@@ -1,6 +1,5 @@
 body {
     background-color: #ffffff;
-    font-size: 5px!important;
     font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
     color: #000000;  
     margin: 10px;
@@ -38,5 +37,5 @@ a:link:hover, a:visited:hover  {
 }
 
 .ui-widget, .ui-widget .ui-widget {
-    font-size: 60%!important;
+    font-size: 95%;
 }

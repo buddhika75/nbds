@@ -10,126 +10,101 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>#{labels.topic}</title>
-        <h:outputStylesheet library="css" name="pdhscss1.css" ></h:outputStylesheet>
-        <style type="text/css">
-            .ui-widget,
-            .ui-widget .ui-widget {
-                font-size: 12px !important;
-            }
-            .ui-layout-north {
-                z-index:20 !important;
-                overflow:visible !important;;
-            }
-
-            .ui-layout-north .ui-layout-unit-content {
-                overflow:visible !important;
-            }
-            .ui-layout-south {
-                overflow:hidden;;
-            }
-
-            .ui-layout-south .ui-layout-unit-content {
-                overflow:hidden !important;
-            }
-
-
-        </style>   
+        <h:outputStylesheet library="css" name="default.css" />
     </h:head>
 
-    <!-- style="min-height:920px !important; height:auto !important;"   -->
-    <h:body >
-
+    <h:body style="padding: 0px;top: 0px!important;left: 0px!important;bottom: 0px!important;right: 0px!important;" >
         <p:growl id="growl" autoUpdate="true"/>
         <p:ajaxStatus style="position: absolute; width:28px;height:28px;position:fixed;right: 60px;top: 25px">  
             <f:facet name="start">  
                 <p:graphicImage library="image" name="loader.gif" />  
             </f:facet>  
-
             <f:facet name="complete">  
                 <h:outputText value="" />  
             </f:facet>  
         </p:ajaxStatus>  
+        <p:layout fullPage="true" style="border: 0px;margin: 0px auto;text-align: center;padding: 0px;left: 0px;right: 0px;top: 0px;" >
+            <p:layoutUnit position="north" 
+                          collapsible="false" 
+                          style="min-height:100px; max-height: 100px!important; height: 100px!important; left: 0px;right: 0px;top: 0px;border: 0px;margin: 0px auto;text-align: center;padding: 0px;" >
+                <h:graphicImage class="banner" library="image" name="logo1.jpg" width="100%" height="100%" style="margin: 0px auto;overflow: hidden; padding: 0px;"></h:graphicImage> 
+            </p:layoutUnit>
+            <p:layoutUnit position="south" >
+                <h:form>
+                    <h:panelGrid columns="3" >
+                        <h:outputLabel rendered="#{sessionController.logged}" value="&copy;&nbsp;Ministry of Health, Sri Lanka." ></h:outputLabel>
+                        <h:outputLabel rendered="#{sessionController.logged}" value="You are logged as #{sessionController.displayName}." ></h:outputLabel>
+                        <p:commandLink rendered="#{sessionController.logged}" action="#{sessionController.logout}" ajax="false">
+                            <h:graphicImage width="100px" height="25px" library="image" name="logout.png" />
+                        </p:commandLink>
+                    </h:panelGrid>
+                </h:form>
+            </p:layoutUnit>
+            <p:layoutUnit position="center"
+                          style="left: 0px;right: 0px;top: 0px;border: 0px;margin: 0px auto;text-align: center;padding: 0px;" >
 
-        <div Class="wholepage" style="width: 98%; height: 96%">
-
-            <h:panelGrid columns="2" id="header" class="headerblock">
-                <h:panelGroup style="margin: auto">
-                    <h:graphicImage class="banner" library="image" name="BDS2.png"  height="100%" width="100%"></h:graphicImage> 
-
-                </h:panelGroup>
-            </h:panelGrid>
-
-            <div id="menu">
                 <h:panelGroup  rendered="#{sessionController.logged}" style="margin: 0px; padding: 0px; border: 0px;" >
 
                     <h:form >  
-                        <div>
-                            <p:menubar styleClass="nonPrintBlock" style="border: 0px;">
-                                <p:menuitem  ajax="false"  action="index" value="Home" icon="ui-icon-home"><p:commandLink action="index" ajax="false" ><h:graphicImage width="40px" height="40px" library="image" name="home.png"/></p:commandLink></p:menuitem>
-                                <p:submenu label="Cases"  rendered="#{sessionController.sysAdmin or sessionController.superUser}">
-                                    <p:menuitem ajax="false" action="#{notificationFormController.listUnregForms()}" value="Register Notifications" ></p:menuitem>
-                                    <p:menuitem ajax="false" action="#{notificationFormController.listRegForms()}" value="List All Registered Notifications" ></p:menuitem>
-                                    <p:menuitem ajax="false" action="#{notificationFormController.listAll}" value="List All Notification Forms"></p:menuitem>
-                                    <p:menuitem ajax="false" action="#{abstractionFormController.listAll()}" value="List All Abstraction Forms"></p:menuitem>
-                                    <p:menuitem ajax="false" action="#{notificationFormController.addNewHospitalNotificationForm()}" value="Hospital Birth Defect Notification" ></p:menuitem>
-                                    <p:menuitem ajax="false" action="#{abstractionFormController.addNewAbstractionForm()}"  value="Case Ascertainment"  ></p:menuitem>
-                                </p:submenu>
-                                <p:submenu label="Cases" rendered="#{sessionController.insAdmin}">
-                                    <p:menuitem ajax="false" action="#{notificationFormController.addNewHospitalNotificationForm()}" value="Hospital Birth Defect Notification" ></p:menuitem>
-                                    <p:menuitem ajax="false" action="#{abstractionFormController.addNewAbstractionForm()}"  value="Case Ascertainment"  ></p:menuitem>
-                                    <p:menuitem ajax="false" action="#{notificationFormController.listAll}" value="List All Notification Forms"></p:menuitem>
-                                    <p:menuitem ajax="false" action="#{abstractionFormController.listAll()}" value="List All Abstraction Forms"></p:menuitem>
-                                    <p:menuitem ajax="false" action="#{notificationFormController.listRegForms()}" value="List All Registered Notifications" ></p:menuitem>
-                                </p:submenu>
-                                <p:submenu label="Reports" rendered="#{sessionController.sysAdmin or sessionController.superUser}">
+                        <p:menubar styleClass="nonPrintBlock" style="text-align: left; border-bottom: 1px solid #dddddd; border-top: 1px solid #dddddd; border-radius: 0px; margin: 0px;">
+                            <p:menuitem  ajax="false"  action="index" value="Home" ></p:menuitem>
+                            <p:submenu label="Cases"  rendered="#{sessionController.sysAdmin or sessionController.superUser}">
+                                <p:menuitem ajax="false" action="#{notificationFormController.listUnregForms()}" value="Register Notifications" ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{notificationFormController.listRegForms()}" value="List All Registered Notifications" ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{notificationFormController.listAll}" value="List All Notification Forms"></p:menuitem>
+                                <p:menuitem ajax="false" action="#{abstractionFormController.listAll()}" value="List All Abstraction Forms"></p:menuitem>
+                                <p:menuitem ajax="false" action="#{notificationFormController.addNewHospitalNotificationForm()}" value="Hospital Birth Defect Notification" ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{abstractionFormController.addNewAbstractionForm()}"  value="Case Ascertainment"  ></p:menuitem>
+                            </p:submenu>
+                            <p:submenu label="Cases" rendered="#{sessionController.insAdmin}">
+                                <p:menuitem ajax="false" action="#{notificationFormController.addNewHospitalNotificationForm()}" value="Hospital Birth Defect Notification" ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{abstractionFormController.addNewAbstractionForm()}"  value="Case Ascertainment"  ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{notificationFormController.listAll}" value="List All Notification Forms"></p:menuitem>
+                                <p:menuitem ajax="false" action="#{abstractionFormController.listAll()}" value="List All Abstraction Forms"></p:menuitem>
+                                <p:menuitem ajax="false" action="#{notificationFormController.listRegForms()}" value="List All Registered Notifications" ></p:menuitem>
+                            </p:submenu>
+                            <p:submenu label="Reports" rendered="#{sessionController.sysAdmin or sessionController.superUser}">
 
-                                    <p:menuitem ajax="false" action="registry_institution" value="Institutional Birth Defects Registry" ></p:menuitem>
-                                    <p:menuitem ajax="false" action="registry_district" value="District Birth Defects Registry" ></p:menuitem>
-                                    <p:menuitem ajax="false" action="registry_province"  value="Provincial Birth Defects Registry"  ></p:menuitem>
-                                    <p:menuitem ajax="false" action="registry_province_by_patients"  value="Provincial Birth Defects Registry By Patients"  ></p:menuitem>
-                                    <p:menuitem ajax="false" action="#{abstractionFormController.listInstitutional()}" value="Institutional Case Ascertainment Forms" ></p:menuitem>
-                                    <p:menuitem ajax="false" action="#{abstractionFormController.listDistrict()}" value="District Case Ascertainment Forms" ></p:menuitem>
+                                <p:menuitem ajax="false" action="registry_institution" value="Institutional Birth Defects Registry" ></p:menuitem>
+                                <p:menuitem ajax="false" action="registry_district" value="District Birth Defects Registry" ></p:menuitem>
+                                <p:menuitem ajax="false" action="registry_province"  value="Provincial Birth Defects Registry"  ></p:menuitem>
+                                <p:menuitem ajax="false" action="registry_province_by_patients"  value="Provincial Birth Defects Registry By Patients"  ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{abstractionFormController.listInstitutional()}" value="Institutional Case Ascertainment Forms" ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{abstractionFormController.listDistrict()}" value="District Case Ascertainment Forms" ></p:menuitem>
 
+                            </p:submenu>
+                            <p:submenu label="Administration"  rendered="#{sessionController.sysAdmin or sessionController.superUser}">
+                                <p:submenu label="Institutions" >
+                                    <p:menuitem  ajax="false"  action="institution_type" value="Institution Type"   ></p:menuitem>
+                                    <p:menuitem  ajax="false"  action="institutions" value="Institutions"  ></p:menuitem>
                                 </p:submenu>
-                                <p:submenu label="Administration"  rendered="#{sessionController.sysAdmin or sessionController.superUser}">
-                                    <p:submenu label="Institutions" >
-                                        <p:menuitem  ajax="false"  action="institution_type" value="Institution Type"   ></p:menuitem>
-                                        <p:menuitem  ajax="false"  action="institutions" value="Institutions"  ></p:menuitem>
-                                    </p:submenu>
-                                    <p:menuitem  ajax="false"  action="area" value="Area"  ></p:menuitem>
+                                <p:menuitem  ajax="false"  action="area" value="Area"  ></p:menuitem>
 
-                                    <p:menuitem  ajax="false"  action="department" value="#{labels.department}"  ></p:menuitem>
-                                    <p:menuitem  ajax="false"  action="#{webUserController.newUserAdd}" value="Add Users"  ></p:menuitem>
-                                    <p:menuitem  ajax="false"  action="manage_users" value="Manage Users"  ></p:menuitem>
-                                </p:submenu>
-                                <p:submenu label="Administration"  rendered="#{sessionController.insAdmin}">
-                                    <p:menuitem  ajax="false"  action="#{sessionController.prepareAddNewUser()}" value="Add Users"  ></p:menuitem>
-                                    <p:menuitem  ajax="false"  action="manage_users" value="Manage Users"  ></p:menuitem>
-                                    <p:menuitem  ajax="false"  action="department" value="Department"  ></p:menuitem>
-                                    <p:menuitem  ajax="false"  action="area" value="Area"  ></p:menuitem>
-                                </p:submenu>
-                                <p:submenu label="Options">
-                                    <p:menuitem  ajax="false"  action="change_password" value="Change Password" ></p:menuitem>
-                                </p:submenu>
-                                <p:submenu label="Gallery">
-                                    <p:menuitem  ajax="false"  action="gallery" value="Picture Gallery" ></p:menuitem>
-                                </p:submenu>
-                                
-                            </p:menubar>
-                        </div>
+                                <p:menuitem  ajax="false"  action="department" value="#{labels.department}"  ></p:menuitem>
+                                <p:menuitem  ajax="false"  action="#{webUserController.newUserAdd}" value="Add Users"  ></p:menuitem>
+                                <p:menuitem  ajax="false"  action="manage_users" value="Manage Users"  ></p:menuitem>
+                            </p:submenu>
+                            <p:submenu label="Administration"  rendered="#{sessionController.insAdmin}">
+                                <p:menuitem  ajax="false"  action="#{sessionController.prepareAddNewUser()}" value="Add Users"  ></p:menuitem>
+                                <p:menuitem  ajax="false"  action="manage_users" value="Manage Users"  ></p:menuitem>
+                                <p:menuitem  ajax="false"  action="department" value="Department"  ></p:menuitem>
+                                <p:menuitem  ajax="false"  action="area" value="Area"  ></p:menuitem>
+                            </p:submenu>
+                            <p:submenu label="Options">
+                                <p:menuitem  ajax="false"  action="change_password" value="Change Password" ></p:menuitem>
+                            </p:submenu>
+                        </p:menubar>
                     </h:form>
 
                 </h:panelGroup>
 
-            </div>
 
-            <div id="content" >
+
                 <h:panelGroup rendered="#{sessionController.logged}">
                     <ui:insert name="content">
                     </ui:insert>
-
-
                 </h:panelGroup>
+
                 <h:panelGroup rendered="#{!sessionController.logged}" >
                     <ui:insert name="login"   >
                         <h:form>
@@ -160,36 +135,10 @@
                         </h:form>
                     </ui:insert>
                 </h:panelGroup>
-            </div>
-            <h:panelGroup  rendered="#{sessionController.logged}" style="margin: 0px; padding: 0px; border: 0px;" >
-                <div style="position: fixed; bottom: 8px; right:  10px;" class="nonPrintBlock" >
-                    <h:form>
-                        <p:stack icon="/resources/image/stack.png">
-                            <p:menuitem value="Log_Out" icon="/resources/image/Logout2.png" style="width: 25px; height: 25px" action="#{sessionController.logout}" ajax="false" rendered="#{sessionController.logged}"/>
-                            <p:menuitem value="List_All_Abstraction_Forms" icon="/resources/image/search.png" style="width: 25px; height: 25px" action="view_all_abstraction_form"/>  
-                            <p:menuitem value="Abstraction_Form" icon="/resources/image/forms.png" style="width: 25px; height: 25px" action="birth_diffect_abstraction_form"/>
-                            <p:menuitem value="List_All_Notification_Forms" icon="/resources/image/search.png" style="width: 25px; height: 25px" action="view_all_notification_form"/>
-                            <p:menuitem value="Notification_Form" icon="/resources/image/forms.png" style="width: 25px; height: 25px" action="add_hospital_notification_form" />
-                            <p:menuitem value="Add_Users" icon="/resources/image/UserGroup.png" style="width: 25px; height: 25px" action="manage_users"/>
-                        </p:stack>
-                    </h:form>
-                    <p:clock pattern="HH:mm a - dd MMMM yyyy" mode="server"  /> 
-                </div>
-            </h:panelGroup>
-            <div style="bottom: 0px;">
-                <h:form>
-                    <h:panelGrid columns="3" >
-                        <h:outputLabel rendered="#{sessionController.logged}" value="&copy;&nbsp;Ministry of Health, Sri Lanka." ></h:outputLabel>
-                        <h:outputLabel rendered="#{sessionController.logged}" value="You are logged as #{sessionController.displayName}." ></h:outputLabel>
-                        <p:commandLink rendered="#{sessionController.logged}" action="#{sessionController.logout}" ajax="false">
-                            <h:graphicImage width="100px" height="25px" library="image" name="logout.png" />
-                        </p:commandLink>
-                    </h:panelGrid>
 
-                </h:form>
-            </div>
+            </p:layoutUnit>
+        </p:layout>
 
-        </div>
 
     </h:body>
 

@@ -48,6 +48,8 @@ public class AbstractionForm implements Serializable {
     @ManyToOne
     Institution hospital;
     @ManyToOne
+    Institution placeOfDelivery;
+    @ManyToOne
     Department ward;
     @ManyToOne
     Area district;
@@ -125,6 +127,14 @@ public class AbstractionForm implements Serializable {
 
     public void setDiagnosisDate(Date diagnosisDate) {
         this.diagnosisDate = diagnosisDate;
+    }
+
+    public Institution getPlaceOfDelivery() {
+        return placeOfDelivery;
+    }
+
+    public void setPlaceOfDelivery(Institution placeOfDelivery) {
+        this.placeOfDelivery = placeOfDelivery;
     }
 
    

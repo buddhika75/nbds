@@ -103,6 +103,13 @@ public class AbstractionFormController implements Serializable {
         } else {
             current = notificationForm.getAbstractionForm();
         }
+
+        if (current.getLabTest() == null) {
+            LabTest labTest = new LabTest();
+            current.setLabTest(labTest);
+
+        }
+
         current.setMother(notificationForm.getMother());
         current.setInfant(notificationForm.getInfant());
         current.setHospital(notificationForm.getHospital());
