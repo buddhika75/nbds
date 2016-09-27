@@ -9,6 +9,8 @@ package gov.health.bean;
 import gov.health.data.Birth;
 import gov.health.data.Dermatolglyphics;
 import gov.health.data.Ethnicity;
+import gov.health.enums.LivingStatus;
+import gov.health.enums.PresenceOfCongenitalAbnormalities;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 
@@ -37,4 +39,19 @@ public class EnumController {
     public Birth[] getBirths(){
         return Birth.values();
     }
+    
+    public LivingStatus[] getLivingStatus(){
+        return LivingStatus.values();
+    }
+    
+    public LivingStatus[] getLivingStatusLimited(){
+        LivingStatus[] ls = new LivingStatus[]{LivingStatus.Living, LivingStatus.StillBirth , LivingStatus.NeonatalDeath, LivingStatus.PostNeonatalDeath};
+        return ls;
+    }
+    
+    public PresenceOfCongenitalAbnormalities[] getPresenceOfCongenitalAbnormalities(){
+        return PresenceOfCongenitalAbnormalities.values();
+    }
+    
+    
 }

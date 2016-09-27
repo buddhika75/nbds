@@ -26,124 +26,203 @@
                                     <p:outputLabel value="A. BASIC INFORMATION" ></p:outputLabel>
                                 </f:facet>
 
-                                <p:panelGrid columns="2" style="column-width: max-content">
+                                <p:panelGrid >
                                     <f:facet name="header">
                                         <p:outputLabel value="BASIC INFORMATION" ></p:outputLabel>
                                     </f:facet>
+                                    <p:row >
+                                        <p:column >
+                                            <h:panelGrid columns="3" style="width: 100%;" columnClasses="middleLeftCol, middleCentreCol, middleRightCol">
+                                                <p:outputLabel value="1. Infant's (Mother's) name"></p:outputLabel>
+                                                <p:spacer width="5" height="1" ></p:spacer>
+                                                <p:inputText value="#{abstractionFormController.current.infant.name}" size="40" id="txtInfantName"></p:inputText>
+                                            </h:panelGrid>
+                                        </p:column>
+                                        <p:column >
+                                            <h:panelGrid columns="3">
+                                                <p:outputLabel value="2. Sex of infant"></p:outputLabel>
+                                                <p:spacer width="5" height="1" ></p:spacer>
+                                                <p:selectOneRadio value="#{abstractionFormController.current.infant.personSex}" id="Sex">
+                                                    <f:selectItem itemValue="MALE" itemLabel="Male"></f:selectItem>
+                                                    <f:selectItem itemValue="FEMALE" itemLabel="Female"></f:selectItem>
+                                                    <f:selectItem itemValue="AMBIGUOUS" itemLabel="Ambiguous"></f:selectItem>
+                                                </p:selectOneRadio>
+                                            </h:panelGrid>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row >
+                                        <p:column >
+                                            <h:panelGrid columns="1" >
+                                                <p:outputLabel value="3. Location where case identified"></p:outputLabel>
+                                                <h:panelGrid columns="3"  >
+                                                    <p:outputLabel value="Hospital"></p:outputLabel>
+                                                    <p:spacer width="5" height="1" ></p:spacer>
+                                                    <p:autoComplete
+                                                        forceSelection="true"                                 
+                                                        value="#{abstractionFormController.current.hospital}" 
+                                                        completeMethod="#{institutionController.completeOffcialInstitutions}"
+                                                        var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" 
+                                                        converter="institutionConverter" id="acHos">
+                                                        <f:ajax event="itemSelect" execute="acHos" render="acWard" ></f:ajax>
+                                                    </p:autoComplete>
+                                                    <p:outputLabel value="Ward/Unit"></p:outputLabel>   
+                                                    <p:spacer width="5" height="1" ></p:spacer>
+                                                    <p:autoComplete
+                                                        forceSelection="true"                                 
+                                                        value="#{abstractionFormController.current.ward}" 
+                                                        completeMethod="#{abstractionFormController.completeOfficialDepartments}"
+                                                        var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" 
+                                                        id="acWard">
+                                                    </p:autoComplete>
+                                                    <p:outputLabel value="BHT"></p:outputLabel>
+                                                    <p:spacer width="5" height="1" ></p:spacer>
+                                                    <p:inputText value="#{abstractionFormController.current.bhtno}" ></p:inputText>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                        </p:column>
+                                        <p:column >
+                                            <h:panelGrid columns="1" >
+                                                <p:outputLabel value="4. Residence"></p:outputLabel>
+                                                <h:panelGrid columns="3"  >
+                                                    <p:outputLabel value="District"></p:outputLabel> 
+                                                    <p:spacer width="5" height="1" ></p:spacer>
+                                                    <p:autoComplete
+                                                        forceSelection="true"                                 
+                                                        value="#{abstractionFormController.current.district}" 
+                                                        completeMethod="#{areaController.completeDistricts}"
+                                                        var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" 
+                                                        converter="areaConverter" id="acDis">
+                                                        <f:ajax event="itemSelect" execute="acDis" render="acmoh"></f:ajax>
+                                                    </p:autoComplete>
 
-                                    <h:panelGrid columns="3" >
-                                        <p:outputLabel value="1. Infant's name"></p:outputLabel>
-                                        <p:spacer width="5" height="1" ></p:spacer>
-                                        <p:inputText value="#{abstractionFormController.current.infant.name}" size="40" id="txtInfantName"></p:inputText>
-                                    </h:panelGrid>
+                                                    <p:outputLabel value="MOH Division"></p:outputLabel> 
+                                                    <p:spacer width="5" height="1" ></p:spacer>
+                                                    <p:autoComplete
+                                                        forceSelection="true"                                 
+                                                        value="#{abstractionFormController.current.mohArea}" 
+                                                        completeMethod="#{abstractionFormController.completeMohAreas}"
+                                                        var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" 
+                                                        converter="areaConverter" id="acmoh">
+                                                        <f:ajax event="itemSelect" execute="acmoh" render="acGn"></f:ajax>
+                                                    </p:autoComplete>
 
-                                    <h:panelGrid columns="3">
-                                        <p:outputLabel value="2. Sex of infant"></p:outputLabel>
-                                        <p:spacer width="5" height="1" ></p:spacer>
-                                        <p:selectOneRadio value="#{abstractionFormController.current.infant.personSex}" id="Sex">
-                                            <f:selectItem itemValue="MALE" itemLabel="Male"></f:selectItem>
-                                            <f:selectItem itemValue="FEMALE" itemLabel="Female"></f:selectItem>
-                                            <f:selectItem itemValue="AMBIGUOUS" itemLabel="Ambiguous"></f:selectItem>
-                                        </p:selectOneRadio>
-                                    </h:panelGrid>
-
-                                    <h:panelGrid columns="1" >
-                                        <p:outputLabel value="3. Location where case identified"></p:outputLabel>
-                                        <h:panelGrid columns="3"  >
-                                            <p:outputLabel value="Hospital"></p:outputLabel>
-                                            <p:spacer width="5" height="1" ></p:spacer>
-                                            <p:autoComplete
-                                                forceSelection="true"                                 
-                                                value="#{abstractionFormController.current.hospital}" 
-                                                completeMethod="#{institutionController.completeOffcialInstitutions}"
-                                                var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" 
-                                                converter="institutionConverter" id="acHos">
-                                                <f:ajax event="itemSelect" execute="acHos" render="acWard" ></f:ajax>
-                                            </p:autoComplete>
-                                            <p:outputLabel value="Ward/Unit"></p:outputLabel>   
-                                            <p:spacer width="5" height="1" ></p:spacer>
-                                            <p:autoComplete
-                                                forceSelection="true"                                 
-                                                value="#{abstractionFormController.current.ward}" 
-                                                completeMethod="#{abstractionFormController.completeOfficialDepartments}"
-                                                var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" 
-                                                id="acWard">
-                                            </p:autoComplete>
-                                            <p:outputLabel value="BHT"></p:outputLabel>
-                                            <p:spacer width="5" height="1" ></p:spacer>
-                                            <p:inputText value="#{abstractionFormController.current.bhtno}" ></p:inputText>
-                                        </h:panelGrid>
-                                    </h:panelGrid>
-
-
-                                    <h:panelGrid columns="1" >
-                                        <p:outputLabel value="4. Residence"></p:outputLabel>
-                                        <h:panelGrid columns="3"  >
-                                            <p:outputLabel value="District"></p:outputLabel> 
-                                            <p:spacer width="5" height="1" ></p:spacer>
-                                            <p:autoComplete
-                                                forceSelection="true"                                 
-                                                value="#{abstractionFormController.current.district}" 
-                                                completeMethod="#{areaController.completeDistricts}"
-                                                var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" 
-                                                converter="areaConverter" id="acDis">
-                                                <f:ajax event="itemSelect" execute="acDis" render="acmoh"></f:ajax>
-                                            </p:autoComplete>
-
-                                            <p:outputLabel value="MOH Division"></p:outputLabel> 
-                                            <p:spacer width="5" height="1" ></p:spacer>
-                                            <p:autoComplete
-                                                forceSelection="true"                                 
-                                                value="#{abstractionFormController.current.mohArea}" 
-                                                completeMethod="#{abstractionFormController.completeMohAreas}"
-                                                var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" 
-                                                converter="areaConverter" id="acmoh">
-                                                <f:ajax event="itemSelect" execute="acmoh" render="acGn"></f:ajax>
-                                            </p:autoComplete>
-
-                                            <p:outputLabel value="GN Division"></p:outputLabel>  
-                                            <p:spacer width="5" height="1" ></p:spacer>
-                                            <p:autoComplete
-                                                forceSelection="true"                                 
-                                                value="#{abstractionFormController.current.gnArea}" 
-                                                completeMethod="#{abstractionFormController.completeGnAreas}"
-                                                var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" 
-                                                converter="areaConverter" id="acGn">
-                                            </p:autoComplete>
-
-
-                                        </h:panelGrid>
-                                    </h:panelGrid>
-
-
-                                    <h:panelGrid columns="3">
-                                        <p:outputLabel value="5. Date of Birth"></p:outputLabel>
-                                        <p:spacer width="5" height="1" ></p:spacer>
-                                        <p:calendar value="#{abstractionFormController.current.infant.dob}" size="40" id="txtInfantDOB" navigator="true" pattern="dd-MM-yyyy"></p:calendar>
-                                    </h:panelGrid>
-
-                                    <h:panelGrid columns="3">
-                                        <p:outputLabel value="6. Place of Delivary"></p:outputLabel>
-                                        <p:spacer width="5" height="1" ></p:spacer>
-                                        <p:autoComplete
-                                            forceSelection="true"                                 
-                                            value="#{abstractionFormController.current.placeOfDelivery}" 
-                                            completeMethod="#{institutionController.completeOffcialInstitutions}"
-                                            var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" 
-                                            converter="institutionConverter" id="acPlaceOfDelivery">
-                                        </p:autoComplete>
-                                    </h:panelGrid>
+                                                    <p:outputLabel value="GN Division"></p:outputLabel>  
+                                                    <p:spacer width="5" height="1" ></p:spacer>
+                                                    <p:autoComplete
+                                                        forceSelection="true"                                 
+                                                        value="#{abstractionFormController.current.gnArea}" 
+                                                        completeMethod="#{abstractionFormController.completeGnAreas}"
+                                                        var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" 
+                                                        converter="areaConverter" id="acGn">
+                                                    </p:autoComplete>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                        </p:column>
+                                    </p:row> 
+                                    <p:row >
+                                        <p:column >
+                                            <h:panelGrid columns="3" style="width: 100%;" columnClasses="middleLeftCol, middleCentreCol, middleRightCol">
+                                                <p:outputLabel value="5. Date of Birth"></p:outputLabel>
+                                                <p:spacer width="5" height="1" ></p:spacer>
+                                                <p:calendar value="#{abstractionFormController.current.infant.dob}" size="40" id="txtInfantDOB" navigator="true" pattern="dd-MMMM-yyyy"></p:calendar>
+                                            </h:panelGrid>
+                                        </p:column>
+                                        <p:column >
+                                            <h:panelGrid columns="3">
+                                                <p:outputLabel value="6. Place of Delivary"></p:outputLabel>
+                                                <p:spacer width="5" height="1" ></p:spacer>
+                                                <p:autoComplete
+                                                    forceSelection="true"                                 
+                                                    value="#{abstractionFormController.current.placeOfDelivery}" 
+                                                    completeMethod="#{institutionController.completeOffcialInstitutions}"
+                                                    var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" 
+                                                    converter="institutionConverter" id="acPlaceOfDelivery">
+                                                </p:autoComplete>
+                                            </h:panelGrid>
+                                        </p:column>
+                                    </p:row>  
+                                    <p:row >
+                                        <p:column >
+                                            <h:panelGrid columns="3" style="width:100%;" columnClasses="middleLeftCol, middleCentreCol, middleRightCol">
+                                                <p:outputLabel value="7. Date of Case Identification"></p:outputLabel>
+                                                <p:spacer width="5" height="1" ></p:spacer>
+                                                <p:calendar value="#{abstractionFormController.current.caseIdentifiedDate}" size="40" id="calCaseIdentificationDate" navigator="true" pattern="dd-MMMM-yyyy"></p:calendar>
+                                            </h:panelGrid>
+                                        </p:column>
+                                        <p:column >
+                                            <h:panelGrid columns="3">
+                                                <p:outputLabel value="8. Age at Case Detection"></p:outputLabel>
+                                                <p:spacer width="5" height="1" ></p:spacer>
+                                                <h:panelGrid columns="3" >
+                                                    <h:panelGrid columns="2" >
+                                                        <p:outputLabel value="Years" ></p:outputLabel>
+                                                        <p:inputText styleClass="shortText" value="#{abstractionFormController.current.ageYears}" ></p:inputText>
+                                                    </h:panelGrid>
+                                                    <h:panelGrid columns="2" >
+                                                        <p:outputLabel value="Months" ></p:outputLabel>
+                                                        <p:inputText  styleClass="shortText" value="#{abstractionFormController.current.ageMonths}" ></p:inputText>
+                                                    </h:panelGrid>
+                                                    <h:panelGrid columns="2" >
+                                                        <p:outputLabel value="Days" ></p:outputLabel>
+                                                        <p:inputText  styleClass="shortText" value="#{abstractionFormController.current.ageDays}" ></p:inputText>
+                                                    </h:panelGrid>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                        </p:column>
+                                    </p:row> 
+                                    <p:row >
+                                        <p:column colspan="2" >
+                                            <h:panelGrid columns="3" >
+                                                <p:outputLabel value="9. Living Status"></p:outputLabel>
+                                                <p:spacer width="5" height="1" ></p:spacer>
+                                                <p:selectOneRadio layout="grid" columns="6" value="#{abstractionFormController.current.livingStatus}" 
+                                                                  id="LivingStatus">
+                                                    <f:selectItems value="#{enumController.livingStatus}" var="ls" itemValue="#{ls}" itemLabel="#{ls.label}"></f:selectItems>
+                                                </p:selectOneRadio>
+                                            </h:panelGrid>
+                                        </p:column>
+                                    </p:row>
+                                    <p:row >
+                                        <p:column colspan="2" >
+                                            <h:panelGrid columns="3" >
+                                                <p:outputLabel value="10. Post mortem / Necropsy details"></p:outputLabel>
+                                                <p:spacer width="5" height="1" ></p:spacer>
+                                                <p:selectOneRadio value="#{abstractionFormController.current.autopsyDone}" >
+                                                    <f:selectItem itemLabel="Done" itemValue="true"></f:selectItem>
+                                                    <f:selectItem itemLabel="Not Done" itemValue="false"></f:selectItem>
+                                                </p:selectOneRadio>
+                                            </h:panelGrid>
+                                        </p:column>
+                                    </p:row>
 
 
 
-                                    <h:panelGrid columns="3">
-                                        <p:outputLabel value="7. Date of Case Identification"></p:outputLabel>
-                                        <p:spacer width="5" height="1" ></p:spacer>
-                                        <p:calendar value="#{abstractionFormController.current.caseIdentifiedDate}" size="40" id="calCaseIdentificationDate" navigator="true" pattern="dd-MM-yyyy"></p:calendar>
-                                    </h:panelGrid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                                 </p:panelGrid>
 
+                                <p:panelGrid columns="3">
+
+                                </p:panelGrid>
 
                             </p:tab>
                             <p:tab title="B">

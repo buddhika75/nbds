@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>#{labels.topic}</title>
         <h:outputStylesheet library="css" name="default.css" />
+        <h:outputStylesheet library="css" name="nbds.css" />
     </h:head>
 
     <h:body style="padding: 0px;top: 0px!important;left: 0px!important;bottom: 0px!important;right: 0px!important;" >
@@ -49,11 +50,12 @@
                         <p:menubar styleClass="nonPrintBlock" style="text-align: left; border-bottom: 1px solid #dddddd; border-top: 1px solid #dddddd; border-radius: 0px; margin: 0px;">
                             <p:menuitem  ajax="false"  action="index" value="Home" ></p:menuitem>
                             <p:submenu label="Cases"  rendered="#{sessionController.sysAdmin or sessionController.superUser}">
+                                 <p:menuitem ajax="false" action="#{notificationFormController.addNewHospitalNotificationForm()}" value="Nortify" ></p:menuitem>
                                 <p:menuitem ajax="false" action="#{notificationFormController.listUnregForms()}" value="Register Notifications" ></p:menuitem>
                                 <p:menuitem ajax="false" action="#{notificationFormController.listRegForms()}" value="List All Registered Notifications" ></p:menuitem>
                                 <p:menuitem ajax="false" action="#{notificationFormController.listAll}" value="List All Notification Forms"></p:menuitem>
                                 <p:menuitem ajax="false" action="#{abstractionFormController.listAll()}" value="List All Abstraction Forms"></p:menuitem>
-                                <p:menuitem ajax="false" action="#{notificationFormController.addNewHospitalNotificationForm()}" value="Hospital Birth Defect Notification" ></p:menuitem>
+                               
                                 <p:menuitem ajax="false" action="#{abstractionFormController.addNewAbstractionForm()}"  value="Case Ascertainment"  ></p:menuitem>
                             </p:submenu>
                             <p:submenu label="Cases" rendered="#{sessionController.insAdmin}">

@@ -1,0 +1,53 @@
+.shortText{
+    width: 50px;
+}
+
+.topLeftCol{
+    vertical-align: top;
+    text-align: left;
+}
+
+.topRightCol{
+    vertical-align: top;
+    text-align: right;
+}
+
+.topCentreCol{
+    vertical-align: top;
+    text-align: center;
+}
+
+.middleLeftCol{
+    vertical-align: middle;
+    text-align: left;
+    float: left;
+    /*background-color: yellow;*/
+}
+
+.middleRightCol{
+    vertical-align: middle;
+    text-align: right;
+    float: right;
+    /*background-color: red;*/
+}
+
+.middleCentreCol{
+    vertical-align: bottom;
+    text-align: center;
+    /*background-color: yellowgreen;*/
+}
+
+.bottomLeftCol{
+    vertical-align: bottom;
+    text-align: left;
+}
+
+.bottomRightCol{
+    vertical-align: middle;
+    text-align: right;
+}
+
+.bottomCentreCol{
+    vertical-align: bottom;
+    text-align: center;
+}

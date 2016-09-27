@@ -6,6 +6,8 @@
 package gov.health.entity;
 
 import gov.health.data.Birth;
+import gov.health.enums.LivingStatus;
+import gov.health.enums.PresenceOfCongenitalAbnormalities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -53,6 +55,8 @@ public class NotificationForm implements Serializable {
     Area gnArea;
     @Temporal(javax.persistence.TemporalType.DATE)
     Date caseIdentifiedDate;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dateOfDeath;
     String bhtNo;
     String bhtNo2;
     boolean live;
@@ -73,6 +77,7 @@ public class NotificationForm implements Serializable {
     Long infantAodMnths; // infant age of death by year
     Long infantAodDys; // infant age of death by year
     String placeOfDead;
+    String placeOfDelivary;
     boolean postMortem; // yes or no
     @ManyToOne(cascade = CascadeType.ALL)
     Person jmo;
@@ -128,7 +133,93 @@ public class NotificationForm implements Serializable {
     @Enumerated(EnumType.STRING)
     Birth birthType;
     int multiBirths;
+    
+    int ageAtCaseDetectionYears;
+    int ageAtCaseDetectionMonths;
+    int ageAtCaseDetectionDays;
 
+    @Enumerated(EnumType.STRING)
+    LivingStatus livingStatus;
+    @Enumerated(EnumType.STRING)
+    PresenceOfCongenitalAbnormalities presenceOfCongenitalAbnormalities;
+
+    @Lob
+    String descriptionOfTheCongenitalAbnormalities;
+
+    public String getDescriptionOfTheCongenitalAbnormalities() {
+        return descriptionOfTheCongenitalAbnormalities;
+    }
+
+    public void setDescriptionOfTheCongenitalAbnormalities(String descriptionOfTheCongenitalAbnormalities) {
+        this.descriptionOfTheCongenitalAbnormalities = descriptionOfTheCongenitalAbnormalities;
+    }
+    
+    
+    
+    public PresenceOfCongenitalAbnormalities getPresenceOfCongenitalAbnormalities() {
+        return presenceOfCongenitalAbnormalities;
+    }
+
+    public void setPresenceOfCongenitalAbnormalities(PresenceOfCongenitalAbnormalities presenceOfCongenitalAbnormalities) {
+        this.presenceOfCongenitalAbnormalities = presenceOfCongenitalAbnormalities;
+    }
+
+    
+    
+    public LivingStatus getLivingStatus() {
+        return livingStatus;
+    }
+
+    public void setLivingStatus(LivingStatus livingStatus) {
+        this.livingStatus = livingStatus;
+    }
+
+    public Date getDateOfDeath() {
+        return dateOfDeath;
+    }
+
+    public void setDateOfDeath(Date dateOfDeath) {
+        this.dateOfDeath = dateOfDeath;
+    }
+    
+    
+    
+    public int getAgeAtCaseDetectionYears() {
+        return ageAtCaseDetectionYears;
+    }
+
+    public void setAgeAtCaseDetectionYears(int ageAtCaseDetectionYears) {
+        this.ageAtCaseDetectionYears = ageAtCaseDetectionYears;
+    }
+
+    public int getAgeAtCaseDetectionMonths() {
+        return ageAtCaseDetectionMonths;
+    }
+
+    public void setAgeAtCaseDetectionMonths(int ageAtCaseDetectionMonths) {
+        this.ageAtCaseDetectionMonths = ageAtCaseDetectionMonths;
+    }
+
+    public int getAgeAtCaseDetectionDays() {
+        return ageAtCaseDetectionDays;
+    }
+
+    public void setAgeAtCaseDetectionDays(int ageAtCaseDetectionDays) {
+        this.ageAtCaseDetectionDays = ageAtCaseDetectionDays;
+    }
+
+    
+    
+    public String getPlaceOfDelivary() {
+        return placeOfDelivary;
+    }
+
+    public void setPlaceOfDelivary(String placeOfDelivary) {
+        this.placeOfDelivary = placeOfDelivary;
+    }
+
+    
+    
     public Date getDiagnosisDate() {
         return diagnosisDate;
     }

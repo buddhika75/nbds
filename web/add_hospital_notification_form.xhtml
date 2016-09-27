@@ -18,36 +18,21 @@
                     <p:panel style="border: #ffffff">
 
                         <f:facet name="header" >
-                            <h:outputLabel value="Hospital Notification Form" style="alignment-adjust: middle"></h:outputLabel>
+                            <h:outputLabel value="BIRTH DEFECTS NOTIFICATION FORM" style="alignment-adjust: middle"></h:outputLabel>
                             <p:spacer width="10" ></p:spacer>
                             <p:commandButton ajax="false" value="Save" action="#{notificationFormController.saveSelected()}" id="cmdSv" disabled="#{sessionController.superUser}"></p:commandButton>
                             <p:tooltip for="cmdSv" value="Save Hospital Notification Form" showEffect="fade" hideEffect="fade" />  
                         </f:facet>
 
-                        <div align="center">
+                        <div align="left">
 
-                            <p:panel style=" width:60%;height:100%">
-                                <div align="right" style="position: absolute; top: 45%; left: 4%;">
-                                    <p:graphicImage library="image" name="baby3.png" style="height: 120px; width: 120px;"/>
-                                </div>
-                                <p:panelGrid columns="1">
-                                    <p:outputLabel ><font size="4">Hospital Notification Form</font></p:outputLabel>
-                                </p:panelGrid>
-                            </p:panel>
-                        </div>
-                        <p:spacer width="10"></p:spacer>
-                        <div align="center">
-                            <p:panel style=" width:60%;height:100%" id="nf">
-
-                                <div align="center">
-                                    <p:panelGrid columns="2" style="column-width: max-content">
-                                        <p:outputLabel value="1. Infant's name"></p:outputLabel>
+                            <p:tabView >
+                                <p:tab title="A. BASIC INFORMATION"  >
+                                    <h:panelGrid columns="2" style="width: 80%;">
+                                        <p:outputLabel value="1. Infant's (or Mother's) name"></p:outputLabel>
                                         <p:inputText value="#{notificationFormController.current.infant.name}" size="40" id="txtInfantName"></p:inputText>
 
-                                        <p:outputLabel value="2. Date of Birth"></p:outputLabel>
-                                        <p:calendar value="#{notificationFormController.current.infant.dob}" size="40" id="txtInfantDOB" navigator="true" pattern="dd-MM-yyyy"></p:calendar>
-                                        
-                                        <p:outputLabel value="3. Sex of infant"></p:outputLabel>
+                                        <p:outputLabel value="2. Sex of infant"></p:outputLabel>
                                         <p:selectOneRadio value="#{notificationFormController.current.infant.personSex}" id="sex">
                                             <f:selectItem itemValue="MALE" itemLabel=" Male "></f:selectItem>
                                             <f:selectItem itemValue="FEMALE" itemLabel=" Female "></f:selectItem>
@@ -55,205 +40,196 @@
                                         </p:selectOneRadio>
 
 
-                                        <p:panelGrid columns="2">
-                                            <p:outputLabel><font color="blue">4. Location where case identified :</font></p:outputLabel>
-                                            <p:outputLabel></p:outputLabel>
-
-                                            <p:outputLabel value="Hospital"></p:outputLabel>
-                                            <p:autoComplete id="acHos"
-                                                            forceSelection="true"                                 
-                                                            value="#{notificationFormController.current.hospital}" 
-                                                            completeMethod="#{institutionController.completeHospitals}"
-                                                            var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" >
-                                                <f:ajax event="itemSelect" execute="acHos" render="acWard" ></f:ajax>
-                                            </p:autoComplete>
-
-                                            <p:outputLabel value="Ward/Unit"></p:outputLabel>  
-                                            <p:autoComplete
-                                                id="acWard"
-                                                forceSelection="true"                                 
-                                                value="#{notificationFormController.current.ward}" 
-                                                completeMethod="#{notificationFormController.completeOfficialDepartments}"
-                                                var="of" itemLabel="#{of.name}" itemValue="#{of}">
-                                            </p:autoComplete>
-
-                                            <p:outputLabel value="District"></p:outputLabel>   
-                                            <p:autoComplete
-                                                forceSelection="true"                                 
-                                                value="#{notificationFormController.current.district}" 
-                                                completeMethod="#{areaController.completeDistricts}"
-                                                var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" id="acDis" >
-                                                <f:ajax event="itemSelect" execute="acDis" render="acdiv"></f:ajax>
-                                            </p:autoComplete>
-
-                                        </p:panelGrid>
-
-                                        <p:panelGrid columns="2">
-                                            <p:outputLabel><font color="blue">Residence :</font></p:outputLabel>
-                                            <p:outputLabel></p:outputLabel>
-                                            <p:outputLabel value="RDHS Division"></p:outputLabel>
-                                            <p:autoComplete
-                                                forceSelection="true"                                 
-                                                value="#{notificationFormController.current.district}" 
-                                                completeMethod="#{areaController.completeDistricts}"
-                                                var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" id="acdiv">
-                                                <f:ajax event="itemSelect" execute="acdiv" render="acmoh"></f:ajax>
-                                            </p:autoComplete>
-                                            <p:outputLabel value="MOH Division"></p:outputLabel>   
-                                            <p:autoComplete
-                                                forceSelection="true"                                 
-                                                value="#{notificationFormController.current.mohArea}" 
-                                                completeMethod="#{notificationFormController.completeMohAreas}"
-                                                var="oi" itemLabel="#{oi.name}" itemValue="#{oi}"  id="acmoh"> 
-                                                <f:ajax event="itemSelect" execute="acmoh" render="acGn"></f:ajax>
-                                            </p:autoComplete>
-                                            <p:outputLabel value="GN Division"></p:outputLabel>    
-                                            <p:autoComplete
-                                                forceSelection="true"                                 
-                                                value="#{notificationFormController.current.gnArea}" 
-                                                completeMethod="#{notificationFormController.completeGnAreas}"
-                                                var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" id="acGn" >
-                                            </p:autoComplete>
-                                        </p:panelGrid>
 
 
-                                        <p:outputLabel value="5. Date of Case Identified"></p:outputLabel>
-                                        <p:calendar value="#{notificationFormController.current.caseIdentifiedDate}" size="40" id="calIden" navigator="true" pattern="dd-MM-yyyy"></p:calendar>
-                                        <p:outputLabel value="6. BHT No"></p:outputLabel>
-                                        <p:inputText value="#{notificationFormController.current.bhtNo}" size="40" id="txtBHT"></p:inputText>
-                                        <p:outputLabel value="7. Pregnancy Registration Number"></p:outputLabel>
-                                        <p:inputText value="#{notificationFormController.current.pregregno}" size="40" id="txtPregReg"></p:inputText>
-                                        <p:outputLabel value="8. Birth Type"></p:outputLabel>
-                                        <p:panelGrid columns="2">
-                                            <p:selectOneMenu value="#{notificationFormController.current.birthType}" id="txtPregType">
-                                                <f:selectItems value="#{enumController.births}"></f:selectItems>
-                                                <f:ajax execute="@this" render="txtmltbrth"></f:ajax>
-                                            </p:selectOneMenu>
-                                            <p:inputText value="#{notificationFormController.current.multiBirths}" size="10" id="txtmltbrth"></p:inputText>
-                                        </p:panelGrid>
-                                        <p:outputLabel value="9. Whether the baby alive or dead ?"></p:outputLabel>
-                                        <p:selectOneRadio value="#{notificationFormController.current.live}" id="live">
-                                            <f:selectItem itemValue="False" itemLabel="Live"></f:selectItem>
-                                            <f:selectItem itemValue="True" itemLabel="Dead"></f:selectItem>
-                                            <f:ajax execute="@this" render="panelDead" ></f:ajax>
-                                        </p:selectOneRadio>
-                                        <p:outputLabel value="10. Diagnosis / Birth Defect Coding"></p:outputLabel>
-                                        <p:inputText value="#{notificationFormController.current.diagnosis}" size="40" id="txtDiag"></p:inputText>
-                                        <p:outputLabel value="11. Date at Diagnosis"></p:outputLabel>
-                                        <p:calendar value="#{notificationFormController.current.diagnosisDate}" size="40" id="txtDiagDate" navigator="true" pattern="dd-MM-yyyy"></p:calendar>
-                                        <p:outputLabel value="12. Name of the mother"></p:outputLabel>
-                                        <p:inputText value="#{notificationFormController.current.mother.name}" size="40" id="txtMother"></p:inputText>
-                                        <p:outputLabel value="13. Mother’s Date of Birth"></p:outputLabel>
-                                        <p:calendar value="#{notificationFormController.current.mother.dob}" size="40" id="txtMDOB" navigator="true" pattern="dd-MM-yyyy" yearRange="c-44:c+16"></p:calendar>
-                                        <p:outputLabel value="14. Age"></p:outputLabel>
-                                        <p:inputText value="#{notificationFormController.current.mother.age}" size="40" id="txtMAge"></p:inputText>
-                                        <p:outputLabel value="15. National Identity Card No"></p:outputLabel>
-                                        <p:inputText value="#{notificationFormController.current.mother.nic}" size="40" id="txtNIC"></p:inputText>
-                                        <p:outputLabel value="16. Ethnicity"></p:outputLabel>
-                                        <p:selectOneMenu value="#{notificationFormController.current.mother.ethnicity}" id="selEth">
-                                            <f:selectItems value="#{enumController.ethnicities}" ></f:selectItems>
-                                        </p:selectOneMenu>
-                                        <p:outputLabel value="17. Residence Address"></p:outputLabel>
+                                        <p:outputLabel value="3. Location where case identified :"></p:outputLabel>
+                                        <p:outputLabel></p:outputLabel>
+
+                                        <p:outputLabel value="Hospital"></p:outputLabel>
+                                        <p:autoComplete id="acHos"
+                                                        forceSelection="true"                                 
+                                                        value="#{notificationFormController.current.hospital}" 
+                                                        completeMethod="#{institutionController.completeHospitals}"
+                                                        var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" >
+                                            <f:ajax event="itemSelect" execute="acHos" render="acWard" ></f:ajax>
+                                        </p:autoComplete>
+
+                                        <p:outputLabel value="Ward/Unit"></p:outputLabel>  
+                                        <p:autoComplete
+                                            id="acWard"
+                                            forceSelection="true"                                 
+                                            value="#{notificationFormController.current.ward}" 
+                                            completeMethod="#{notificationFormController.completeOfficialDepartments}"
+                                            var="of" itemLabel="#{of.name}" itemValue="#{of}">
+                                        </p:autoComplete>
+
+                                        <p:outputLabel value="BHT No"></p:outputLabel>   
+                                        <p:inputText value="#{notificationFormController.current.bhtNo}" ></p:inputText>
+
+                                        <p:outputLabel value="4. Residence Address"></p:outputLabel>
                                         <p:inputText value="#{notificationFormController.current.mother.address}" size="40" id="txtAddress"></p:inputText>
-                                        <p:outputLabel value="18. Phone1"></p:outputLabel>
-                                        <p:inputMask value="#{notificationFormController.current.tp1}" size="40" id="txtP1" mask="999-9999999"></p:inputMask>
-                                        <p:outputLabel value="19. Phone2"></p:outputLabel>
-                                        <p:inputMask value="#{notificationFormController.current.tp2}" size="40" id="txtP2" mask="999-9999999"></p:inputMask>
+
+                                        <p:outputLabel value="5. MOH Division"></p:outputLabel>   
+                                        <p:autoComplete
+                                            forceSelection="true"                                 
+                                            value="#{notificationFormController.current.mohArea}" 
+                                            completeMethod="#{notificationFormController.completeMohAreas}"
+                                            var="oi" itemLabel="#{oi.name}" itemValue="#{oi}"  id="acmoh"> 
+                                        </p:autoComplete>
+                                        <p:outputLabel value="6. District / RDHS"></p:outputLabel>
+                                        <p:autoComplete
+                                            forceSelection="true"                                 
+                                            value="#{notificationFormController.current.district}" 
+                                            completeMethod="#{areaController.completeDistricts}"
+                                            var="oi" itemLabel="#{oi.name}" itemValue="#{oi}" id="acdiv">
+                                            <f:ajax event="itemSelect" execute="acdiv" render="acmoh"></f:ajax>
+                                        </p:autoComplete>
+
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" style="width: 80%;">
+
+                                        <h:panelGrid columns="5" >
+                                            <p:outputLabel value="7. Mother's Name"></p:outputLabel>
+                                            <p:inputText value="#{notificationFormController.current.mother.name}" size="20" ></p:inputText>
+                                            <p:spacer width="20" height="1" ></p:spacer>
+                                            <p:outputLabel value="8. Maternal Age(Years)"></p:outputLabel>
+                                            <p:inputText value="#{notificationFormController.current.mother.age}" size="5" id="txtMotherAge"></p:inputText>
+                                        </h:panelGrid>
+
+                                        <h:panelGrid columns="2" >
+                                            <p:outputLabel value="9. Contact Phone"></p:outputLabel>
+                                            <p:inputMask value="#{notificationFormController.current.tp1}" size="20" id="txtP1" mask="999-9999999"></p:inputMask>
+
+                                        </h:panelGrid>
+
+                                    </h:panelGrid>
+
+                                    <h:panelGrid columns="4" style="width: 80%;text-align: left;">
+                                        <p:outputLabel value="10. Ethnicity"></p:outputLabel>
+                                        <p:selectOneRadio value="#{notificationFormController.current.mother.ethnicity}" id="selEth">
+                                            <f:selectItems value="#{enumController.ethnicities}" ></f:selectItems>
+                                        </p:selectOneRadio>
+                                        <p:inputText value="#{notificationFormController.current.infant.ethnicityOther}" size="20" id="txtMotherName"></p:inputText>
+                                        <p:spacer height="1" width="20"></p:spacer>
+                                    </h:panelGrid>
+
+                                    <h:panelGrid columns="5" style="width: 80%;">
+
+                                        <p:outputLabel value="11. Date of Birth/Delivary"></p:outputLabel>
+                                        <p:calendar value="#{notificationFormController.current.infant.dob}" size="20" navigator="true" pattern="dd-MM-yyyy"></p:calendar>
+
+                                        <p:spacer height="1" width="20" ></p:spacer>
+
+                                        <p:outputLabel value="12. Place of Delivary"></p:outputLabel>
+                                        <p:inputText value="#{notificationFormController.current.placeOfDelivary}" size="20" ></p:inputText>
+
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" style="width: 80%;">
+
+                                        <p:outputLabel value="13. Date of Case Identified"></p:outputLabel>
+                                        <p:calendar value="#{notificationFormController.current.caseIdentifiedDate}" size="30" id="calIden" navigator="true" pattern="dd-MM-yyyy"></p:calendar>
+
+
+                                        <h:panelGrid columns="12" >
+                                            <p:outputLabel value="14. Age at case detection"></p:outputLabel>
+                                            <p:spacer height="1" width="20" ></p:spacer>
+                                            <p:inputText value="#{notificationFormController.current.ageAtCaseDetectionYears}" size="4" id="txtY"></p:inputText>
+                                            <p:outputLabel value="Years"></p:outputLabel>
+                                            <p:spacer height="1" width="5" ></p:spacer>
+                                            <p:inputText value="#{notificationFormController.current.ageAtCaseDetectionMonths}" size="4" id="txtM"></p:inputText>
+                                            <p:outputLabel value="Months"></p:outputLabel>
+                                            <p:spacer height="1" width="5" ></p:spacer>
+                                            <p:inputText value="#{notificationFormController.current.ageAtCaseDetectionDays}" size="4" id="txtD"></p:inputText>
+                                            <p:outputLabel value="Days"></p:outputLabel>
+                                            <p:spacer height="1" width="5" ></p:spacer>
+                                        </h:panelGrid>
+
+
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" style="width: 80%;">
+                                        <p:outputLabel value="15. Living Status"></p:outputLabel>
+                                        <p:selectOneRadio value="#{notificationFormController.current.livingStatus}" id="selLs">
+                                            <f:selectItems value="#{enumController.livingStatusLimited}" ></f:selectItems>
+                                        </p:selectOneRadio>
+
+                                        <p:outputLabel value="16. Date of Death"></p:outputLabel>
+                                        <p:calendar value="#{notificationFormController.current.dateOfDeath}" size="30"  navigator="true" pattern="dd-MM-yyyy"></p:calendar>
+
+                                        <p:outputLabel value="17. Post mortem / Necropsy details"></p:outputLabel>
+                                        <p:selectBooleanButton  offLabel="Not Done" onLabel="Done" value="#{notificationFormController.current.postMortem}" >
+                                        </p:selectBooleanButton>
+                                    </h:panelGrid>
+
+
+
+                                </p:tab>
+                                <p:tab title="B. DESCRIPTION OF THE CONGENITAL ABNORMALITIES" >
+                                    <p:outputLabel value="Presence of congenital abnormalities:" ></p:outputLabel>
+                                    <p:selectOneRadio value="#{notificationFormController.current.presenceOfCongenitalAbnormalities}" id="selCa">
+                                        <f:selectItems value="#{enumController.presenceOfCongenitalAbnormalities}" ></f:selectItems>
+                                    </p:selectOneRadio>
+                                    <p:inputTextarea style="height: 250px; width: 50%;" value="#{notificationFormController.current.descriptionOfTheCongenitalAbnormalities}" ></p:inputTextarea>
+                                </p:tab>
+                                <p:tab title="C. DEATH DETAILS" >
+                                    <p:panelGrid columns="2">
+                                        <p:outputLabel value="Date of Death"></p:outputLabel>
+                                        <p:calendar value="#{notificationFormController.current.infant.dateOfDead}" size="40" id="calDOD" navigator="true" pattern="dd-MM-yyyy"></p:calendar>
+                                        <p:outputLabel value="Age at Death"></p:outputLabel>
+                                        <p:panelGrid columns="2">
+                                            <p:outputLabel value="Years"></p:outputLabel>
+                                            <p:inputText value="#{notificationFormController.current.infantAodYrs}" id="txtAgeYear"></p:inputText>
+                                            <p:outputLabel value="Months"></p:outputLabel>
+                                            <p:inputText value="#{notificationFormController.current.infantAodMnths}" id="txtAgeMonth"></p:inputText>
+                                            <p:outputLabel value="Days"></p:outputLabel>
+                                            <p:inputText value="#{notificationFormController.current.infantAodDys}" id="txtAgeDay"></p:inputText>
+                                        </p:panelGrid>
+                                        <p:outputLabel value="Place of Death"></p:outputLabel>
+                                        <p:inputText value="#{notificationFormController.current.placeOfDead}" size="40" id="plsDeath"></p:inputText>
+                                        <p:outputLabel value="Name of the JMO / Pathologist"></p:outputLabel>
+                                        <p:inputText  size="40" id="txtJMO" value="#{notificationFormController.current.jmo.name}"></p:inputText>
+                                        <p:outputLabel><font color="blue">Cause/s of Death:</font></p:outputLabel>
+                                        <p:outputLabel></p:outputLabel>
+                                        <p:outputLabel value="Underlying Cause"></p:outputLabel>
+                                        <p:inputText value="#{notificationFormController.current.underlyingCause}" size="40" id="txtun"></p:inputText>
+                                        <p:outputLabel value="Immediate Cause"></p:outputLabel>
+                                        <p:inputText value="#{notificationFormController.current.immediateCause}" size="40" id="txtim"></p:inputText>
+                                        <p:outputLabel value="Conditions contributing to Death"></p:outputLabel>
+                                        <p:inputText value="#{notificationFormController.current.conDeath}" size="40" id="txtcontodeath"></p:inputText>
                                     </p:panelGrid>
 
-                                    <p:accordionPanel id="panelDead">
-                                        <p:tab title="Details of Death" rendered="#{notificationFormController.current.live}">
-                                            <p:panelGrid columns="2">
-                                                <p:outputLabel value="Date of Death"></p:outputLabel>
-                                                <p:calendar value="#{notificationFormController.current.infant.dateOfDead}" size="40" id="calDOD" navigator="true" pattern="dd-MM-yyyy"></p:calendar>
-                                                <p:outputLabel value="Age at Death"></p:outputLabel>
-                                                <p:panelGrid columns="2">
-                                                    <p:outputLabel value="Years"></p:outputLabel>
-                                                    <p:inputText value="#{notificationFormController.current.infantAodYrs}" id="txtAgeYear"></p:inputText>
-                                                    <p:outputLabel value="Months"></p:outputLabel>
-                                                    <p:inputText value="#{notificationFormController.current.infantAodMnths}" id="txtAgeMonth"></p:inputText>
-                                                    <p:outputLabel value="Days"></p:outputLabel>
-                                                    <p:inputText value="#{notificationFormController.current.infantAodDys}" id="txtAgeDay"></p:inputText>
-                                                </p:panelGrid>
-                                                <p:outputLabel value="Place of Death"></p:outputLabel>
-                                                <p:inputText value="#{notificationFormController.current.placeOfDead}" size="40" id="plsDeath"></p:inputText>
-                                                <p:outputLabel value="Post-Mortem / Pathological Examination conducted"></p:outputLabel>
-                                                <p:selectBooleanCheckbox value="#{notificationFormController.current.postMortem}" itemLabel="Post-mortem"  id="rdoPM"></p:selectBooleanCheckbox>
-                                                <p:outputLabel value="Name of the JMO / Pathologist"></p:outputLabel>
-                                                <p:inputText  size="40" id="txtJMO" value="#{notificationFormController.current.jmo.name}"></p:inputText>
-                                                <p:outputLabel><font color="blue">Cause/s of Death:</font></p:outputLabel>
-                                                <p:outputLabel></p:outputLabel>
-                                                <p:outputLabel value="Underlying Cause"></p:outputLabel>
-                                                <p:inputText value="#{notificationFormController.current.underlyingCause}" size="40" id="txtun"></p:inputText>
-                                                <p:outputLabel value="Immediate Cause"></p:outputLabel>
-                                                <p:inputText value="#{notificationFormController.current.immediateCause}" size="40" id="txtim"></p:inputText>
-                                                <p:outputLabel value="Conditions contributing to Death"></p:outputLabel>
-                                                <p:inputText value="#{notificationFormController.current.conDeath}" size="40" id="txtcontodeath"></p:inputText>
-                                                <p:outputLabel value="Name of the Informant"></p:outputLabel>
-                                                <p:inputText  size="40" id="txtimf" value="#{notificationFormController.current.informant.name}"></p:inputText>
-                                                <p:outputLabel value="Designation of the Informant"></p:outputLabel>
-                                                <p:inputText  size="40" id="txtdes" value="#{notificationFormController.current.designation}"></p:inputText>
-                                                <p:outputLabel value="Contact Phone"></p:outputLabel>
-                                                <p:inputMask value="#{notificationFormController.current.inTp}" size="40" id="txtcoIm" mask="999-9999999"></p:inputMask>
-                                                <p:outputLabel value="Name of the Head of the Institution"></p:outputLabel>
-                                                <p:inputText  size="40" id="txthoi" value="#{notificationFormController.current.hoi.name}"></p:inputText>
-                                                <p:outputLabel value="Approved Date"></p:outputLabel>
-                                                <p:calendar  size="40" id="txtapp" value="#{notificationFormController.current.approveDate}" navigator="true" pattern="dd-MM-yyyy"></p:calendar>
+                                </p:tab>
+                                <p:tab title="D. INFORMANT DETAILS" >
 
-                                            </p:panelGrid>
-                                        </p:tab>
-                                    </p:accordionPanel>
-                                </div>
-                                <!--                                <p:panelGrid>
-                                                                    <p:tooltip for="txtInfantName" value="Type Infant's Name" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="sex" value="Select Sex" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="acHos" value="Select Hospital" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="acdiv" value="Auto Fill RDHS Division with District" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="acWard" value="Select Ward" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="acmoh" value="Select MOH Area" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="acDis" value="Select District" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="acGn" value="Select Grama Niladari Area" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="calIden" value="Select Date from Calender" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtBHT" value="Type BHT Number" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtPregReg" value="Type Pregnancy Registration Number" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtPregType" value="Pregnancy Type" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="live" value="Select the option" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtDiag" value="Type diagnosis" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtMother" value="Type mother's name" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtMDOB" value="Type mother's Date of birth" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtMAge" value="Type mother's Age" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtNIC" value="Type mother's National Identity Card number" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="selEth" value="Select mother's National Ethnicity" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtAddress" value="Type permanent address" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtP1" value="Type Telephone number" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtP2" value="Type Mobile phone number" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="calDOD" value="Type Infant's date of death" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtAgeYear" value="Type Infant's date of death in years" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtAgeMonth" value="Type Infant's date of death in months" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtAgeDay" value="Type Infant's date of death in days" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="plsDeath" value="Type Place of death" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="rdoPM" value="Select one option" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtJMO" value="Type name of pathogist" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtun" value="Type Underlyig cause" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtim" value="Type Immediate cause" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtcontodeath" value="Type Conditions contributing to Death" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtimf" value="Type Name of the Informant" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtdes" value="Type Designation of the Informant" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtcoIm" value="Type Contact Phone" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txthoi" value="Type Name of the HOI" showEffect="fade" hideEffect="fade" />
-                                                                    <p:tooltip for="txtapp" value="Approved Date by HOI" showEffect="fade" hideEffect="fade" />
-                                                                </p:panelGrid>-->
+                                    <h:panelGrid columns="2" >
 
-                            </p:panel>
+
+                                        <p:outputLabel value="Name of the Informant"></p:outputLabel>
+                                        <p:inputText  size="40" id="txtimf" value="#{notificationFormController.current.informant.name}"></p:inputText>
+                                        <p:outputLabel value="Designation of the Informant"></p:outputLabel>
+                                        <p:inputText  size="40" id="txtdes" value="#{notificationFormController.current.designation}"></p:inputText>
+                                        <p:outputLabel value="Contact Phone"></p:outputLabel>
+                                        <p:inputMask value="#{notificationFormController.current.inTp}" size="40" id="txtcoIm" mask="999-9999999"></p:inputMask>
+                                        <p:outputLabel value="Name of the Head of the Institution"></p:outputLabel>
+                                        <p:inputText  size="40" id="txthoi" value="#{notificationFormController.current.hoi.name}"></p:inputText>
+                                        <p:outputLabel value="Approved Date"></p:outputLabel>
+                                        <p:calendar  size="40" id="txtapp" value="#{notificationFormController.current.approveDate}" navigator="true" pattern="dd-MM-yyyy"></p:calendar>
+
+
+                                    </h:panelGrid>
+                                </p:tab>
+
+                            </p:tabView>
+
+
+
+
                         </div>
-                        <f:facet name="footer">
-                            <p align="center"><h:outputLabel value="Hospital Notification Form"></h:outputLabel>
-                                <p:spacer width="10" ></p:spacer>
-                                <p:commandButton ajax="false" value="Save" action="#{notificationFormController.saveSelected()}" id="cmdSv2" disabled="#{sessionController.superUser}"></p:commandButton></p>
-                            <p:tooltip for="cmdSv2" value="Save Hospital Notification Form" showEffect="fade" hideEffect="fade" />
-                        </f:facet>
+
+
 
                     </p:panel>
+
+
 
                 </h:form>
 

@@ -72,8 +72,19 @@ public class Person implements Serializable {
     int ageInWeek;
     @Enumerated(EnumType.STRING)
     Ethnicity ethnicity;
+    String ethnicityOther;
     String address;
 
+    public String getEthnicityOther() {
+        return ethnicityOther;
+    }
+
+    public void setEthnicityOther(String ethnicityOther) {
+        this.ethnicityOther = ethnicityOther;
+    }
+
+    
+    
     public int getAgeInWeek() {
         return ageInWeek;
     }

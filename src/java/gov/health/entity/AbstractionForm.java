@@ -7,6 +7,7 @@ package gov.health.entity;
 
 import gov.health.data.Ethnicity;
 import gov.health.data.Relationship;
+import gov.health.enums.LivingStatus;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -17,6 +18,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -34,7 +36,7 @@ public class AbstractionForm implements Serializable {
     @OneToOne(mappedBy = "abstractionForm", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private LabTest labTest;
 
-    @OneToOne(mappedBy = "abstractionForm", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "abstractionForm", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     NotificationForm notificationForm;
 
     private static final long serialVersionUID = 1L;
@@ -72,10 +74,15 @@ public class AbstractionForm implements Serializable {
     //@Temporal(javax.persistence.TemporalType.DATE)
     //Date motherDoB;
     int age;
+    int ageYears;
+    int ageMonths;
+    int ageDays;
     //@ManyToOne
     //Person mnic;
     @Enumerated(EnumType.STRING)
     Ethnicity methnicity;
+    @Enumerated(EnumType.STRING)
+    LivingStatus livingStatus;
     //@ManyToOne
     //Person address;
     String tp1;
@@ -120,7 +127,94 @@ public class AbstractionForm implements Serializable {
     WebUser retiredUser;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     Date retiredAt;
+    boolean autopsyDone;
+    String autopsyNo;
+    String autopsyDoneBy;
+    @Lob
+    String autopsyDetails;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date autopsyDate;
 
+    public Date getAutopsyDate() {
+        return autopsyDate;
+    }
+
+    public void setAutopsyDate(Date autopsyDate) {
+        this.autopsyDate = autopsyDate;
+    }
+    
+    
+
+    public boolean isAutopsyDone() {
+        return autopsyDone;
+    }
+
+    public void setAutopsyDone(boolean autopsyDone) {
+        this.autopsyDone = autopsyDone;
+    }
+
+    public String getAutopsyNo() {
+        return autopsyNo;
+    }
+
+    public void setAutopsyNo(String autopsyNo) {
+        this.autopsyNo = autopsyNo;
+    }
+
+    public String getAutopsyDoneBy() {
+        return autopsyDoneBy;
+    }
+
+    public void setAutopsyDoneBy(String autopsyDoneBy) {
+        this.autopsyDoneBy = autopsyDoneBy;
+    }
+
+    public String getAutopsyDetails() {
+        return autopsyDetails;
+    }
+
+    public void setAutopsyDetails(String autopsyDetails) {
+        this.autopsyDetails = autopsyDetails;
+    }
+    
+    
+
+    public LivingStatus getLivingStatus() {
+        return livingStatus;
+    }
+
+    public void setLivingStatus(LivingStatus livingStatus) {
+        this.livingStatus = livingStatus;
+    }
+
+    
+    
+    public int getAgeYears() {
+        return ageYears;
+    }
+
+    public void setAgeYears(int ageYears) {
+        this.ageYears = ageYears;
+    }
+
+    public int getAgeMonths() {
+        return ageMonths;
+    }
+
+    public void setAgeMonths(int ageMonths) {
+        this.ageMonths = ageMonths;
+    }
+
+    public int getAgeDays() {
+        return ageDays;
+    }
+
+    public void setAgeDays(int ageDays) {
+        this.ageDays = ageDays;
+    }
+
+    
+    
     public Date getDiagnosisDate() {
         return diagnosisDate;
     }
