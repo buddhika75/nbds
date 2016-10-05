@@ -127,8 +127,6 @@ public class NotificationForm implements Serializable {
     @ManyToOne
     WebUser createdUser;
     
-    @OneToOne
-    AbstractionForm abstractionForm;
     
     @Enumerated(EnumType.STRING)
     Birth birthType;
@@ -718,13 +716,6 @@ public class NotificationForm implements Serializable {
         this.createdUser = createdUser;
     }
 
-    public AbstractionForm getAbstractionForm() {
-        return abstractionForm;
-    }
-
-    public void setAbstractionForm(AbstractionForm abstractionForm) {
-        this.abstractionForm = abstractionForm;
-    }
 
  
 

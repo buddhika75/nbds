@@ -458,25 +458,7 @@ public class InstitutionController implements Serializable {
         this.offSel = offSel;
     }
 
-    @Inject
-    DbfController dbfController;
-
-    public DbfController getDbfController() {
-        return dbfController;
-    }
-
-    public void setDbfController(DbfController dbfController) {
-        this.dbfController = dbfController;
-    }
-
-    public void setSelectedNode(TreeNode selectedNode) {
-        if (this.selectedNode != selectedNode) {
-            //System.out.println("set select node");
-            getDbfController().recreateModel();
-            getDbfController().getSelectedPersonInstitutions();
-        }
-        this.selectedNode = selectedNode;
-    }
+   
 
     public void onNodeExpand(NodeExpandEvent event) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Expanded", event.getTreeNode().toString());
@@ -507,13 +489,7 @@ public class InstitutionController implements Serializable {
         return ins;
     }
 
-    public void onNodeSelect(NodeSelectEvent event) {
-        current = findInstitution(event.getTreeNode().toString(), false);
-        //System.out.println("set on node select");
-        getDbfController().recreateModel();
-        getDbfController().getSelectedPersonInstitutions();
-        JsfUtil.addSuccessMessage(current.getName());
-    }
+   
 
     public void onNodeUnselect(NodeUnselectEvent event) {
         current = null;
