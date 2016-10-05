@@ -4,6 +4,7 @@
  */
 package gov.health.entity;
 
+import gov.health.data.CategoryType;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -14,14 +15,23 @@ import javax.persistence.*;
  */
 @Entity
 public class Category implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 //Main Properties
+    @Enumerated(EnumType.STRING)
+    CategoryType type;
     String name;
+    String code;
+    @Lob
     String description;
     int orderNo;
+    @ManyToOne
+    Category parent;
+    @ManyToOne
+    Category categoty;
     //Created Properties
     @ManyToOne
     WebUser creater;
@@ -106,9 +116,7 @@ public class Category implements Serializable {
     public void setOrderNo(int orderNo) {
         this.orderNo = orderNo;
     }
-    
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -140,5 +148,5 @@ public class Category implements Serializable {
     public String toString() {
         return name;
     }
-    
+
 }

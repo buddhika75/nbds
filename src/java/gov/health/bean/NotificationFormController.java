@@ -285,16 +285,6 @@ public class NotificationFormController implements Serializable {
 
     public String addNewHospitalNotificationForm() {
         current = new NotificationForm();
-        Person infant = new Person();
-        Person mother = new Person();
-        Person informant = new Person();
-        Person jmo = new Person();
-        Person hoi = new Person();
-        current.setInfant(infant);
-        current.setMother(mother);
-        current.setInformant(informant);
-        current.setJmo(jmo);
-        current.setHoi(hoi);
         current.setCreatedAt(new Date());
         current.setCreatedUser(getSessionController().getLoggedUser());
         if (getSessionController().getLoggedUser().getRestrictedInstitution() != null) {
@@ -307,8 +297,6 @@ public class NotificationFormController implements Serializable {
         current = new NotificationForm();
         Person infant = new Person();
         Person mother = new Person();
-        current.setInfant(infant);
-        current.setMother(mother);
         return "add_area_notification_form";
     }
 
@@ -326,31 +314,6 @@ public class NotificationFormController implements Serializable {
     public NotificationForm getCurrent() {
         if (current == null) {
             current = new NotificationForm();
-            Person infant = new Person();
-            Person mother = new Person();
-            Person informant = new Person();
-            Person jmo = new Person();
-            Person hoi = new Person();
-            current.setInfant(infant);
-            current.setMother(mother);
-            current.setInformant(informant);
-            current.setJmo(jmo);
-            current.setHoi(hoi);
-        }
-
-        if (current.getJmo() == null) {
-            Person j = new Person();
-            current.setJmo(j);
-        }
-
-        if (current.getInformant() == null) {
-            Person i = new Person();
-            current.setInformant(i);
-        }
-
-        if (current.getHoi() == null) {
-            Person h = new Person();
-            current.setHoi(h);
         }
         return current;
     }

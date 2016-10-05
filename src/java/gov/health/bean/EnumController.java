@@ -9,8 +9,8 @@ package gov.health.bean;
 import gov.health.data.Birth;
 import gov.health.data.Dermatolglyphics;
 import gov.health.data.Ethnicity;
-import gov.health.enums.LivingStatus;
-import gov.health.enums.PresenceOfCongenitalAbnormalities;
+import gov.health.data.LivingStatus;
+import gov.health.data.PresenceOfCongenitalAbnormalities;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 
