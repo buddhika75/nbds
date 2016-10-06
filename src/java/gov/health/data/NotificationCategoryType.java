@@ -14,6 +14,7 @@ public enum NotificationCategoryType {
     THERAPEUTIC_SURGICAL_INTERVENTIONS_REFERRALS_CARRIED_OUT_ON_ANOMALIES,
     Underlying_Courses_of_death,
     Immediate_courses_of_death,
+    Causes_contributing_to_death,
     Investigations,
     FamilyHistory,
     Other;

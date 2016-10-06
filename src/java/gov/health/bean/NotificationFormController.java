@@ -1,6 +1,5 @@
 package gov.health.bean;
 
-
 import gov.health.data.NotificationCategoryType;
 import gov.health.entity.Area;
 import gov.health.entity.Department;
@@ -55,16 +54,55 @@ public class NotificationFormController implements Serializable {
     AreaController areaController;
     Date fromDate;
     Date toDate;
-    
-    
+
     NotificationCategory congenital_Abnormality;
-    
-    
-    public void addCongenitalAbnormality(){
+    NotificationCategory family_History_Of_Congenital_Abnormality;
+    NotificationCategory prenatal_Antenatal_Postnatal_Investigation;
+    NotificationCategory therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomaly;
+    NotificationCategory underlyning_Cause_of_Death;
+    NotificationCategory immediate_Cause_of_Death;
+    NotificationCategory conditions_Contributing_to_Death;
+
+    public void addConditionsContributingToDeath() {
+        getCurrent().getCongenital_Abnormalities().add(conditions_Contributing_to_Death);
+        saveSelected();
+        conditions_Contributing_to_Death = new NotificationCategory();
+        conditions_Contributing_to_Death.setType(NotificationCategoryType.Causes_contributing_to_death);
+    }
+
+    public void addImmediateCauseOfDeath() {
+        getCurrent().getCongenital_Abnormalities().add(immediate_Cause_of_Death);
+        saveSelected();
+        immediate_Cause_of_Death = new NotificationCategory();
+        immediate_Cause_of_Death.setType(NotificationCategoryType.Immediate_courses_of_death);
+    }
+
+    public void addUnderlyingCauseOfDeath() {
+        getCurrent().getCongenital_Abnormalities().add(underlyning_Cause_of_Death);
+        saveSelected();
+        underlyning_Cause_of_Death = new NotificationCategory();
+        underlyning_Cause_of_Death.setType(NotificationCategoryType.Underlying_Courses_of_death);
+    }
+
+    public void addIx() {
+        getCurrent().getCongenital_Abnormalities().add(prenatal_Antenatal_Postnatal_Investigation);
+        saveSelected();
+        prenatal_Antenatal_Postnatal_Investigation = new NotificationCategory();
+        prenatal_Antenatal_Postnatal_Investigation.setType(NotificationCategoryType.Investigations);
+    }
+
+    public void addCongenitalAbnormality() {
         getCurrent().getCongenital_Abnormalities().add(congenital_Abnormality);
         saveSelected();
         congenital_Abnormality = new NotificationCategory();
         congenital_Abnormality.setType(NotificationCategoryType.Congenital_Adnormalities);
+    }
+
+    public void addFamilyHistory() {
+        getCurrent().getCongenital_Abnormalities().add(family_History_Of_Congenital_Abnormality);
+        saveSelected();
+        family_History_Of_Congenital_Abnormality = new NotificationCategory();
+        family_History_Of_Congenital_Abnormality.setType(NotificationCategoryType.FamilyHistory);
     }
 
     public String registerNotificationForm() {
@@ -300,6 +338,13 @@ public class NotificationFormController implements Serializable {
         current = new NotificationForm();
         current.setCreatedAt(new Date());
         current.setCreatedUser(getSessionController().getLoggedUser());
+        congenital_Abnormality = new NotificationCategory();
+        family_History_Of_Congenital_Abnormality = new NotificationCategory();
+        prenatal_Antenatal_Postnatal_Investigation = new NotificationCategory();
+        therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomaly = new NotificationCategory();
+        underlyning_Cause_of_Death = new NotificationCategory();
+        immediate_Cause_of_Death = new NotificationCategory();
+        conditions_Contributing_to_Death = new NotificationCategory();
         if (getSessionController().getLoggedUser().getRestrictedInstitution() != null) {
             current.setHospital(getSessionController().getLoggedUser().getRestrictedInstitution());
         }
@@ -350,7 +395,7 @@ public class NotificationFormController implements Serializable {
             JsfUtil.addErrorMessage("Please select the hospital");
             return;
         }
-        
+
         if (current.getId() == null || current.getId() == 0) {
             getFacade().create(current);
         } else {
