@@ -45,6 +45,40 @@ public class Category implements Serializable {
     Date retiredAt;
     String retireComments;
 
+    public CategoryType getType() {
+        return type;
+    }
+
+    public void setType(CategoryType type) {
+        this.type = type;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Category getParent() {
+        return parent;
+    }
+
+    public void setParent(Category parent) {
+        this.parent = parent;
+    }
+
+    public Category getCategoty() {
+        return categoty;
+    }
+
+    public void setCategoty(Category categoty) {
+        this.categoty = categoty;
+    }
+    
+    
+
     public Date getCreatedAt() {
         return createdAt;
     }

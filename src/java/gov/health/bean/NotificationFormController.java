@@ -1,11 +1,13 @@
 package gov.health.bean;
 
 
+import gov.health.data.NotificationCategoryType;
 import gov.health.entity.Area;
 import gov.health.entity.Department;
 import gov.health.facade.NotificationFormFacade;
 import gov.health.entity.NotificationForm;
 import gov.health.entity.Institution;
+import gov.health.entity.NotificationCategory;
 import gov.health.entity.Person;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -53,6 +55,17 @@ public class NotificationFormController implements Serializable {
     AreaController areaController;
     Date fromDate;
     Date toDate;
+    
+    
+    NotificationCategory congenital_Abnormality;
+    
+    
+    public void addCongenitalAbnormality(){
+        getCurrent().getCongenital_Abnormalities().add(congenital_Abnormality);
+        saveSelected();
+        congenital_Abnormality = new NotificationCategory();
+        congenital_Abnormality.setType(NotificationCategoryType.Congenital_Adnormalities);
+    }
 
     public String registerNotificationForm() {
         if (current == null) {

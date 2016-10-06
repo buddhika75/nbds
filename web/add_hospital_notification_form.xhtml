@@ -42,9 +42,13 @@
                                         </p:selectOneMenu>
 
                                         <p:outputLabel value="Location_Where_Case_Identified_Hospital:" for="location_Where_Case_Identified_Hospital" />
-                                        <p:selectOneMenu id="location_Where_Case_Identified_Hospital" value="#{notificationFormController.current.location_Where_Case_Identified_Hospital}" >
-                                            <f:selectItems value="#{institutionController.items}" var="h" itemLabel="#{h.name}" itemValue="#{h}"/>
-                                        </p:selectOneMenu>
+                                        <p:autoComplete id="location_Where_Case_Identified_Hospital" value="#{notificationFormController.current.location_Where_Case_Identified_Hospital}" 
+                                                        completeMethod="#{institutionController.completeHospitals}"                                            
+                                                        var="h0"
+                                                        itemLabel="#{h0.name}"
+                                                        itemValue="#{h0}"
+                                                        >
+                                        </p:autoComplete>
                                         <p:outputLabel value="Location_Where_Case_Identified_Ward_Unit:" for="location_Where_Case_Identified_Ward_Unit" />
                                         <p:inputText id="location_Where_Case_Identified_Ward_Unit" value="#{notificationFormController.current.location_Where_Case_Identified_Ward_Unit}" title="Location_Where_Case_Identified_Ward_Unit" />
                                         <p:outputLabel value="Location_Where_Case_Identified_Bht_No:" for="location_Where_Case_Identified_Bht_No" />
@@ -75,9 +79,10 @@
 
                                         </p:autoComplete>
                                         <p:outputLabel value="Date_of_Birth_Delivery:" for="date_of_Birth_Delivery" />
-                                        <p:inputText id="date_of_Birth_Delivery" value="#{notificationFormController.current.date_of_Birth_Delivery}" title="Date_of_Birth_Delivery" >
-                                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                                        </p:inputText>
+                                        <p:calendar id="date_of_Birth_Delivery" value="#{notificationFormController.current.date_of_Birth_Delivery}" title="Date_of_Birth_Delivery" 
+                                                    pattern="MM/dd/yyyy" >
+                                             
+                                        </p:calendar>
                                         <p:outputLabel value="Place_of_Delivery:" for="place_of_Delivery" />
                                         <p:autoComplete id="place_of_Delivery" value="#{notificationFormController.current.place_of_Delivery}" 
                                                         completeMethod="#{institutionController.completeHospitals}"                                            
@@ -88,9 +93,10 @@
 
                                         </p:autoComplete>
                                         <p:outputLabel value="Date_of_Case_Identified:" for="date_of_Case_Identified" />
-                                        <p:inputText id="date_of_Case_Identified" value="#{notificationFormController.current.date_of_Case_Identified}" title="Date_of_Case_Identified" >
-                                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                                        </p:inputText>
+                                        <p:calendar id="date_of_Case_Identified" 
+                                                    pattern="MM/dd/yyyy" 
+                                                    value="#{notificationFormController.current.date_of_Case_Identified}" title="Date_of_Case_Identified" >
+                                        </p:calendar>
                                         <p:outputLabel value="Age_at_Case_Detection_Days:" for="age_at_Case_Detection_Days" />
                                         <p:inputText id="age_at_Case_Detection_Days" value="#{notificationFormController.current.age_at_Case_Detection_Days}" title="Age_at_Case_Detection_Days" />
                                         <p:outputLabel value="Age_at_Case_Detection_Months:" for="age_at_Case_Detection_Months" />
@@ -98,7 +104,9 @@
                                         <p:outputLabel value="Age_at_Case_Detection_Years:" for="age_at_Case_Detection_Years" />
                                         <p:inputText id="age_at_Case_Detection_Years" value="#{notificationFormController.current.age_at_Case_Detection_Years}" title="Age_at_Case_Detection_Years" />
                                         <p:outputLabel value="Living_Status:" for="living_Status" />
-                                        <p:inputText id="living_Status" value="#{notificationFormController.current.living_Status}" title="Living_Status" />
+                                        <p:selectOneMenu id="living_Status" value="#{notificationFormController.current.living_Status}" >
+                                            <f:selectItems value="#{enumController.livingStatus}" var="ls" itemValue="#{ls}" itemLabel="#{ls.label}" ></f:selectItems>
+                                        </p:selectOneMenu>
                                         <p:outputLabel value="Post_Mortem_Necropsy_Done:" for="post_Mortem_Necropsy_Done" />
                                         <p:inputText id="post_Mortem_Necropsy_Done" value="#{notificationFormController.current.post_Mortem_Necropsy_Done}" title="Post_Mortem_Necropsy_Done" />
                                         <p:outputLabel value="Pathological_Forensic_Post_Mortem_Record_No:" for="pathological_Forensic_Post_Mortem_Record_No" />
@@ -108,9 +116,10 @@
                                         <p:outputLabel value="Pathological_Forensic_Post_Mortem_Done_by:" for="pathological_Forensic_Post_Mortem_Done_by" />
                                         <p:inputText id="pathological_Forensic_Post_Mortem_Done_by" value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Done_by}" title="Pathological_Forensic_Post_Mortem_Done_by" />
                                         <p:outputLabel value="Pathological_Forensic_Post_Mortem_Date:" for="pathological_Forensic_Post_Mortem_Date" />
-                                        <p:inputText id="pathological_Forensic_Post_Mortem_Date" value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Date}" title="Pathological_Forensic_Post_Mortem_Date" >
-                                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                                        </p:inputText>
+                                        <p:calendar id="pathological_Forensic_Post_Mortem_Date" 
+                                                    pattern="MM/dd/yyyy" 
+                                                    value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Date}" title="Pathological_Forensic_Post_Mortem_Date" >
+                                        </p:calendar>
 
                                     </p:panelGrid>
                                 </p:tab>

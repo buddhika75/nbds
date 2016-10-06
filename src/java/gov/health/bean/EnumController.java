@@ -44,10 +44,7 @@ public class EnumController {
         return LivingStatus.values();
     }
     
-    public LivingStatus[] getLivingStatusLimited(){
-        LivingStatus[] ls = new LivingStatus[]{LivingStatus.Living, LivingStatus.StillBirth , LivingStatus.NeonatalDeath, LivingStatus.PostNeonatalDeath};
-        return ls;
-    }
+   
     
     public PresenceOfCongenitalAbnormalities[] getPresenceOfCongenitalAbnormalities(){
         return PresenceOfCongenitalAbnormalities.values();
