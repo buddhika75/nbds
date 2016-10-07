@@ -7,10 +7,16 @@
 package gov.health.bean;
 
 import gov.health.data.Birth;
+import gov.health.data.CategoryType;
 import gov.health.data.Dermatolglyphics;
+import gov.health.data.EducationLevel;
 import gov.health.data.Ethnicity;
 import gov.health.data.LivingStatus;
+import gov.health.data.MariatalStatus;
+import gov.health.data.ModeOfDelivery;
+import gov.health.data.Plurality;
 import gov.health.data.PresenceOfCongenitalAbnormalities;
+import gov.health.data.SourceOfPog;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 
@@ -40,15 +46,36 @@ public class EnumController {
         return Birth.values();
     }
     
+    public CategoryType[] getCategoryTypes(){
+        return CategoryType.values();
+    }
+    
     public LivingStatus[] getLivingStatus(){
         return LivingStatus.values();
     }
     
+    public MariatalStatus[] getMariatalStatus(){
+        return MariatalStatus.values();
+    }
    
+    public EducationLevel[] getEducationLevels(){
+        return EducationLevel.values();
+    }
     
     public PresenceOfCongenitalAbnormalities[] getPresenceOfCongenitalAbnormalities(){
         return PresenceOfCongenitalAbnormalities.values();
     }
     
+    public SourceOfPog[] getSourceOfPogs(){
+        return SourceOfPog.values();
+    }
+    
+    public ModeOfDelivery[] getModeOfDeliverys(){
+        return ModeOfDelivery.values();
+    }
+    
+    public Plurality[] getPluralities(){
+        
+    }
     
 }

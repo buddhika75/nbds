@@ -9,14 +9,12 @@ package gov.health.data;
  *
  * @author User
  */
-public enum CategoryType {
-    Unspecified,
-    Designation,
-    CodingSystem,
-    SurgicalProcedure,
-    Investigation,
-    Relationship,
-    ICD10,
-    RCPCH_Extension,
-    Code;
+public enum ModeOfDelivery {
+    Normal_Vaginal,
+    Breech,
+    Forceps,
+    Vacuum,
+    Elective_CS,
+    Emergency_CS,
+    Other,
 }

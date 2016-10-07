@@ -92,8 +92,8 @@ public class NotificationFormController implements Serializable {
     }
 
     public void addCongenitalAbnormality() {
-        getCurrent().getCongenital_Abnormalities().add(congenital_Abnormality);
         saveSelected();
+        getCurrent().getCongenital_Abnormalities().add(congenital_Abnormality);
         congenital_Abnormality = new NotificationCategory();
         congenital_Abnormality.setType(NotificationCategoryType.Congenital_Adnormalities);
     }
@@ -348,14 +348,14 @@ public class NotificationFormController implements Serializable {
         if (getSessionController().getLoggedUser().getRestrictedInstitution() != null) {
             current.setHospital(getSessionController().getLoggedUser().getRestrictedInstitution());
         }
-        return "add_hospital_notification_form";
+        return "/add_hospital_notification_form";
     }
 
     public String addNewAreaNotificationForm() {
         current = new NotificationForm();
         Person infant = new Person();
         Person mother = new Person();
-        return "add_area_notification_form";
+        return "/add_area_notification_form";
     }
 
     public Institution getInstitution() {
@@ -391,10 +391,10 @@ public class NotificationFormController implements Serializable {
             return;
         }
 
-        if (current.getHospital() == null) {
-            JsfUtil.addErrorMessage("Please select the hospital");
-            return;
-        }
+//        if (current.getHospital() == null) {
+//            JsfUtil.addErrorMessage("Please select the hospital");
+//            return;
+//        }
 
         if (current.getId() == null || current.getId() == 0) {
             getFacade().create(current);
@@ -459,6 +459,64 @@ public class NotificationFormController implements Serializable {
         this.areaController = areaController;
     }
 
+    public NotificationCategory getCongenital_Abnormality() {
+        return congenital_Abnormality;
+    }
+
+    public void setCongenital_Abnormality(NotificationCategory congenital_Abnormality) {
+        this.congenital_Abnormality = congenital_Abnormality;
+    }
+
+    public NotificationCategory getFamily_History_Of_Congenital_Abnormality() {
+        return family_History_Of_Congenital_Abnormality;
+    }
+
+    public void setFamily_History_Of_Congenital_Abnormality(NotificationCategory family_History_Of_Congenital_Abnormality) {
+        this.family_History_Of_Congenital_Abnormality = family_History_Of_Congenital_Abnormality;
+    }
+
+    public NotificationCategory getPrenatal_Antenatal_Postnatal_Investigation() {
+        return prenatal_Antenatal_Postnatal_Investigation;
+    }
+
+    public void setPrenatal_Antenatal_Postnatal_Investigation(NotificationCategory prenatal_Antenatal_Postnatal_Investigation) {
+        this.prenatal_Antenatal_Postnatal_Investigation = prenatal_Antenatal_Postnatal_Investigation;
+    }
+
+    public NotificationCategory getTherapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomaly() {
+        return therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomaly;
+    }
+
+    public void setTherapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomaly(NotificationCategory therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomaly) {
+        this.therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomaly = therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomaly;
+    }
+
+    public NotificationCategory getUnderlyning_Cause_of_Death() {
+        return underlyning_Cause_of_Death;
+    }
+
+    public void setUnderlyning_Cause_of_Death(NotificationCategory underlyning_Cause_of_Death) {
+        this.underlyning_Cause_of_Death = underlyning_Cause_of_Death;
+    }
+
+    public NotificationCategory getImmediate_Cause_of_Death() {
+        return immediate_Cause_of_Death;
+    }
+
+    public void setImmediate_Cause_of_Death(NotificationCategory immediate_Cause_of_Death) {
+        this.immediate_Cause_of_Death = immediate_Cause_of_Death;
+    }
+
+    public NotificationCategory getConditions_Contributing_to_Death() {
+        return conditions_Contributing_to_Death;
+    }
+
+    public void setConditions_Contributing_to_Death(NotificationCategory conditions_Contributing_to_Death) {
+        this.conditions_Contributing_to_Death = conditions_Contributing_to_Death;
+    }
+
+    
+    
     @FacesConverter(forClass = NotificationForm.class)
     public static class NotificationFormControllerConverter implements Converter {
 

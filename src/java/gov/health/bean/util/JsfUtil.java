@@ -9,6 +9,20 @@ import javax.faces.model.SelectItem;
 
 public class JsfUtil {
 
+    static boolean validationFailed;
+
+    public static boolean isValidationFailed() {
+        return validationFailed;
+    }
+
+    public static void setValidationFailed(boolean validationFailed) {
+        JsfUtil.validationFailed = validationFailed;
+    }
+
+    
+    
+    
+
     public static SelectItem[] getSelectItems(List<?> entities, boolean selectOne) {
         int size = selectOne ? entities.size() + 1 : entities.size();
         SelectItem[] items = new SelectItem[size];
@@ -55,5 +69,12 @@ public class JsfUtil {
     public static Object getObjectFromRequestParameter(String requestParameterName, Converter converter, UIComponent component) {
         String theId = JsfUtil.getRequestParameter(requestParameterName);
         return converter.getAsObject(FacesContext.getCurrentInstance(), component, theId);
+    }
+
+    public static enum PersistAction {
+        CREATE,
+        UPDATE,
+        DELETE,
+        
     }
 }

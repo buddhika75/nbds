@@ -9,14 +9,6 @@ package gov.health.data;
  *
  * @author User
  */
-public enum CategoryType {
-    Unspecified,
-    Designation,
-    CodingSystem,
-    SurgicalProcedure,
-    Investigation,
-    Relationship,
-    ICD10,
-    RCPCH_Extension,
-    Code;
+public enum Plurality {
+    Singleton, Twin, Triplet, Higher_order,
 }

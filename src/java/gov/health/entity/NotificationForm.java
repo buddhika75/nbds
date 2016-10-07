@@ -10,12 +10,15 @@ import gov.health.data.Ethnicity;
 import gov.health.data.Sex;
 import gov.health.data.LivingStatus;
 import gov.health.data.MariatalStatus;
+import gov.health.data.ModeOfDelivery;
 import gov.health.data.PresenceOfCongenitalAbnormalities;
 import gov.health.data.Sector;
+import gov.health.data.SourceOfPog;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -64,6 +67,7 @@ public class NotificationForm implements Serializable {
     LivingStatus living_Status;
     Boolean post_Mortem_Necropsy_Done;
     String pathological_Forensic_Post_Mortem_Record_No;
+    @Lob
     String pathological_Forensic_Post_Mortem_Details;
     String pathological_Forensic_Post_Mortem_Done_by;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -114,6 +118,7 @@ public class NotificationForm implements Serializable {
     int live_Births;
     Boolean previous_Terminations_of_Pregnancy_for_Congenital_Malformations;
     @Lob
+    @Column(name = "PREVIOUS_TERMINATIONS_OF_PREGNANCY_FOR_CM_DETAILS")
     String previous_Terminations_of_Pregnancy_for_Congenital_Malformations_Details;
     Boolean previous_Still_Births;
     @Lob
@@ -124,6 +129,16 @@ public class NotificationForm implements Serializable {
     Boolean previous_Live_Births_With_Congenital_Malformations;
     @Lob
     String previous_Live_Births_with_Congenital_Malformations_Details;
+    SourceOfPog Source_of_POG_Information;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date lmp;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date edd;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    Date dateAndTimeOfDelivary;
+    ModeOfDelivery modeOfDelivery;
+    String modeOfDelivery_Other;
+    
 
     /**
      *
@@ -238,7 +253,6 @@ public class NotificationForm implements Serializable {
     WebUser retiredUser;
 
     //Gettors & Settors
-
     public Long getId() {
         return id;
     }
@@ -416,7 +430,7 @@ public class NotificationForm implements Serializable {
     }
 
     public List<NotificationCategory> getCongenital_Abnormalities() {
-        if(congenital_Abnormalities==null){
+        if (congenital_Abnormalities == null) {
             congenital_Abnormalities = new ArrayList<NotificationCategory>();
         }
         return congenital_Abnormalities;
@@ -795,7 +809,7 @@ public class NotificationForm implements Serializable {
     }
 
     public List<NotificationCategory> getFamily_History_Of_Congenital_Abnormalities() {
-        if(family_History_Of_Congenital_Abnormalities==null){
+        if (family_History_Of_Congenital_Abnormalities == null) {
             family_History_Of_Congenital_Abnormalities = new ArrayList<NotificationCategory>();
         }
         return family_History_Of_Congenital_Abnormalities;
@@ -806,7 +820,7 @@ public class NotificationForm implements Serializable {
     }
 
     public List<NotificationCategory> getPrenatal_Antenatal_Postnatal_Investigations() {
-        if(prenatal_Antenatal_Postnatal_Investigations==null){
+        if (prenatal_Antenatal_Postnatal_Investigations == null) {
             prenatal_Antenatal_Postnatal_Investigations = new ArrayList<NotificationCategory>();
         }
         return prenatal_Antenatal_Postnatal_Investigations;
@@ -817,7 +831,7 @@ public class NotificationForm implements Serializable {
     }
 
     public List<NotificationCategory> getTherapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomalies() {
-        if(therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomalies==null){
+        if (therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomalies == null) {
             therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomalies = new ArrayList<NotificationCategory>();
         }
         return therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomalies;
@@ -868,7 +882,7 @@ public class NotificationForm implements Serializable {
     }
 
     public List<NotificationCategory> getUnderlyning_Causes_of_Death() {
-        if(underlyning_Causes_of_Death==null){
+        if (underlyning_Causes_of_Death == null) {
             underlyning_Causes_of_Death = new ArrayList<NotificationCategory>();
         }
         return underlyning_Causes_of_Death;
@@ -879,7 +893,7 @@ public class NotificationForm implements Serializable {
     }
 
     public List<NotificationCategory> getImmediate_Causes_of_Death() {
-        if(immediate_Causes_of_Death==null){
+        if (immediate_Causes_of_Death == null) {
             immediate_Causes_of_Death = new ArrayList<NotificationCategory>();
         }
         return immediate_Causes_of_Death;
@@ -890,7 +904,7 @@ public class NotificationForm implements Serializable {
     }
 
     public List<NotificationCategory> getConditions_Contributing_to_Death() {
-        if(conditions_Contributing_to_Death==null){
+        if (conditions_Contributing_to_Death == null) {
             conditions_Contributing_to_Death = new ArrayList<NotificationCategory>();
         }
         return conditions_Contributing_to_Death;
@@ -1035,8 +1049,5 @@ public class NotificationForm implements Serializable {
     public void setRetiredUser(WebUser retiredUser) {
         this.retiredUser = retiredUser;
     }
-    
-    
-    
-    
+
 }

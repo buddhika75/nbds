@@ -1,13 +1,25 @@
+.testCss{
+    text-align: right!important;
+    color: red;
+    background-color: yellow;
+    font-size: 1em;
+}
+
 .shortText{
     width: 50px;
 }
 
+
 .topLeftCol{
+/*    color: red;
+    background-color: yellow;*/
     vertical-align: top;
     text-align: left;
 }
 
 .topRightCol{
+/*    color: yellow;
+    background-color: red;*/
     vertical-align: top;
     text-align: right;
 }

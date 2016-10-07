@@ -53,6 +53,10 @@
             <base-name>/Bundle</base-name>
             <var>bundle</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleCat</base-name>
+            <var>bundleCat</var>
+        </resource-bundle>
     </application>
     
     

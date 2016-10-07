@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CategoryViewDlg" widgetVar="CategoryViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCat.ViewCategoryTitle}">
+            <h:form id="CategoryViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{categoryController.selected != null}">
+                        <h:outputText value="#{bundleCat.ViewCategoryLabel_type}"/>
+                        <h:outputText value="#{categoryController.selected.type}" title="#{bundleCat.ViewCategoryTitle_type}"/>
+                        <h:outputText value="#{bundleCat.ViewCategoryLabel_code}"/>
+                        <h:outputText value="#{categoryController.selected.code}" title="#{bundleCat.ViewCategoryTitle_code}"/>
+                        <h:outputText value="#{bundleCat.ViewCategoryLabel_parent}"/>
+                        <h:outputText value="#{categoryController.selected.parent}" title="#{bundleCat.ViewCategoryTitle_parent}"/>
+                        <h:outputText value="#{bundleCat.ViewCategoryLabel_categoty}"/>
+                        <h:outputText value="#{categoryController.selected.categoty}" title="#{bundleCat.ViewCategoryTitle_categoty}"/>
+                        <h:outputText value="#{bundleCat.ViewCategoryLabel_createdAt}"/>
+                        <h:outputText value="#{categoryController.selected.createdAt}" title="#{bundleCat.ViewCategoryTitle_createdAt}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleCat.ViewCategoryLabel_creater}"/>
+                        <h:outputText value="#{categoryController.selected.creater}" title="#{bundleCat.ViewCategoryTitle_creater}"/>
+                        <h:outputText value="#{bundleCat.ViewCategoryLabel_description}"/>
+                        <h:outputText value="#{categoryController.selected.description}" title="#{bundleCat.ViewCategoryTitle_description}"/>
+                        <h:outputText value="#{bundleCat.ViewCategoryLabel_name}"/>
+                        <h:outputText value="#{categoryController.selected.name}" title="#{bundleCat.ViewCategoryTitle_name}"/>
+                        <h:outputText value="#{bundleCat.ViewCategoryLabel_retireComments}"/>
+                        <h:outputText value="#{categoryController.selected.retireComments}" title="#{bundleCat.ViewCategoryTitle_retireComments}"/>
+                        <h:outputText value="#{bundleCat.ViewCategoryLabel_retiredAt}"/>
+                        <h:outputText value="#{categoryController.selected.retiredAt}" title="#{bundleCat.ViewCategoryTitle_retiredAt}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleCat.ViewCategoryLabel_retirer}"/>
+                        <h:outputText value="#{categoryController.selected.retirer}" title="#{bundleCat.ViewCategoryTitle_retirer}"/>
+                        <h:outputText value="#{bundleCat.ViewCategoryLabel_orderNo}"/>
+                        <h:outputText value="#{categoryController.selected.orderNo}" title="#{bundleCat.ViewCategoryTitle_orderNo}"/>
+                        <h:outputText value="#{bundleCat.ViewCategoryLabel_id}"/>
+                        <h:outputText value="#{categoryController.selected.id}" title="#{bundleCat.ViewCategoryTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleCat.Close}" onclick="CategoryViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
