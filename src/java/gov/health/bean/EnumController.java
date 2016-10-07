@@ -75,7 +75,7 @@ public class EnumController {
     }
     
     public Plurality[] getPluralities(){
-        
+        return Plurality.values();
     }
     
 }
