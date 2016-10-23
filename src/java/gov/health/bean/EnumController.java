@@ -7,6 +7,7 @@
 package gov.health.bean;
 
 import gov.health.data.Birth;
+import gov.health.data.BirthAttendedBy;
 import gov.health.data.CategoryType;
 import gov.health.data.Dermatolglyphics;
 import gov.health.data.EducationLevel;
@@ -15,6 +16,7 @@ import gov.health.data.LivingStatus;
 import gov.health.data.MariatalStatus;
 import gov.health.data.ModeOfDelivery;
 import gov.health.data.Plurality;
+import gov.health.data.PregnancyOutcome;
 import gov.health.data.PresenceOfCongenitalAbnormalities;
 import gov.health.data.SourceOfPog;
 import javax.inject.Named;
@@ -78,4 +80,12 @@ public class EnumController {
         return Plurality.values();
     }
     
+    public BirthAttendedBy[] getBirthAttendedBys(){
+        return BirthAttendedBy.values();
+    }
+    
+    public PregnancyOutcome[] getPregnancyOutcomes(){
+        return PregnancyOutcome.values();
+    }
+
 }

@@ -5,12 +5,15 @@
  */
 package gov.health.entity;
 
+import gov.health.data.BirthAttendedBy;
 import gov.health.data.EducationLevel;
 import gov.health.data.Ethnicity;
 import gov.health.data.Sex;
 import gov.health.data.LivingStatus;
 import gov.health.data.MariatalStatus;
 import gov.health.data.ModeOfDelivery;
+import gov.health.data.Plurality;
+import gov.health.data.PregnancyOutcome;
 import gov.health.data.PresenceOfCongenitalAbnormalities;
 import gov.health.data.Sector;
 import gov.health.data.SourceOfPog;
@@ -129,6 +132,7 @@ public class NotificationForm implements Serializable {
     Boolean previous_Live_Births_With_Congenital_Malformations;
     @Lob
     String previous_Live_Births_with_Congenital_Malformations_Details;
+    @Enumerated(EnumType.STRING)
     SourceOfPog Source_of_POG_Information;
     @Temporal(javax.persistence.TemporalType.DATE)
     Date lmp;
@@ -136,8 +140,21 @@ public class NotificationForm implements Serializable {
     Date edd;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     Date dateAndTimeOfDelivary;
+    @Enumerated(EnumType.STRING)
     ModeOfDelivery modeOfDelivery;
     String modeOfDelivery_Other;
+    @Enumerated(EnumType.STRING)
+    Plurality plurality;
+    @Enumerated(EnumType.STRING)
+    BirthAttendedBy birthAttendedBy;
+    @Enumerated(EnumType.STRING)
+    PregnancyOutcome pregnancyOutcome;
+    int apgar_1st_minute;
+    int apgar_5th_minute;
+    int apgar_10th_minute;
+    double birth_weight_in_grams;
+    double length_in_cm;
+    double head_circumference_in_cm;
     
 
     /**
@@ -1050,4 +1067,126 @@ public class NotificationForm implements Serializable {
         this.retiredUser = retiredUser;
     }
 
+    public SourceOfPog getSource_of_POG_Information() {
+        return Source_of_POG_Information;
+    }
+
+    public void setSource_of_POG_Information(SourceOfPog Source_of_POG_Information) {
+        this.Source_of_POG_Information = Source_of_POG_Information;
+    }
+
+    public Date getLmp() {
+        return lmp;
+    }
+
+    public void setLmp(Date lmp) {
+        this.lmp = lmp;
+    }
+
+    public Date getEdd() {
+        return edd;
+    }
+
+    public void setEdd(Date edd) {
+        this.edd = edd;
+    }
+
+    public Date getDateAndTimeOfDelivary() {
+        return dateAndTimeOfDelivary;
+    }
+
+    public void setDateAndTimeOfDelivary(Date dateAndTimeOfDelivary) {
+        this.dateAndTimeOfDelivary = dateAndTimeOfDelivary;
+    }
+
+    public ModeOfDelivery getModeOfDelivery() {
+        return modeOfDelivery;
+    }
+
+    public void setModeOfDelivery(ModeOfDelivery modeOfDelivery) {
+        this.modeOfDelivery = modeOfDelivery;
+    }
+
+    public String getModeOfDelivery_Other() {
+        return modeOfDelivery_Other;
+    }
+
+    public void setModeOfDelivery_Other(String modeOfDelivery_Other) {
+        this.modeOfDelivery_Other = modeOfDelivery_Other;
+    }
+
+    public Plurality getPlurality() {
+        return plurality;
+    }
+
+    public void setPlurality(Plurality plurality) {
+        this.plurality = plurality;
+    }
+
+    public BirthAttendedBy getBirthAttendedBy() {
+        return birthAttendedBy;
+    }
+
+    public void setBirthAttendedBy(BirthAttendedBy birthAttendedBy) {
+        this.birthAttendedBy = birthAttendedBy;
+    }
+
+    public PregnancyOutcome getPregnancyOutcome() {
+        return pregnancyOutcome;
+    }
+
+    public void setPregnancyOutcome(PregnancyOutcome pregnancyOutcome) {
+        this.pregnancyOutcome = pregnancyOutcome;
+    }
+
+    public int getApgar_1st_minute() {
+        return apgar_1st_minute;
+    }
+
+    public void setApgar_1st_minute(int apgar_1st_minute) {
+        this.apgar_1st_minute = apgar_1st_minute;
+    }
+
+    public int getApgar_5th_minute() {
+        return apgar_5th_minute;
+    }
+
+    public void setApgar_5th_minute(int apgar_5th_minute) {
+        this.apgar_5th_minute = apgar_5th_minute;
+    }
+
+    public int getApgar_10th_minute() {
+        return apgar_10th_minute;
+    }
+
+    public void setApgar_10th_minute(int apgar_10th_minute) {
+        this.apgar_10th_minute = apgar_10th_minute;
+    }
+
+    public double getBirth_weight_in_grams() {
+        return birth_weight_in_grams;
+    }
+
+    public void setBirth_weight_in_grams(double birth_weight_in_grams) {
+        this.birth_weight_in_grams = birth_weight_in_grams;
+    }
+
+    public double getLength_in_cm() {
+        return length_in_cm;
+    }
+
+    public void setLength_in_cm(double length_in_cm) {
+        this.length_in_cm = length_in_cm;
+    }
+
+    public double getHead_circumference_in_cm() {
+        return head_circumference_in_cm;
+    }
+
+    public void setHead_circumference_in_cm(double head_circumference_in_cm) {
+        this.head_circumference_in_cm = head_circumference_in_cm;
+    }
+
+    
+    
 }
