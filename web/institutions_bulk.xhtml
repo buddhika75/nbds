@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./resources/template/template_1.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:define name="content">
+
+
+
+        <h:panelGroup >
+
+
+
+            <h:form  >
+                <p:growl autoUpdate="true" />
+                <p:panel style="border: #ffffff" >
+                    <f:facet name="header" >
+                    <h:outputLabel value="Manage Institutions" ></h:outputLabel>
+                </f:facet>
+                    <div align="center">
+                        <h:panelGrid id ="gpVeda" columns="2" >
+
+                                    <h:panelGrid id="gpDetailText" columns="2">
+                                        <h:outputText id="lblName" value="#{labels.institution}" ></h:outputText>
+                                        <p:inputTextarea id="txtName" value="#{institutionController.bulkText}"  ></p:inputTextarea>
+                                        <h:outputText id="lblCat" value="#{labels.institutionType}" ></h:outputText>
+                                        <p:selectOneMenu id="cmbCat" value="#{institutionController.bulkInstitutionType}">
+                                            <f:selectItem itemLabel="Select Type"/>
+                                            <f:selectItems  value="#{institutionTypeController.lstItems}" var="itype" itemLabel="#{itype.name}" itemValue="#{itype}" />
+                                        </p:selectOneMenu>
+                                        <h:outputText id="lblPi"   value="Super Institute"  ></h:outputText>
+                                        <p:autoComplete   forceSelection="true"  id="acPi" 
+                                                          value="#{institutionController.bulkParentInstitution}"   completeMethod="#{institutionController.completeOffcialInstitutions}" var="pi" itemLabel="#{pi.name}" itemValue="#{pi}" >
+                                        </p:autoComplete>
+                                        <h:outputLabel id="lbldis" value="#{labels.district}"></h:outputLabel>   
+                                        <p:autoComplete
+                                            forceSelection="true"                                 
+                                            value="#{institutionController.bulkDistrict}" 
+                                            completeMethod="#{areaController.completeDistricts}"
+                                            var="od" itemLabel="#{od.name}" itemValue="#{od}" id="acDis" >   
+                                        </p:autoComplete>
+                                    </h:panelGrid>
+                                    <h:panelGrid id="gpDetailButtons" columns="2">
+                                        <p:commandButton ajax="false" id="btnSave" value="#{labels.save}"  
+                                                         action="#{institutionController.addBulkInstitutions()}" >
+                                        </p:commandButton>
+                                    </h:panelGrid>
+
+                        </h:panelGrid>
+                    </div>
+                </p:panel>
+            </h:form>        
+
+        </h:panelGroup>
+
+    </ui:define>
+
+</ui:composition>

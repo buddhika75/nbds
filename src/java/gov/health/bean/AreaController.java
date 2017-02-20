@@ -49,8 +49,72 @@ public class AreaController implements Serializable {
     Area superArea;
     
 
+    String bulkText;
+    AreaType bulkAreaType;
+    Area bulkParentArea;
+    
+    public void addBulkAreas() {
+        if (bulkAreaType == null) {
+            JsfUtil.addErrorMessage("Type?");
+            return;
+        }
+        if (bulkParentArea == null) {
+            JsfUtil.addErrorMessage("Parent Area?");
+            return;
+        }
+        if (bulkText.trim().equals("")) {
+            JsfUtil.addErrorMessage("Institutions?");
+            return;
+        }
+        String lines[] = bulkText.split("\\r?\\n");
+
+        int i =0;
+        
+        for (String line : lines) {
+            if (!line.trim().equals("")) {
+                i++;
+                Area ba = new Area();
+                ba.setName(line);
+                ba.setSuperArea(bulkParentArea);
+                ba.setAreaType(bulkAreaType);
+                getFacade().create(ba);
+            }
+        }
+
+        bulkText = "";
+        bulkAreaType = null;
+        bulkParentArea = null;
+        JsfUtil.addSuccessMessage(i + " Areas added.");
+    }
+    
     Institution institution;
 
+    public String getBulkText() {
+        return bulkText;
+    }
+
+    public void setBulkText(String bulkText) {
+        this.bulkText = bulkText;
+    }
+
+    public AreaType getBulkAreaType() {
+        return bulkAreaType;
+    }
+
+    public void setBulkAreaType(AreaType bulkAreaType) {
+        this.bulkAreaType = bulkAreaType;
+    }
+
+    public Area getBulkParentArea() {
+        return bulkParentArea;
+    }
+
+    public void setBulkParentArea(Area bulkParentArea) {
+        this.bulkParentArea = bulkParentArea;
+    }
+
+    
+    
     public Area getSuperArea() {
         return superArea;
     }
@@ -171,7 +235,7 @@ public class AreaController implements Serializable {
     }
 
     public List<Area> getLstItems() {
-        return getFacade().findBySQL("Select d From Area d");
+        return getFacade().findBySQL("Select d From Area d order by d.name");
     }
 
     public void setLstItems(List<Area> lstItems) {

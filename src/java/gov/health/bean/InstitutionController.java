@@ -8,6 +8,7 @@
  */
 package gov.health.bean;
 
+import gov.health.entity.Area;
 import javax.faces.application.FacesMessage;
 
 import org.primefaces.event.NodeCollapseEvent;
@@ -86,6 +87,52 @@ public class InstitutionController implements Serializable {
     List<Institution> mappedInstitutions;
     Institution mappingsForInstitution;
     Institution currentMappingInstitution;
+
+    String bulkText;
+    InstitutionType bulkInstitutionType;
+    Institution bulkParentInstitution;
+    Area bulkDistrict;
+
+    public void addBulkInstitutions() {
+        if (bulkInstitutionType == null) {
+            JsfUtil.addErrorMessage("Type?");
+            return;
+        }
+        if (bulkParentInstitution == null) {
+            JsfUtil.addErrorMessage("Parent Institution?");
+            return;
+        }
+        if (bulkText.trim().equals("")) {
+            JsfUtil.addErrorMessage("Institutions?");
+            return;
+        }
+        if(bulkDistrict==null){
+            JsfUtil.addErrorMessage("District?");
+            return;
+        }
+        String lines[] = bulkText.split("\\r?\\n");
+
+        int i =0;
+        
+        for (String line : lines) {
+            if (!line.trim().equals("")) {
+                i++;
+                Institution ins = new Institution();
+                ins.setName(line);
+                ins.setSuperInstitution(bulkParentInstitution);
+                ins.setInstitutionType(bulkInstitutionType);
+                ins.setDistrict(bulkDistrict);
+                ins.setOfficial(true);
+                getFacade().create(ins);
+            }
+        }
+
+        bulkText = "";
+        bulkInstitutionType = null;
+        bulkParentInstitution = null;
+        bulkDistrict = null;
+        JsfUtil.addSuccessMessage(i + " institutions added.");
+    }
 
     public void saveCurrentMapping() {
         if (getSessionController().getLoggedUser().getRestrictedInstitution() != null) {
@@ -458,8 +505,6 @@ public class InstitutionController implements Serializable {
         this.offSel = offSel;
     }
 
-   
-
     public void onNodeExpand(NodeExpandEvent event) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Expanded", event.getTreeNode().toString());
 
@@ -488,8 +533,6 @@ public class InstitutionController implements Serializable {
         }
         return ins;
     }
-
-   
 
     public void onNodeUnselect(NodeUnselectEvent event) {
         current = null;
@@ -745,7 +788,7 @@ public class InstitutionController implements Serializable {
             current.setCreater(sessionController.getLoggedUser());
             current.setOfficial(true);
             getFacade().create(current);
-            
+
             JsfUtil.addSuccessMessage(new MessageProvider().getValue("savedNewSuccessfully"));
         }
         this.prepareSelect();
@@ -902,6 +945,40 @@ public class InstitutionController implements Serializable {
         this.root = root;
     }
 
+    public String getBulkText() {
+        return bulkText;
+    }
+
+    public void setBulkText(String bulkText) {
+        this.bulkText = bulkText;
+    }
+
+    public InstitutionType getBulkInstitutionType() {
+        return bulkInstitutionType;
+    }
+
+    public void setBulkInstitutionType(InstitutionType bulkInstitutionType) {
+        this.bulkInstitutionType = bulkInstitutionType;
+    }
+
+    public Institution getBulkParentInstitution() {
+        return bulkParentInstitution;
+    }
+
+    public void setBulkParentInstitution(Institution bulkParentInstitution) {
+        this.bulkParentInstitution = bulkParentInstitution;
+    }
+
+    public Area getBulkDistrict() {
+        return bulkDistrict;
+    }
+
+    public void setBulkDistrict(Area bulkDistrict) {
+        this.bulkDistrict = bulkDistrict;
+    }
+
+    
+    
     @FacesConverter(forClass = Institution.class)
     public static class InstitutionControllerConverter implements Converter {
 

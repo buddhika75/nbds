@@ -142,30 +142,32 @@
 
                                     </h:panelGrid>
 
-                                    <p:panelGrid columns="2" columnClasses="topLeftCol, topLeftCol">
-                                        <p:outputLabel value="Living_Status:" for="living_Status" />
-                                        <p:selectOneMenu id="living_Status" value="#{notificationFormController.current.living_Status}" >
-                                            <f:selectItem itemLabel="Select a Living Status" ></f:selectItem>
-                                            <f:selectItems value="#{enumController.livingStatus}" var="ls" itemValue="#{ls}" itemLabel="#{ls.label}" ></f:selectItems>
-                                        </p:selectOneMenu>
-                                        <p:outputLabel value="Post_Mortem_Necropsy_Done:" for="post_Mortem_Necropsy_Done" />
-                                        <p:selectBooleanCheckbox  id="post_Mortem_Necropsy_Done" value="#{notificationFormController.current.post_Mortem_Necropsy_Done}" />
-                                        <p:outputLabel value="Pathological_Forensic_Post_Mortem_Record_No:" for="pathological_Forensic_Post_Mortem_Record_No" />
-                                        <p:inputText id="pathological_Forensic_Post_Mortem_Record_No" value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Record_No}" title="Pathological_Forensic_Post_Mortem_Record_No" />
-                                        <p:outputLabel value="Pathological_Forensic_Post_Mortem_Details:" for="pathological_Forensic_Post_Mortem_Details" />
-                                        <p:inputTextarea id="pathological_Forensic_Post_Mortem_Details" value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Details}" title="Pathological_Forensic_Post_Mortem_Details" />
-                                        <p:outputLabel value="Pathological_Forensic_Post_Mortem_Done_by:" for="pathological_Forensic_Post_Mortem_Done_by" />
-                                        <p:inputText id="pathological_Forensic_Post_Mortem_Done_by" value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Done_by}" title="Pathological_Forensic_Post_Mortem_Done_by" />
-                                        <p:outputLabel value="Pathological_Forensic_Post_Mortem_Date:" for="pathological_Forensic_Post_Mortem_Date" />
-                                        <p:calendar id="pathological_Forensic_Post_Mortem_Date" 
-                                                    pattern="MM/dd/yyyy" 
-                                                    value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Date}" title="Pathological_Forensic_Post_Mortem_Date" >
-                                        </p:calendar>
+                                    <p:panel header="Living Status &amp; Necropsy">
 
-                                    </p:panelGrid>
+                                        <p:panelGrid columns="2" columnClasses="topLeftCol, topLeftCol">
+                                            <p:outputLabel value="Living status" for="living_Status" />
+                                            <p:selectOneMenu id="living_Status" value="#{notificationFormController.current.living_Status}" >
+                                                <f:selectItem itemLabel="Select a Living Status" ></f:selectItem>
+                                                <f:selectItems value="#{enumController.livingStatus}" var="ls" itemValue="#{ls}" itemLabel="#{ls.label}" ></f:selectItems>
+                                            </p:selectOneMenu>
+                                            <p:outputLabel value="Post Mortem Necropsy Done" for="post_Mortem_Necropsy_Done" />
+                                            <p:selectBooleanCheckbox  id="post_Mortem_Necropsy_Done" value="#{notificationFormController.current.post_Mortem_Necropsy_Done}" />
+                                            <p:outputLabel value="Record No" for="pathological_Forensic_Post_Mortem_Record_No" />
+                                            <p:inputText id="pathological_Forensic_Post_Mortem_Record_No" value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Record_No}" title="Pathological_Forensic_Post_Mortem_Record_No" />
+                                            <p:outputLabel value="Date:" for="pathological_Forensic_Post_Mortem_Date" />
+                                            <p:calendar id="pathological_Forensic_Post_Mortem_Date" 
+                                                        pattern="MM/dd/yyyy" 
+                                                        value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Date}" title="Pathological_Forensic_Post_Mortem_Date" >
+                                            </p:calendar>
+                                            <p:outputLabel value="Details" for="pathological_Forensic_Post_Mortem_Details" />
+                                            <p:inputTextarea id="pathological_Forensic_Post_Mortem_Details" value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Details}" title="Pathological_Forensic_Post_Mortem_Details" />
+                                            <p:outputLabel value="Done by" for="pathological_Forensic_Post_Mortem_Done_by" />
+                                            <p:inputText id="pathological_Forensic_Post_Mortem_Done_by" value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Done_by}" title="Pathological_Forensic_Post_Mortem_Done_by" />
+                                        </p:panelGrid>
+                                    </p:panel>
                                 </p:tab>
 
-                                <p:tab title="B. Description of the congenital abnormalities"  >
+                                <p:tab title="B. CONGENITAL ABNORMALITIES"  >
                                     <p:panelGrid columns="2">
                                         <p:outputLabel value="Presence_of_Congenital_Abnormalities:" for="presence_of_Congenital_Abnormalities" />
                                         <p:selectOneMenu  id="presence_of_Congenital_Abnormalities" value="#{notificationFormController.current.presence_of_Congenital_Abnormalities}" >
@@ -240,7 +242,7 @@
                                     </p:panelGrid>
                                 </p:tab>
 
-                                <p:tab title="C. PAENTAL SOCIO-DEMOGRAPHIC DETAILS" >
+                                <p:tab title="C. SOCIO-DEMOGRAPHIC DETAILS" >
                                     <p:panelGrid columns="2">
                                         <p:outputLabel value="Name_of_the_Mother:" for="name_of_the_Mother" />
                                         <p:inputText id="name_of_the_Mother" value="#{notificationFormController.current.name_of_the_Mother}" title="Name_of_the_Mother" />
@@ -288,7 +290,7 @@
                                     </p:panelGrid>
                                 </p:tab>
 
-                                <p:tab title="D. PREGNANCY HISTORY &amp; DELIVERY INFORMATION" >
+                                <p:tab title="D. PREGNANCY &amp; DELIVERY" >
                                     <p:panelGrid columns="2">
                                         <p:outputLabel value="Total_Pregnancies:" for="total_Pregnancies" />
                                         <p:inputText id="total_Pregnancies" value="#{notificationFormController.current.total_Pregnancies}" title="Total_Pregnancies" />
@@ -374,7 +376,7 @@
                                     </p:panelGrid>
                                 </p:tab>
 
-                                <p:tab title="F. MATERNAL ILLNESSES, CONDITIONS, COMPLICATIONS and EXPOSURES" >
+                                <p:tab title="F. MATERNAL HISTORY" >
                                     <p:panelGrid columns="2">
                                         <p:outputLabel value="Pre_Pregnancy_Diabetes_Mellitus_IDDM:" for="pre_Pregnancy_Diabetes_Mellitus_IDDM" />
                                         <p:selectBooleanCheckbox id="pre_Pregnancy_Diabetes_Mellitus_IDDM" value="#{notificationFormController.current.pre_Pregnancy_Diabetes_Mellitus_IDDM}"/>

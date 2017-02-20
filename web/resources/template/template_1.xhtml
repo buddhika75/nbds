@@ -78,10 +78,18 @@
                             </p:submenu>
                             <p:submenu label="Administration"  rendered="#{sessionController.sysAdmin or sessionController.superUser}">
                                 <p:submenu label="Institutions" >
-                                    <p:menuitem  ajax="false"  action="institution_type" value="Institution Type"   ></p:menuitem>
-                                    <p:menuitem  ajax="false"  action="institutions" value="Institutions"  ></p:menuitem>
+                                    <p:menuitem  ajax="false"  action="institution_type" value="Manage Institution Type"   ></p:menuitem>
+                                    <p:menuitem  ajax="false"  action="institutions" value="Manage Institutions"  ></p:menuitem>
+                                    <p:menuitem  ajax="false"  action="institutions_bulk" value="Add All Institutions"  ></p:menuitem>
                                 </p:submenu>
-                                <p:menuitem  ajax="false"  action="area" value="Area"  ></p:menuitem>
+                                <p:submenu label="Areas" >
+                                    <p:menuitem  ajax="false"  action="area" value="Manage All Areas"  ></p:menuitem>
+                                    <p:menuitem  ajax="false"  action="area" value="Manage MOH Areas"  ></p:menuitem>
+                                    <p:menuitem  ajax="false"  action="area" value="Manage Districts"  ></p:menuitem>
+                                    <p:menuitem  ajax="false"  action="area" value="Manage GN Areas"  ></p:menuitem>
+                                    <p:menuitem  ajax="false"  action="area_bulk" value="Add All Areas"  ></p:menuitem>
+                                </p:submenu>
+                                
                                 <p:menuitem  ajax="false"  action="/category/List" value="Categories"  ></p:menuitem>
                                 <p:menuitem value="Category" outcome="/category/List.xhtml" />
                                 <p:menuitem  ajax="false"  action="department" value="#{labels.department}"  ></p:menuitem>
