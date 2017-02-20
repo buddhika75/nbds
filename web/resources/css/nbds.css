@@ -10,9 +10,17 @@
 }
 
 
+.mediumText{
+    width: 350px;
+}
+
+
 .topLeftCol{
-/*    color: red;
-    background-color: yellow;*/
+    vertical-align: top;
+    text-align: left;
+}
+
+.topLeftCol td{
     vertical-align: top;
     text-align: left;
 }

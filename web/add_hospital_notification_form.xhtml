@@ -30,81 +30,119 @@
 
 
 
-                            <p:tabView orientation="left" style="text-align: left;" activeIndex="1">
+                            <p:tabView orientation="left" style="text-align: left;" activeIndex="0">
                                 <p:tab title="A. BASIC DETAILS" >
                                     <p:panelGrid columns="2" columnClasses="topLeftCol, topLeftCol">
-                                        <p:outputLabel value="Infants_Name:" for="infants_Name" />
-                                        <p:inputText required="true" id="infants_Name" value="#{notificationFormController.current.infants_Name}" title="Infants_Name" />
-                                        <p:outputLabel value="Sex_of_Infant:" for="sex_of_Infant" />
+                                        <p:outputLabel value="Infants Name:" for="infants_Name" />
+                                        <p:inputText required="true" id="infants_Name" value="#{notificationFormController.current.infants_Name}"
+                                                     title="Infants_Name"  styleClass="mediumText"/>
+                                        <p:outputLabel value="Sex of Infant:" for="sex_of_Infant" />
                                         <p:selectOneMenu id="sex_of_Infant" value="#{notificationFormController.current.sex_of_Infant}"  >
                                             <f:selectItem itemLabel="Select Sex" ></f:selectItem>
                                             <f:selectItem itemValue="MALE" itemLabel=" Male "></f:selectItem>
                                             <f:selectItem itemValue="FEMALE" itemLabel=" Female "></f:selectItem>
                                             <f:selectItem itemValue="AMBIGUOUS" itemLabel=" Ambiguous "></f:selectItem>
                                         </p:selectOneMenu>
+                                    </p:panelGrid>
 
-                                        <p:outputLabel value="Location_Where_Case_Identified_Hospital:" for="location_Where_Case_Identified_Hospital" />
-                                        <p:autoComplete id="location_Where_Case_Identified_Hospital" value="#{notificationFormController.current.location_Where_Case_Identified_Hospital}" 
-                                                        completeMethod="#{institutionController.completeHospitals}"                                            
-                                                        var="h0" forceSelection="true" 
-                                                        itemLabel="#{h0.name}"
-                                                        itemValue="#{h0}"
-                                                        >
-                                        </p:autoComplete>
-                                        <p:outputLabel value="Location_Where_Case_Identified_Ward_Unit:" for="location_Where_Case_Identified_Ward_Unit" />
-                                        <p:inputText id="location_Where_Case_Identified_Ward_Unit" value="#{notificationFormController.current.location_Where_Case_Identified_Ward_Unit}" title="Location_Where_Case_Identified_Ward_Unit" />
-                                        <p:outputLabel value="Location_Where_Case_Identified_Bht_No:" for="location_Where_Case_Identified_Bht_No" />
-                                        <p:inputText id="location_Where_Case_Identified_Bht_No" value="#{notificationFormController.current.location_Where_Case_Identified_Bht_No}" title="Location_Where_Case_Identified_Bht_No" />
-                                        <p:outputLabel value="Residence_Rdhs:" for="residence_Rdhs" />
-                                        <p:autoComplete id="residence_Rdhs" value="#{notificationFormController.current.residence_Rdhs}" 
-                                                        completeMethod="#{areaController.completeDistricts}"                                            
-                                                        var="r" forceSelection="true"
-                                                        itemLabel="#{r.name}"
-                                                        itemValue="#{r}"
-                                                        >
-                                        </p:autoComplete>
-                                        <p:outputLabel value="Residence_Moh:" for="residence_Moh" />
-                                        <p:autoComplete id="residence_Moh" value="#{notificationFormController.current.residence_Moh}" 
-                                                        completeMethod="#{areaController.completeMohs}"                                            
-                                                        var="m" forceSelection="true"
-                                                        itemLabel="#{m.name}"
-                                                        itemValue="#{m}"
-                                                        >
-                                        </p:autoComplete>
-                                        <p:outputLabel value="Residence_Gn:" for="residence_Gn" />
-                                        <p:autoComplete id="residence_Gn" value="#{notificationFormController.current.residence_Gn}" 
-                                                        completeMethod="#{areaController.completeGns}"                                            
-                                                        var="g" forceSelection="true"
-                                                        itemLabel="#{g.name}"
-                                                        itemValue="#{g}"
-                                                        >
+                                    <h:panelGrid columns="2" >
 
-                                        </p:autoComplete>
-                                        <p:outputLabel value="Date_of_Birth_Delivery:" for="date_of_Birth_Delivery" />
-                                        <p:calendar id="date_of_Birth_Delivery" value="#{notificationFormController.current.date_of_Birth_Delivery}" title="Date_of_Birth_Delivery" 
-                                                    pattern="MM/dd/yyyy" >
+                                        <p:panel header="Location where case identified" >
+                                            <p:panelGrid columns="2" columnClasses="topLeftCol, topLeftCol">
+                                                <p:outputLabel value="Hospital" for="location_Where_Case_Identified_Hospital" />
+                                                <p:autoComplete id="location_Where_Case_Identified_Hospital" value="#{notificationFormController.current.location_Where_Case_Identified_Hospital}" 
+                                                                completeMethod="#{institutionController.completeHospitals}"                                            
+                                                                var="h0" forceSelection="true" 
+                                                                itemLabel="#{h0.name}"
+                                                                itemValue="#{h0}"
+                                                                >
+                                                </p:autoComplete>
+                                                <p:outputLabel value="Ward / Unit" for="location_Where_Case_Identified_Ward_Unit" />
+                                                <p:inputText id="location_Where_Case_Identified_Ward_Unit" value="#{notificationFormController.current.location_Where_Case_Identified_Ward_Unit}" title="Location_Where_Case_Identified_Ward_Unit" />
+                                                <p:outputLabel value="BHT No." for="location_Where_Case_Identified_Bht_No" />
+                                                <p:inputText id="location_Where_Case_Identified_Bht_No" value="#{notificationFormController.current.location_Where_Case_Identified_Bht_No}" title="Location_Where_Case_Identified_Bht_No" />
+                                            </p:panelGrid>
+                                        </p:panel>
 
-                                        </p:calendar>
-                                        <p:outputLabel value="Place_of_Delivery:" for="place_of_Delivery" />
-                                        <p:autoComplete id="place_of_Delivery" value="#{notificationFormController.current.place_of_Delivery}" 
-                                                        completeMethod="#{institutionController.completeHospitals}"                                            
-                                                        var="h1" forceSelection="true"
-                                                        itemLabel="#{h1.name}"
-                                                        itemValue="#{h1}"
-                                                        >
+                                        <p:panel header="Residence" >
+                                            <p:panelGrid columns="2" columnClasses="topLeftCol, topLeftCol">
 
-                                        </p:autoComplete>
-                                        <p:outputLabel value="Date_of_Case_Identified:" for="date_of_Case_Identified" />
-                                        <p:calendar id="date_of_Case_Identified" 
-                                                    pattern="MM/dd/yyyy" 
-                                                    value="#{notificationFormController.current.date_of_Case_Identified}" title="Date_of_Case_Identified" >
-                                        </p:calendar>
-                                        <p:outputLabel value="Age_at_Case_Detection_Days:" for="age_at_Case_Detection_Days" />
-                                        <p:inputText id="age_at_Case_Detection_Days" value="#{notificationFormController.current.age_at_Case_Detection_Days}" title="Age_at_Case_Detection_Days" />
-                                        <p:outputLabel value="Age_at_Case_Detection_Months:" for="age_at_Case_Detection_Months" />
-                                        <p:inputText id="age_at_Case_Detection_Months" value="#{notificationFormController.current.age_at_Case_Detection_Months}" title="Age_at_Case_Detection_Months" />
-                                        <p:outputLabel value="Age_at_Case_Detection_Years:" for="age_at_Case_Detection_Years" />
-                                        <p:inputText id="age_at_Case_Detection_Years" value="#{notificationFormController.current.age_at_Case_Detection_Years}" title="Age_at_Case_Detection_Years" />
+                                                <p:outputLabel value="RDHS" for="residence_Rdhs" />
+                                                <p:autoComplete id="residence_Rdhs" value="#{notificationFormController.current.residence_Rdhs}" 
+                                                                completeMethod="#{areaController.completeDistricts}"                                            
+                                                                var="r" forceSelection="true"
+                                                                itemLabel="#{r.name}"
+                                                                itemValue="#{r}"
+                                                                >
+                                                </p:autoComplete>
+                                                <p:outputLabel value="MOH" for="residence_Moh" />
+                                                <p:autoComplete id="residence_Moh" value="#{notificationFormController.current.residence_Moh}" 
+                                                                completeMethod="#{areaController.completeMohs}"                                            
+                                                                var="m" forceSelection="true"
+                                                                itemLabel="#{m.name}"
+                                                                itemValue="#{m}"
+                                                                >
+                                                </p:autoComplete>
+                                                <p:outputLabel value="GN" for="residence_Gn" />
+                                                <p:autoComplete id="residence_Gn" value="#{notificationFormController.current.residence_Gn}" 
+                                                                completeMethod="#{areaController.completeGns}"                                            
+                                                                var="g" forceSelection="true"
+                                                                itemLabel="#{g.name}"
+                                                                itemValue="#{g}"
+                                                                >
+                                                </p:autoComplete>
+                                            </p:panelGrid>
+                                        </p:panel>
+
+                                    </h:panelGrid>
+
+
+                                    <h:panelGrid columns="2" styleClass="topLeftCol" >
+
+                                        <p:panel header="Delivery" >
+                                            <p:panelGrid columns="2" columnClasses="topLeftCol, topLeftCol">
+                                                <p:outputLabel value="Date of Birth" for="date_of_Birth_Delivery" />
+                                                <p:calendar id="date_of_Birth_Delivery" value="#{notificationFormController.current.date_of_Birth_Delivery}" title="Date_of_Birth_Delivery" 
+                                                            pattern="MM/dd/yyyy" >
+
+                                                </p:calendar>
+                                                <p:outputLabel value="Place of Delivery:" for="place_of_Delivery" />
+                                                <p:autoComplete id="place_of_Delivery" value="#{notificationFormController.current.place_of_Delivery}" 
+                                                                completeMethod="#{institutionController.completeHospitals}"                                            
+                                                                var="h1" forceSelection="true"
+                                                                itemLabel="#{h1.name}"
+                                                                itemValue="#{h1}"
+                                                                >
+
+                                                </p:autoComplete>
+
+                                            </p:panelGrid>
+                                        </p:panel>
+
+                                        <p:panel header="Case Detection" >
+                                            <p:panelGrid columns="2" columnClasses="topLeftCol, topLeftCol">
+
+                                                <p:outputLabel value="Date of case Identification" for="date_of_Case_Identified" />
+                                                <p:calendar id="date_of_Case_Identified" 
+                                                            pattern="MM/dd/yyyy" 
+                                                            value="#{notificationFormController.current.date_of_Case_Identified}" title="Date_of_Case_Identified" >
+                                                </p:calendar>
+                                                <p:outputLabel value="Age at Case Detection" />
+                                                <h:panelGrid columns="9" >
+                                                    <p:outputLabel value="Days" />
+                                                    <p:inputText styleClass="shortText" id="age_at_Case_Detection_Days" value="#{notificationFormController.current.age_at_Case_Detection_Days}" title="Days" />
+                                                    <p:outputLabel value="Months" />
+                                                    <p:inputText  styleClass="shortText" id="age_at_Case_Detection_Months" value="#{notificationFormController.current.age_at_Case_Detection_Months}" title="Months" />
+                                                    <p:outputLabel value="Years" />
+                                                    <p:inputText  styleClass="shortText" id="age_at_Case_Detection_Years" value="#{notificationFormController.current.age_at_Case_Detection_Years}" title="Years" />
+                                                </h:panelGrid>
+
+                                            </p:panelGrid>
+                                        </p:panel>
+
+                                    </h:panelGrid>
+
+                                    <p:panelGrid columns="2" columnClasses="topLeftCol, topLeftCol">
                                         <p:outputLabel value="Living_Status:" for="living_Status" />
                                         <p:selectOneMenu id="living_Status" value="#{notificationFormController.current.living_Status}" >
                                             <f:selectItem itemLabel="Select a Living Status" ></f:selectItem>
