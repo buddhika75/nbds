@@ -227,7 +227,9 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="Birth_Defect_Code_ICD_10"/>
                                                 </f:facet>
-                                                <h:outputText value="#{item.birth_Defect_Code_ICD_10}"/>
+                                                <h:outputText value="#{item.birth_Defect_Code_ICD_10.code}"/>
+                                                <p:spacer width="2" height="1" ></p:spacer>
+                                                <h:outputText value="#{item.birth_Defect_Code_ICD_10.name}"/>
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">

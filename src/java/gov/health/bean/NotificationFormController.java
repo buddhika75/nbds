@@ -173,6 +173,26 @@ public class NotificationFormController implements Serializable {
         return "view_all_registered_notification_forms";
     }
 
+    public String listUserNotificationForms() {
+        Map m = new HashMap();
+        m.put("fd", fromDate);
+        m.put("td", toDate);
+        String jpql = "select n from NotificationForm n where n.retired=false  and n.createdUser=:cu and n.createdAt between :fd and :td order by n.id desc";
+        m.put("cu", getSessionController().getLoggedUser());
+        items = getFacade().findBySQL(jpql, m, TemporalType.DATE);
+        return "/my_notifications";
+    }
+    
+    public String listUserHospitalNotificationForms() {
+        Map m = new HashMap();
+        m.put("fd", fromDate);
+        m.put("td", toDate);
+        String jpql = "select n from NotificationForm n where n.retired=false  and n.hospital=:cu and n.createdAt between :fd and :td order by n.id desc";
+        m.put("cu", getSessionController().getLoggedUser().getRestrictedInstitution());
+        items = getFacade().findBySQL(jpql, m, TemporalType.DATE);
+        return "/my_hospital_notifications";
+    }
+
     public String listUnregForms() {
         Map m = new HashMap();
         m.put("fd", fromDate);
@@ -350,6 +370,23 @@ public class NotificationFormController implements Serializable {
         }
         return "/add_hospital_notification_form";
     }
+    
+    
+    public String viewNotificationForm() {
+        if(current==null){
+            JsfUtil.addErrorMessage("Please select a notification form");
+            return "";
+        }
+        congenital_Abnormality = new NotificationCategory();
+        family_History_Of_Congenital_Abnormality = new NotificationCategory();
+        prenatal_Antenatal_Postnatal_Investigation = new NotificationCategory();
+        therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomaly = new NotificationCategory();
+        underlyning_Cause_of_Death = new NotificationCategory();
+        immediate_Cause_of_Death = new NotificationCategory();
+        conditions_Contributing_to_Death = new NotificationCategory();
+        return "/add_hospital_notification_form";
+    }
+    
 
     public String addNewAreaNotificationForm() {
         current = new NotificationForm();
@@ -391,11 +428,10 @@ public class NotificationFormController implements Serializable {
             return;
         }
 
-//        if (current.getHospital() == null) {
-//            JsfUtil.addErrorMessage("Please select the hospital");
-//            return;
-//        }
-
+        if (current.getHospital() == null) {
+            current.setHospital(getSessionController().getLoggedUser().getRestrictedInstitution());
+        }
+        
         if (current.getId() == null || current.getId() == 0) {
             getFacade().create(current);
         } else {
@@ -515,8 +551,6 @@ public class NotificationFormController implements Serializable {
         this.conditions_Contributing_to_Death = conditions_Contributing_to_Death;
     }
 
-    
-    
     @FacesConverter(forClass = NotificationForm.class)
     public static class NotificationFormControllerConverter implements Converter {
 

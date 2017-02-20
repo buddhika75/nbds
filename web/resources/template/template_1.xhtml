@@ -50,23 +50,16 @@
                         <p:menubar styleClass="nonPrintBlock" style="text-align: left; border-bottom: 1px solid #dddddd; border-top: 1px solid #dddddd; border-radius: 0px; margin: 0px;">
                             <p:menuitem  ajax="false"  action="index" value="Home" ></p:menuitem>
                             <p:submenu label="Cases"  rendered="#{sessionController.sysAdmin or sessionController.superUser}">
-                                <p:menuitem ajax="false" action="#{notificationFormController.addNewHospitalNotificationForm()}" value="Nortify" ></p:menuitem>
-                                <p:menuitem ajax="false" action="#{notificationFormController.listUnregForms()}" value="Register Notifications" ></p:menuitem>
-                                <p:menuitem ajax="false" action="#{notificationFormController.listRegForms()}" value="List All Registered Notifications" ></p:menuitem>
-                                <p:menuitem ajax="false" action="#{notificationFormController.listAll}" value="List All Notification Forms"></p:menuitem>
-                                <p:menuitem ajax="false" action="#{abstractionFormController.listAll()}" value="List All Abstraction Forms"></p:menuitem>
-
-                                <p:menuitem ajax="false" action="#{abstractionFormController.addNewAbstractionForm()}"  value="Case Ascertainment"  ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{notificationFormController.addNewHospitalNotificationForm()}" value="Notify" ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{notificationFormController.listUserNotificationForms()}" value="User Notifications" ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{notificationFormController.listUserHospitalNotificationForms()}" value="Institution Notifications" ></p:menuitem>
                             </p:submenu>
-                            <p:submenu label="Cases" rendered="#{sessionController.insAdmin}">
-                                <p:menuitem ajax="false" action="#{notificationFormController.addNewHospitalNotificationForm()}" value="Hospital Birth Defect Notification" ></p:menuitem>
-                                <p:menuitem ajax="false" action="#{abstractionFormController.addNewAbstractionForm()}"  value="Case Ascertainment"  ></p:menuitem>
-                                <p:menuitem ajax="false" action="#{notificationFormController.listAll}" value="List All Notification Forms"></p:menuitem>
-                                <p:menuitem ajax="false" action="#{abstractionFormController.listAll()}" value="List All Abstraction Forms"></p:menuitem>
-                                <p:menuitem ajax="false" action="#{notificationFormController.listRegForms()}" value="List All Registered Notifications" ></p:menuitem>
+                            <p:submenu label="Cases" rendered="#{sessionController.insAdmin or sessionController.insUser}">
+                                <p:menuitem ajax="false" action="#{notificationFormController.addNewHospitalNotificationForm()}" value="Notify" ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{abstractionFormController.listUserNotificationForms()}"  value="User Notifications"  ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{notificationFormController.listUserHospitalNotificationForms()}" value="Institution Notifications"></p:menuitem>
                             </p:submenu>
                             <p:submenu label="Reports" rendered="#{sessionController.sysAdmin or sessionController.superUser}">
-
                                 <p:menuitem ajax="false" action="registry_institution" value="Institutional Birth Defects Registry" ></p:menuitem>
                                 <p:menuitem ajax="false" action="registry_all" value="All Notifications" ></p:menuitem>
                                 <p:menuitem ajax="false" action="registry_district" value="District Birth Defects Registry" ></p:menuitem>
