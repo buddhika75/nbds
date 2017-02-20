@@ -168,29 +168,34 @@
                                 </p:tab>
 
                                 <p:tab title="B. CONGENITAL ABNORMALITIES"  >
-                                    <p:panelGrid columns="2">
-                                        <p:outputLabel value="Presence_of_Congenital_Abnormalities:" for="presence_of_Congenital_Abnormalities" />
+                                    <p:panelGrid columns="2" styleClass="topLeftCol">
+                                        <p:outputLabel value="Presence of Congenital Abnormalities" for="presence_of_Congenital_Abnormalities" />
                                         <p:selectOneMenu  id="presence_of_Congenital_Abnormalities" value="#{notificationFormController.current.presence_of_Congenital_Abnormalities}" >
                                             <f:selectItems value="#{enumController.presenceOfCongenitalAbnormalities}" ></f:selectItems>
                                         </p:selectOneMenu>
-                                        <p:outputLabel value="Additional_Information__On_Congenital_Abnormalities:" for="additional_Information__On_Congenital_Abnormalities" />
-                                        <p:inputTextarea rows="4" cols="30" id="additional_Information__On_Congenital_Abnormalities" value="#{notificationFormController.current.additional_Information__On_Congenital_Abnormalities}" title="Additional_Information__On_Congenital_Abnormalities" />
+                                        <p:outputLabel value="Additional Information on Congenital Abnormalities" for="additional_Information__On_Congenital_Abnormalities" />
+                                        <p:inputTextarea rows="6" cols="60" id="additional_Information__On_Congenital_Abnormalities" value="#{notificationFormController.current.additional_Information__On_Congenital_Abnormalities}" title="Additional_Information__On_Congenital_Abnormalities" />
                                     </p:panelGrid>
                                     <p:panelGrid columns="1" >
                                         <p:panelGrid columns="6" columnClasses="topLeftCol, topLeftCol, topLeftCol, topLeftCol, topLeftCol, topLeftCol">
-                                            <p:outputLabel value="Type_of_Birth_Defect:" for="type_of_Birth_Defect" />
-                                            <p:outputLabel value="Full_Description:" for="full_Description" />
-                                            <p:outputLabel value="Birth_Defect_Code_ICD_10:" for="birth_Defect_Code_ICD_10" />
-                                            <p:outputLabel value="Rcpch__Extension:" for="rcpch__Extension" />
-                                            <p:outputLabel value="Confirmed_Possible:" for="confirmed_Possible" />
+                                            <p:outputLabel value="Type of Birth Defect" for="type_of_Birth_Defect" />
+                                            <p:outputLabel value="Full Description" for="full_Description" />
+                                            <p:outputLabel value="Birth Defect Code ICD 10" for="birth_Defect_Code_ICD_10" />
+                                            <p:outputLabel value="RCPCH Extension" for="rcpch__Extension" />
+                                            <p:outputLabel value="Confirmed" for="confirmed_Possible" />
                                             <p:outputLabel value=" "  />
 
                                             <p:inputText id="type_of_Birth_Defect" value="#{notificationFormController.congenital_Abnormality.type_of_Birth_Defect}" title="Type_of_Birth_Defect" />
                                             <p:inputTextarea rows="4" cols="30" id="full_Description" value="#{notificationFormController.congenital_Abnormality.full_Description}" title="Full_Description" />
-                                            <p:selectOneMenu id="birth_Defect_Code_ICD_10" value="#{notificationFormController.congenital_Abnormality.birth_Defect_Code_ICD_10}" >
-                                                <f:selectItem itemLabel="Select ICD Code" ></f:selectItem>
-                                                <f:selectItems value="#{categoryController.icd10s}"/>
-                                            </p:selectOneMenu>
+                                            <p:autoComplete completeMethod="#{categoryController.completeIcd10s}" var="c" itemLabel="#{c.name}" itemValue="#{c}"
+                                                id="birth_Defect_Code_ICD_10" value="#{notificationFormController.congenital_Abnormality.birth_Defect_Code_ICD_10}" >
+                                                <p:column >
+                                                    <p:outputLabel value="#{c.code}" ></p:outputLabel>
+                                                </p:column>
+                                                <p:column >
+                                                    <p:outputLabel value="#{c.name}" ></p:outputLabel>
+                                                </p:column>
+                                            </p:autoComplete>
                                             <p:selectOneMenu id="rcpch__Extension" value="#{notificationFormController.congenital_Abnormality.rcpch__Extension}" >
                                                 <f:selectItem itemLabel="Select RCPCH Extension" ></f:selectItem>
                                                 <f:selectItems value="#{categoryController.rcpchExtensions}"/>
@@ -205,7 +210,7 @@
 
 
 
-                                        <p:dataTable value="#{notificationFormController.current.congenital_Abnormalities}" var="item">
+                                        <p:dataTable value="#{notificationFormController.current.con_ab}" var="item">
                                             <p:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Type_of_Birth_Defect"/>

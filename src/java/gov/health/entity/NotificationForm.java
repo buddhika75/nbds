@@ -21,6 +21,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -81,7 +82,7 @@ public class NotificationForm implements Serializable {
      */
     PresenceOfCongenitalAbnormalities presence_of_Congenital_Abnormalities;
     @OneToMany
-    List<NotificationCategory> congenital_Abnormalities;
+    List<NotificationCategory> con_ab;
     @Lob
     String additional_Information__On_Congenital_Abnormalities;
 
@@ -196,7 +197,7 @@ public class NotificationForm implements Serializable {
      * G. FAMILY HISTORY OF CONGENITAL ABNORMALITIES
      */
     @OneToMany
-    List<NotificationCategory> family_History_Of_Congenital_Abnormalities;
+    List<NotificationCategory> fhx_ca;
 
     /**
      *
@@ -204,7 +205,7 @@ public class NotificationForm implements Serializable {
      *
      */
     @OneToMany
-    List<NotificationCategory> prenatal_Antenatal_Postnatal_Investigations;
+    List<NotificationCategory> ix;
 
     /**
      *
@@ -213,7 +214,7 @@ public class NotificationForm implements Serializable {
      *
      */
     @OneToMany
-    List<NotificationCategory> therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomalies;
+    List<NotificationCategory> rx;
 
     /**
      *
@@ -228,11 +229,11 @@ public class NotificationForm implements Serializable {
     @ManyToOne
     Institution place_of_Death;
     @OneToMany
-    List<NotificationCategory> underlyning_Causes_of_Death;
+    List<NotificationCategory> ucod;
     @OneToMany
-    List<NotificationCategory> immediate_Causes_of_Death;
+    List<NotificationCategory> icod;
     @OneToMany
-    List<NotificationCategory> conditions_Contributing_to_Death;
+    List<NotificationCategory> cctd;
 
     /**
      * Submission Details
@@ -446,15 +447,15 @@ public class NotificationForm implements Serializable {
         this.presence_of_Congenital_Abnormalities = presence_of_Congenital_Abnormalities;
     }
 
-    public List<NotificationCategory> getCongenital_Abnormalities() {
-        if (congenital_Abnormalities == null) {
-            congenital_Abnormalities = new ArrayList<NotificationCategory>();
+    public List<NotificationCategory> getCon_ab() {
+        if (con_ab == null) {
+            con_ab = new ArrayList<NotificationCategory>();
         }
-        return congenital_Abnormalities;
+        return con_ab;
     }
 
-    public void setCongenital_Abnormalities(List<NotificationCategory> congenital_Abnormalities) {
-        this.congenital_Abnormalities = congenital_Abnormalities;
+    public void setCon_ab(List<NotificationCategory> con_ab) {
+        this.con_ab = con_ab;
     }
 
     public String getAdditional_Information__On_Congenital_Abnormalities() {
@@ -825,37 +826,37 @@ public class NotificationForm implements Serializable {
         this.additional_Information_Remarks_on_Maternal_Risk_Factors = additional_Information_Remarks_on_Maternal_Risk_Factors;
     }
 
-    public List<NotificationCategory> getFamily_History_Of_Congenital_Abnormalities() {
-        if (family_History_Of_Congenital_Abnormalities == null) {
-            family_History_Of_Congenital_Abnormalities = new ArrayList<NotificationCategory>();
+    public List<NotificationCategory> getFhx_ca() {
+        if (fhx_ca == null) {
+            fhx_ca = new ArrayList<NotificationCategory>();
         }
-        return family_History_Of_Congenital_Abnormalities;
+        return fhx_ca;
     }
 
-    public void setFamily_History_Of_Congenital_Abnormalities(List<NotificationCategory> family_History_Of_Congenital_Abnormalities) {
-        this.family_History_Of_Congenital_Abnormalities = family_History_Of_Congenital_Abnormalities;
+    public void setFhx_ca(List<NotificationCategory> fhx_ca) {
+        this.fhx_ca = fhx_ca;
     }
 
-    public List<NotificationCategory> getPrenatal_Antenatal_Postnatal_Investigations() {
-        if (prenatal_Antenatal_Postnatal_Investigations == null) {
-            prenatal_Antenatal_Postnatal_Investigations = new ArrayList<NotificationCategory>();
+    public List<NotificationCategory> getIx() {
+        if (ix == null) {
+            ix = new ArrayList<NotificationCategory>();
         }
-        return prenatal_Antenatal_Postnatal_Investigations;
+        return ix;
     }
 
-    public void setPrenatal_Antenatal_Postnatal_Investigations(List<NotificationCategory> prenatal_Antenatal_Postnatal_Investigations) {
-        this.prenatal_Antenatal_Postnatal_Investigations = prenatal_Antenatal_Postnatal_Investigations;
+    public void setIx(List<NotificationCategory> ix) {
+        this.ix = ix;
     }
 
-    public List<NotificationCategory> getTherapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomalies() {
-        if (therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomalies == null) {
-            therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomalies = new ArrayList<NotificationCategory>();
+    public List<NotificationCategory> getRx() {
+        if (rx == null) {
+            rx = new ArrayList<NotificationCategory>();
         }
-        return therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomalies;
+        return rx;
     }
 
-    public void setTherapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomalies(List<NotificationCategory> therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomalies) {
-        this.therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomalies = therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomalies;
+    public void setRx(List<NotificationCategory> rx) {
+        this.rx = rx;
     }
 
     public Date getDate_of_Death() {
@@ -898,37 +899,37 @@ public class NotificationForm implements Serializable {
         this.place_of_Death = place_of_Death;
     }
 
-    public List<NotificationCategory> getUnderlyning_Causes_of_Death() {
-        if (underlyning_Causes_of_Death == null) {
-            underlyning_Causes_of_Death = new ArrayList<NotificationCategory>();
+    public List<NotificationCategory> getUcod() {
+        if (ucod == null) {
+            ucod = new ArrayList<NotificationCategory>();
         }
-        return underlyning_Causes_of_Death;
+        return ucod;
     }
 
-    public void setUnderlyning_Causes_of_Death(List<NotificationCategory> underlyning_Causes_of_Death) {
-        this.underlyning_Causes_of_Death = underlyning_Causes_of_Death;
+    public void setUcod(List<NotificationCategory> ucod) {
+        this.ucod = ucod;
     }
 
-    public List<NotificationCategory> getImmediate_Causes_of_Death() {
-        if (immediate_Causes_of_Death == null) {
-            immediate_Causes_of_Death = new ArrayList<NotificationCategory>();
+    public List<NotificationCategory> getIcod() {
+        if (icod == null) {
+            icod = new ArrayList<NotificationCategory>();
         }
-        return immediate_Causes_of_Death;
+        return icod;
     }
 
-    public void setImmediate_Causes_of_Death(List<NotificationCategory> immediate_Causes_of_Death) {
-        this.immediate_Causes_of_Death = immediate_Causes_of_Death;
+    public void setIcod(List<NotificationCategory> icod) {
+        this.icod = icod;
     }
 
-    public List<NotificationCategory> getConditions_Contributing_to_Death() {
-        if (conditions_Contributing_to_Death == null) {
-            conditions_Contributing_to_Death = new ArrayList<NotificationCategory>();
+    public List<NotificationCategory> getCctd() {
+        if (cctd == null) {
+            cctd = new ArrayList<NotificationCategory>();
         }
-        return conditions_Contributing_to_Death;
+        return cctd;
     }
 
-    public void setConditions_Contributing_to_Death(List<NotificationCategory> conditions_Contributing_to_Death) {
-        this.conditions_Contributing_to_Death = conditions_Contributing_to_Death;
+    public void setCctd(List<NotificationCategory> cctd) {
+        this.cctd = cctd;
     }
 
     public String getClinician_or_Medical_Officer_Name() {

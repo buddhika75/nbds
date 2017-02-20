@@ -15,6 +15,7 @@ import gov.health.data.Ethnicity;
 import gov.health.data.LivingStatus;
 import gov.health.data.MariatalStatus;
 import gov.health.data.ModeOfDelivery;
+import gov.health.data.NotificationCategoryType;
 import gov.health.data.Plurality;
 import gov.health.data.PregnancyOutcome;
 import gov.health.data.PresenceOfCongenitalAbnormalities;
@@ -34,6 +35,10 @@ public class EnumController {
      * Creates a new instance of EnumController
      */
     public EnumController() {
+    }
+    
+    public NotificationCategoryType[] getNotificationCategoryTypes(){
+        return NotificationCategoryType.values();
     }
     
     public Ethnicity[] getEthnicities(){

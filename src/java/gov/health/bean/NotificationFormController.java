@@ -64,28 +64,28 @@ public class NotificationFormController implements Serializable {
     NotificationCategory conditions_Contributing_to_Death;
 
     public void addConditionsContributingToDeath() {
-        getCurrent().getCongenital_Abnormalities().add(conditions_Contributing_to_Death);
+        getCurrent().getCon_ab().add(conditions_Contributing_to_Death);
         saveSelected();
         conditions_Contributing_to_Death = new NotificationCategory();
         conditions_Contributing_to_Death.setType(NotificationCategoryType.Causes_contributing_to_death);
     }
 
     public void addImmediateCauseOfDeath() {
-        getCurrent().getCongenital_Abnormalities().add(immediate_Cause_of_Death);
+        getCurrent().getCon_ab().add(immediate_Cause_of_Death);
         saveSelected();
         immediate_Cause_of_Death = new NotificationCategory();
         immediate_Cause_of_Death.setType(NotificationCategoryType.Immediate_courses_of_death);
     }
 
     public void addUnderlyingCauseOfDeath() {
-        getCurrent().getCongenital_Abnormalities().add(underlyning_Cause_of_Death);
+        getCurrent().getCon_ab().add(underlyning_Cause_of_Death);
         saveSelected();
         underlyning_Cause_of_Death = new NotificationCategory();
         underlyning_Cause_of_Death.setType(NotificationCategoryType.Underlying_Courses_of_death);
     }
 
     public void addIx() {
-        getCurrent().getCongenital_Abnormalities().add(prenatal_Antenatal_Postnatal_Investigation);
+        getCurrent().getCon_ab().add(prenatal_Antenatal_Postnatal_Investigation);
         saveSelected();
         prenatal_Antenatal_Postnatal_Investigation = new NotificationCategory();
         prenatal_Antenatal_Postnatal_Investigation.setType(NotificationCategoryType.Investigations);
@@ -93,13 +93,13 @@ public class NotificationFormController implements Serializable {
 
     public void addCongenitalAbnormality() {
         saveSelected();
-        getCurrent().getCongenital_Abnormalities().add(congenital_Abnormality);
+        getCurrent().getCon_ab().add(congenital_Abnormality);
         congenital_Abnormality = new NotificationCategory();
         congenital_Abnormality.setType(NotificationCategoryType.Congenital_Adnormalities);
     }
 
     public void addFamilyHistory() {
-        getCurrent().getCongenital_Abnormalities().add(family_History_Of_Congenital_Abnormality);
+        getCurrent().getCon_ab().add(family_History_Of_Congenital_Abnormality);
         saveSelected();
         family_History_Of_Congenital_Abnormality = new NotificationCategory();
         family_History_Of_Congenital_Abnormality.setType(NotificationCategoryType.FamilyHistory);

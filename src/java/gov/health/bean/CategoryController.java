@@ -7,6 +7,7 @@ import gov.health.data.CategoryType;
 import gov.health.facade.CategoryFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,20 @@ public class CategoryController implements Serializable {
         return icd10s;
     }
 
+    
+    public List<Category> completeIcd10s(String qry) {
+        List<Category> icds = new ArrayList<Category>();
+        String j = "Select c from Category c "
+                + " where (lower(c.name) like :n or lower(c.code) like :n) "
+                + " and c.type=:t "
+                + " order by c.code, c.name";
+        Map m = new HashMap();
+        m.put("n", "%"+ qry.trim().toLowerCase() + "%");
+        m.put("t", CategoryType.ICD10);
+        icds = getFacade().findBySQL(j, m);
+        return icds;
+    }
+    
     public void setIcd10s(List<Category> icd10s) {
         this.icd10s = icd10s;
     }
