@@ -23,24 +23,24 @@
 
 
                             <h:outputLabel value="From" ></h:outputLabel>
-                            <p:calendar value="#{notificationFormController.fromDate}" pattern="dd MMMM yyyy" ></p:calendar>
+                            <p:calendar  timeZone="Asia/Colombo" value="#{notificationFormController.fromDate}" pattern="dd MMMM yyyy" ></p:calendar>
                             <p:spacer width="10" height="1"></p:spacer>
                             <h:outputLabel value="To" ></h:outputLabel>
-                            <p:calendar value="#{notificationFormController.toDate}" pattern="dd MMMM yyyy" ></p:calendar>
+                            <p:calendar timeZone="Asia/Colombo" value="#{notificationFormController.toDate}" pattern="dd MMMM yyyy" ></p:calendar>
                             <p:spacer width="10" height="1"></p:spacer>
                             <p:commandButton ajax="false" value="List" action="#{notificationFormController.listUserNotificationForms()}" ></p:commandButton>
                             <p:spacer width="30" height="1"></p:spacer>
 
-                            <h:commandLink value="Download Excel">
+                            <h:commandLink value="Download List as Excel">
                                 <p:dataExporter type="xls" target="tbl1" fileName="notification_list" />
                             </h:commandLink>
-                            <h:commandLink value="Download PDF">
+                            <h:commandLink value="Download List as PDF">
                                 <p:dataExporter type="pdf" target="tbl1" fileName="notification_list"/>
                             </h:commandLink>
-                            <h:commandLink value="Print" >
+                            <h:commandLink value="Print List" >
                                 <p:printer target="tbl1" />
                             </h:commandLink>
-                            <h:commandLink value="Download All Data">
+                            <h:commandLink value="Download Complete Data as Excel">
                                 <p:dataExporter type="xls" target="tblAllData" fileName="notification_list" />
                             </h:commandLink>
 
@@ -59,6 +59,12 @@
                             <p:column headerText="No" width="25">
                                 <h:outputLabel value="#{iv + 1}"></h:outputLabel>
                             </p:column>
+                            <p:column headerText="Added Time" width="125">
+                                <h:outputLabel value="#{item.createdAt}">
+                                    <f:convertDateTime pattern="dd/MMM/yy hh:mm" timeZone="Asia/Colombo"></f:convertDateTime>
+                                </h:outputLabel>
+                            </p:column>
+                            
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="Infants Name"/>

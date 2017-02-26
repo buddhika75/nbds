@@ -8,6 +8,7 @@ import gov.health.entity.NotificationForm;
 import gov.health.entity.Institution;
 import gov.health.entity.NotificationCategory;
 import gov.health.entity.Person;
+import gov.health.facade.NotificationCategoryFacade;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import javax.ejb.EJB;
 import javax.inject.Named;
 
@@ -37,6 +39,8 @@ public class NotificationFormController implements Serializable {
 
     @EJB
     private NotificationFormFacade facade;
+    @EJB
+    NotificationCategoryFacade notificationCategoryFacade;
 
     @Inject
     SessionController sessionController;
@@ -62,6 +66,35 @@ public class NotificationFormController implements Serializable {
     NotificationCategory underlyning_Cause_of_Death;
     NotificationCategory immediate_Cause_of_Death;
     NotificationCategory conditions_Contributing_to_Death;
+
+    NotificationCategory removingNotificationCategory;
+
+    public void removeNotificationCategory() {
+        if (removingNotificationCategory == null) {
+            JsfUtil.addErrorMessage("Please select");
+            return;
+        }
+        for (NotificationCategory c : current.getCon_ab()) {
+            if (c.equals(removingNotificationCategory)) {
+                current.getCon_ab().remove(c);
+                removingNotificationCategory = null;
+                JsfUtil.addSuccessMessage("Removed");
+                return;
+            }
+        }
+        removingNotificationCategory = null;
+        JsfUtil.addErrorMessage("Nothing to Remove");
+    }
+
+    public void createCreatedDates() {
+        List<NotificationForm> nfs = getFacade().findAll();
+        for (NotificationForm n : nfs) {
+            n.setCreatedDate(n.getCreatedAt());
+            getFacade().edit(n);
+            System.out.println("n = " + n);
+        }
+        JsfUtil.addSuccessMessage("Converted");
+    }
 
     public void addConditionsContributingToDeath() {
         getCurrent().getCon_ab().add(conditions_Contributing_to_Death);
@@ -110,10 +143,10 @@ public class NotificationFormController implements Serializable {
             JsfUtil.addErrorMessage("Select a Form");
             return "";
         }
-
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("Asia/Colombo"));
         current.setRegistered(true);
         current.setRegisteredUser(getSessionController().getLoggedUser());
-        current.setRegisteredAt(new Date());
+        current.setRegisteredAt(c.getTime());
         current.setRegisteredNumber(newRegNumber());
 
         getFacade().edit(current);
@@ -164,9 +197,9 @@ public class NotificationFormController implements Serializable {
             institution = getSessionController().getLoggedUser().getRestrictedInstitution();
         }
         if (institution == null) {
-            jpql = "select n from NotificationForm n where n.retired=false and n.registered=true and n.createdAt between :fwdt and :tdt order by n.id desc";
+            jpql = "select n from NotificationForm n where n.retired=false and n.registered=true and n.createdDate between :fwdt and :tdt order by n.id desc";
         } else {
-            jpql = "select n from NotificationForm n where n.retired=false and n.registered=true and n.hospital=:hsptl and n.createdAt between :fwdt and :tdt order by n.id desc";
+            jpql = "select n from NotificationForm n where n.retired=false and n.registered=true and n.hospital=:hsptl and n.createdDate between :fwdt and :tdt order by n.id desc";
             m.put("hsptl", institution);
         }
         items = getFacade().findBySQL(jpql, m, TemporalType.DATE);
@@ -174,20 +207,21 @@ public class NotificationFormController implements Serializable {
     }
 
     public String listUserNotificationForms() {
+        TimeZone.setDefault(TimeZone.getTimeZone("ASIA/COLOMBO"));
         Map m = new HashMap();
-        m.put("fd", fromDate);
-        m.put("td", toDate);
-        String jpql = "select n from NotificationForm n where n.retired=false  and n.createdUser=:cu and n.createdAt between :fd and :td order by n.id desc";
+        m.put("fd", JsfUtil.getDayStart(getFromDate()));
+        m.put("td", JsfUtil.gmtToColombo(JsfUtil.getDayEnd(getToDate())));
+        String jpql = "select n from NotificationForm n where n.retired=false  and n.createdUser=:cu and n.createdDate between :fd and :td order by n.id desc";
         m.put("cu", getSessionController().getLoggedUser());
-        items = getFacade().findBySQL(jpql, m, TemporalType.DATE);
+        items = getFacade().findBySQL(jpql, m);
         return "/my_notifications";
     }
-    
+
     public String listUserHospitalNotificationForms() {
         Map m = new HashMap();
         m.put("fd", fromDate);
         m.put("td", toDate);
-        String jpql = "select n from NotificationForm n where n.retired=false  and n.hospital=:cu and n.createdAt between :fd and :td order by n.id desc";
+        String jpql = "select n from NotificationForm n where n.retired=false  and n.hospital=:cu and n.createdDate between :fd and :td order by n.id desc";
         m.put("cu", getSessionController().getLoggedUser().getRestrictedInstitution());
         items = getFacade().findBySQL(jpql, m, TemporalType.DATE);
         return "/my_hospital_notifications";
@@ -202,9 +236,9 @@ public class NotificationFormController implements Serializable {
             institution = getSessionController().getLoggedUser().getRestrictedInstitution();
         }
         if (institution == null) {
-            jpql = "select n from NotificationForm n where n.retired=false and n.registered=false and n.createdAt between :fd and :td order by n.id desc";
+            jpql = "select n from NotificationForm n where n.retired=false and n.registered=false and n.createdDate between :fd and :td order by n.id desc";
         } else {
-            jpql = "select n from NotificationForm n where n.retired=false and n.registered=false and n.hospital=:hos and n.createdAt between :fd and :td order by n.id desc";
+            jpql = "select n from NotificationForm n where n.retired=false and n.registered=false and n.hospital=:hos and n.createdDate between :fd and :td order by n.id desc";
             m.put("hos", institution);
         }
         items = getFacade().findBySQL(jpql, m, TemporalType.DATE);
@@ -216,8 +250,12 @@ public class NotificationFormController implements Serializable {
             Calendar c = Calendar.getInstance();
             Calendar today = Calendar.getInstance();
             c.set(Calendar.YEAR, today.get(Calendar.YEAR));
-            c.set(Calendar.MONTH, 0);
-            c.set(Calendar.DATE, 1);
+            c.set(Calendar.MONTH, c.getActualMinimum(Calendar.MONTH));
+            c.set(Calendar.DATE, c.getActualMinimum(Calendar.DATE));
+            c.set(Calendar.HOUR_OF_DAY, c.getActualMinimum(Calendar.HOUR_OF_DAY));
+            c.set(Calendar.MINUTE, c.getActualMinimum(Calendar.MINUTE));
+            c.set(Calendar.SECOND, c.getActualMinimum(Calendar.SECOND));
+            c.set(Calendar.MILLISECOND, c.getActualMinimum(Calendar.MILLISECOND));
             fromDate = c.getTime();
         }
         return fromDate;
@@ -229,7 +267,12 @@ public class NotificationFormController implements Serializable {
 
     public Date getToDate() {
         if (toDate == null) {
-            toDate = new Date();
+            Calendar c = Calendar.getInstance(TimeZone.getTimeZone("Asia/Colombo"));
+            c.set(Calendar.HOUR_OF_DAY, c.getActualMaximum(Calendar.HOUR_OF_DAY));
+            c.set(Calendar.MINUTE, c.getActualMaximum(Calendar.MINUTE));
+            c.set(Calendar.SECOND, c.getActualMaximum(Calendar.SECOND));
+            c.set(Calendar.MILLISECOND, c.getActualMaximum(Calendar.MILLISECOND));
+            toDate = c.getTime();
         }
         return toDate;
     }
@@ -356,7 +399,10 @@ public class NotificationFormController implements Serializable {
 
     public String addNewHospitalNotificationForm() {
         current = new NotificationForm();
-        current.setCreatedAt(new Date());
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("Asia/Colombo"));
+        current.setCreatedAt(c.getTime());
+        current.setCreatedDate(c.getTime());
+        System.out.println("current.getCreatedAt() = " + current.getCreatedAt());
         current.setCreatedUser(getSessionController().getLoggedUser());
         congenital_Abnormality = new NotificationCategory();
         family_History_Of_Congenital_Abnormality = new NotificationCategory();
@@ -370,10 +416,9 @@ public class NotificationFormController implements Serializable {
         }
         return "/add_hospital_notification_form";
     }
-    
-    
+
     public String viewNotificationForm() {
-        if(current==null){
+        if (current == null) {
             JsfUtil.addErrorMessage("Please select a notification form");
             return "";
         }
@@ -386,7 +431,6 @@ public class NotificationFormController implements Serializable {
         conditions_Contributing_to_Death = new NotificationCategory();
         return "/add_hospital_notification_form";
     }
-    
 
     public String addNewAreaNotificationForm() {
         current = new NotificationForm();
@@ -431,7 +475,7 @@ public class NotificationFormController implements Serializable {
         if (current.getHospital() == null) {
             current.setHospital(getSessionController().getLoggedUser().getRestrictedInstitution());
         }
-        
+
         if (current.getId() == null || current.getId() == 0) {
             getFacade().create(current);
         } else {
@@ -549,6 +593,18 @@ public class NotificationFormController implements Serializable {
 
     public void setConditions_Contributing_to_Death(NotificationCategory conditions_Contributing_to_Death) {
         this.conditions_Contributing_to_Death = conditions_Contributing_to_Death;
+    }
+
+    public NotificationCategoryFacade getNotificationCategoryFacade() {
+        return notificationCategoryFacade;
+    }
+
+    public NotificationCategory getRemovingNotificationCategory() {
+        return removingNotificationCategory;
+    }
+
+    public void setRemovingNotificationCategory(NotificationCategory removingNotificationCategory) {
+        this.removingNotificationCategory = removingNotificationCategory;
     }
 
     @FacesConverter(forClass = NotificationForm.class)

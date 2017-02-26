@@ -262,6 +262,8 @@ public class NotificationForm implements Serializable {
     Area mohArea;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     Date createdAt;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date createdDate;
     @ManyToOne
     WebUser createdUser;
     boolean retired;
@@ -279,6 +281,16 @@ public class NotificationForm implements Serializable {
         this.id = id;
     }
 
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    
+    
     public String getInfants_Name() {
         return infants_Name;
     }

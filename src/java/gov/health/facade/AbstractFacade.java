@@ -1,6 +1,10 @@
 package gov.health.facade;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
@@ -30,9 +34,8 @@ public abstract class AbstractFacade<T> {
     public void refresh(T entity) {
         getEntityManager().refresh(entity);
     }
-    
-    
-     public List<T> findRange(int[] range) {
+
+    public List<T> findRange(int[] range) {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
@@ -95,13 +98,41 @@ public abstract class AbstractFacade<T> {
             Map.Entry m = (Map.Entry) it.next();
             String pPara = (String) m.getKey();
             if (m.getValue() instanceof Date) {
-                Date pVal = (Date) m.getValue();
-                qry.setParameter(pPara, pVal, TemporalType.DATE);
-                System.out.println("Parameter " + pPara + "\tVal" + pVal);
+                Date d = (Date) m.getValue();
+                System.out.println("d = " + d);
+                Calendar c = Calendar.getInstance(TimeZone.getTimeZone("Asia/Colombo"));
+                c.setTime(d);
+
+                Calendar ec = Calendar.getInstance(TimeZone.getTimeZone("Asia/Colombo"));
+                ec.set(Calendar.YEAR, c.get(Calendar.YEAR));
+                ec.set(Calendar.MONTH, c.get(Calendar.MONTH));
+                ec.set(Calendar.DATE, c.get(Calendar.DATE));
+                ec.set(Calendar.HOUR_OF_DAY, ec.getActualMinimum(Calendar.HOUR_OF_DAY));
+                ec.set(Calendar.MINUTE, ec.getActualMinimum(Calendar.MINUTE));
+                ec.set(Calendar.MILLISECOND, ec.getActualMinimum(Calendar.MILLISECOND));
+                
+                Date e = ec.getTime();
+                System.out.println("e = " + e);
+
+                SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                String sd = isoFormat.format(e);
+                System.out.println("sd = " + sd);
+                isoFormat.setTimeZone(TimeZone.getTimeZone("Asia/Colombo"));
+                sd = isoFormat.format(e);
+                Date date;
+                try {
+                    date = isoFormat.parse(sd);
+                } catch (ParseException ex) {
+                    date =ec.getTime();
+                    Logger.getLogger(AbstractFacade.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                System.out.println("date = " + date);
+                qry.setParameter(pPara, date, TemporalType.DATE);
+                System.out.println("Parameter " + pPara + "\tValue\t" + d);
             } else {
                 Object pVal = (Object) m.getValue();
                 qry.setParameter(pPara, pVal);
-                System.out.println("Parameter " + pPara + "\tVal" + pVal);
+                System.out.println("Parameter " + pPara + "\tValue\t" + pVal);
             }
         }
         return qry.getResultList();
@@ -117,11 +148,17 @@ public abstract class AbstractFacade<T> {
             String pPara = (String) m.getKey();
             if (pVal instanceof Date) {
                 Date d = (Date) pVal;
+                System.out.println("d = " + d);
+                Calendar c = Calendar.getInstance(TimeZone.getTimeZone("Asia/Colombo"));
+                c.setTime(d);
+                c.setTimeZone(TimeZone.getTimeZone("Asia/Colombo"));
+                d = c.getTime();
                 qry.setParameter(pPara, d, tt);
+                System.out.println("d = " + d);
             } else {
                 qry.setParameter(pPara, pVal);
             }
-            //    System.out.println("Parameter " + pPara + "\tVal" + pVal);
+            System.out.println("Parameter " + pPara + "\tValue\t" + pVal);
         }
         return qry.getResultList();
     }
@@ -151,7 +188,6 @@ public abstract class AbstractFacade<T> {
         }
     }
 
-    
     public Long findLongByJpql(String temSQL, Map<String, Object> parameters, TemporalType tt) {
         TypedQuery<Long> qry = (TypedQuery<Long>) getEntityManager().createQuery(temSQL);
         Set s = parameters.entrySet();
@@ -177,9 +213,6 @@ public abstract class AbstractFacade<T> {
         }
     }
 
-    
-    
-    
     public List<T> findBySQL(String temSQL, Map<String, Object> parameters, TemporalType tt, int maxRecords) {
         TypedQuery<T> qry = getEntityManager().createQuery(temSQL, entityClass);
         Set s = parameters.entrySet();
@@ -415,7 +448,7 @@ public abstract class AbstractFacade<T> {
             return null;
         }
     }
-    
+
     public List<String> findString(String strJQL, Map parameters, TemporalType tt) {
         TypedQuery<String> qry = getEntityManager().createQuery(strJQL, String.class);
         Set s = parameters.entrySet();
@@ -433,7 +466,7 @@ public abstract class AbstractFacade<T> {
         }
         return qry.getResultList();
     }
-    
+
     public List<String> findString(String strJQL, Map parameters) {
         return findString(strJQL, parameters, TemporalType.DATE);
     }

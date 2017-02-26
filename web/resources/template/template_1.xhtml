@@ -56,7 +56,7 @@
                             </p:submenu>
                             <p:submenu label="Cases" rendered="#{sessionController.insAdmin or sessionController.insUser}">
                                 <p:menuitem ajax="false" action="#{notificationFormController.addNewHospitalNotificationForm()}" value="Notify" ></p:menuitem>
-                                <p:menuitem ajax="false" action="#{abstractionFormController.listUserNotificationForms()}"  value="User Notifications"  ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{notificationFormController.listUserNotificationForms()}"  value="User Notifications"  ></p:menuitem>
                                 <p:menuitem ajax="false" action="#{notificationFormController.listUserHospitalNotificationForms()}" value="Institution Notifications"></p:menuitem>
                             </p:submenu>
                             <p:submenu label="Reports" rendered="#{sessionController.sysAdmin or sessionController.superUser}">
@@ -88,6 +88,7 @@
                                 <p:menuitem  ajax="false"  action="department" value="#{labels.department}"  ></p:menuitem>
                                 <p:menuitem  ajax="false"  action="#{webUserController.newUserAdd}" value="Add Users"  ></p:menuitem>
                                 <p:menuitem  ajax="false"  action="manage_users" value="Manage Users"  ></p:menuitem>
+                                <p:menuitem  ajax="false"  action="/developer" value="Developer Zone"  ></p:menuitem>
                             </p:submenu>
                             <p:submenu label="Administration"  rendered="#{sessionController.insAdmin}">
                                 <p:menuitem  ajax="false"  action="#{sessionController.prepareAddNewUser()}" value="Add Users"  ></p:menuitem>

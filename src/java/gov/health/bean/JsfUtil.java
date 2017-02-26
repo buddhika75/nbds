@@ -1,14 +1,17 @@
 package gov.health.bean;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
 
-public class JsfUtil  implements Serializable {
+public class JsfUtil implements Serializable {
 
     public static SelectItem[] getSelectItems(List<?> entities, boolean selectOne) {
         int size = selectOne ? entities.size() + 1 : entities.size();
@@ -22,6 +25,33 @@ public class JsfUtil  implements Serializable {
             items[i++] = new SelectItem(x, x.toString());
         }
         return items;
+    }
+
+    public static Date gmtToColombo(Date date) {
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("Asia/Colombo"));
+        c.setTime(date);
+        c.add(Calendar.MINUTE, (330));
+        return c.getTime();
+    }
+
+    public static Date getDayStart(Date date) {
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("Asia/Colombo"));
+        c.setTime(date);
+        c.set(Calendar.HOUR_OF_DAY, c.getActualMinimum(Calendar.HOUR_OF_DAY));
+        c.set(Calendar.MINUTE, c.getActualMinimum(Calendar.MINUTE));
+        c.set(Calendar.SECOND, c.getActualMinimum(Calendar.SECOND));
+        c.set(Calendar.MILLISECOND, c.getActualMinimum(Calendar.MILLISECOND));
+        return c.getTime();
+    }
+
+    public static Date getDayEnd(Date date) {
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("Asia/Colombo"));
+        c.setTime(date);
+        c.set(Calendar.HOUR_OF_DAY, c.getActualMaximum(Calendar.HOUR_OF_DAY));
+        c.set(Calendar.MINUTE, c.getActualMaximum(Calendar.MINUTE));
+        c.set(Calendar.SECOND, c.getActualMaximum(Calendar.SECOND));
+        c.set(Calendar.MILLISECOND, c.getActualMaximum(Calendar.MILLISECOND));
+        return c.getTime();
     }
 
     public static void addErrorMessage(Exception ex, String defaultMsg) {

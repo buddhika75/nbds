@@ -19,6 +19,7 @@ import gov.health.data.NotificationCategoryType;
 import gov.health.data.Plurality;
 import gov.health.data.PregnancyOutcome;
 import gov.health.data.PresenceOfCongenitalAbnormalities;
+import gov.health.data.Sector;
 import gov.health.data.SourceOfPog;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
@@ -39,6 +40,10 @@ public class EnumController {
     
     public NotificationCategoryType[] getNotificationCategoryTypes(){
         return NotificationCategoryType.values();
+    }
+    
+    public Sector[] getSectors(){
+        return Sector.values();
     }
     
     public Ethnicity[] getEthnicities(){
