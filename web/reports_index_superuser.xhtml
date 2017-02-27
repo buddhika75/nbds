@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./resources/template/template_1.xhtml">
+
+            <ui:define name="content">
+
+
+                <f:view>
+
+
+                    <h:form>
+
+                        <h:panelGrid columns="1" >
+                            <p:commandButton value="List All Notifications" ajax="false" action="#" ></p:commandButton>
+                            <p:commandButton value="List Notifications by District of Hospital" ajax="false" action="#" ></p:commandButton>
+                            <p:commandButton value="List Notifications by District of Residance" ajax="false" action="#" ></p:commandButton>
+                            <p:commandButton value="List Institution By Notification" ajax="false" action="#" ></p:commandButton>
+                            <p:commandButton value="List Notifications by ICD10" ajax="false" action="#" ></p:commandButton>
+                            
+                            
+                        </h:panelGrid>
+
+                    </h:form>
+                </f:view>
+
+
+
+
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

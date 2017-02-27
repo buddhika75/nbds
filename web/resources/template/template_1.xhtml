@@ -97,7 +97,8 @@
                                 <p:menuitem  ajax="false"  action="area" value="Area"  ></p:menuitem>
                             </p:submenu>
                             <p:submenu label="Options">
-                                <p:menuitem  ajax="false"  action="change_password" value="Change Password" ></p:menuitem>
+                                <p:menuitem  ajax="false"  action="#{sessionController.toChangePassword()}" value="Change My Password" ></p:menuitem>
+                                <p:menuitem  ajax="false"  action="#{sessionController.toUpdateUserDetails}" value="Change My Details" ></p:menuitem>
                             </p:submenu>
                         </p:menubar>
                     </h:form>

@@ -8,23 +8,34 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
-
         <h:form>
-
             <p:growl id="messages" autoUpdate="true"/>
-
             <p:panel style="border: #ffffff">
-<!--                <f:facet name="header" >
-                    <h:outputLabel value="Dash board" style="alignment-adjust: middle"></h:outputLabel>
-                </f:facet>-->
                 <h:graphicImage  class="pdLogin" library="image" name="Welcome.png"  height="60%" width="100%"></h:graphicImage>  
-
                 <div align="right" style="position: absolute; top: 60%; right: 72%;">
                     <p:galleria value="#{imagesView.images}" var="image" panelWidth="300" panelHeight="150">
                         <p:graphicImage name="image/DashBoard/#{image}" alt="Image Description for #{image}" title="#{image}" height="100%" width="100%"/>
                     </p:galleria>
                 </div>
             </p:panel>
+            <p:commandButton ajax="false" value="Notify" action="#{notificationFormController.addNewHospitalNotificationForm()}"
+                             style="position: absolute; top: 180px; left: 55px; width: 250px;" >
+            </p:commandButton>
+            <p:commandButton ajax="false" value="Lisy My Notifications" action="#{notificationFormController.listUserNotificationForms()}"
+                             style="position: absolute; top: 220px; left: 55px; width: 250px;" >
+            </p:commandButton>
+            <p:commandButton ajax="false" value="List Hospital Notifications" action="#{notificationFormController.addNewHospitalNotificationForm()}"
+                             style="position: absolute; top: 260px; left: 55px; width: 250px;" >
+            </p:commandButton>
+            <p:commandButton ajax="false" value="Change My Password" action="#{sessionController.toChangePassword()}"
+                             style="position: absolute; top: 180px; left: 325px; width: 250px;" >
+            </p:commandButton>
+            <p:commandButton ajax="false" value="Change My Details" action="#{sessionController.toUpdateUserDetails()}"
+                             style="position: absolute; top: 220px; left: 325px; width: 250px;" >
+            </p:commandButton>
+            <p:commandButton ajax="false" value="View Reports" action="#{notificationFormController.addNewHospitalNotificationForm()}"
+                             style="position: absolute; top: 260px; left: 325px; width: 250px;" >
+            </p:commandButton>
         </h:form>
     </ui:define>
 

@@ -422,7 +422,26 @@ public class SessionController implements Serializable {
         }
         return result;
     }
+    
+    public String toUpdateUserDetails(){
+        if(loggedUser==null){
+            JsfUtil.addErrorMessage("No User");
+            return "";
+        }
+        return "/change_user_details";
+    }
 
+    public String updateUserDate(){
+        if(loggedUser==null){
+            JsfUtil.addErrorMessage("No User");
+            return "";
+        }
+        getpFacade().edit(loggedUser.getWebUserPerson());
+        getFacede().edit(loggedUser);
+        JsfUtil.addSuccessMessage("Details Updated");
+        return "/index";
+    }
+    
     public String registeUser() {
 //        if (!telNoOk()) {
 //            JsfUtil.addErrorMessage("Telephone number in correct, Please enter a valid phone number");
@@ -467,7 +486,16 @@ public class SessionController implements Serializable {
         }
         uFacade.create(user);
         JsfUtil.addSuccessMessage("New User Registered.");
-        return "manage_users";
+        newUserName = "";
+        newDesignation = "";
+        newInstitution = null;
+        newPassword = "";
+        newPasswordConfirm = "";
+        newPasswordHint = "";
+        newPersonName="";
+        email = "";
+        telNo = "";
+        return "/index";
     }
 
     public void updateLoggedInstitution() {
@@ -480,6 +508,15 @@ public class SessionController implements Serializable {
         JsfUtil.addSuccessMessage("Updated");
     }
 
+    
+    public String toChangePassword(){
+        if(getLoggedUser()==null){
+            JsfUtil.addErrorMessage("No user");
+            return "";
+        }
+        return "/change_password";
+    }
+    
     public String changePassword() {
         WebUser user = getLoggedUser();
         if (!HOSecurity.matchPassword(passord, user.getWebUserPassword())) {
@@ -493,9 +530,8 @@ public class SessionController implements Serializable {
 
         user.setWebUserPassword(HOSecurity.hash(newPassword));
         uFacade.edit(user);
-        //
         JsfUtil.addSuccessMessage("Password changed");
-        return "index";
+        return "/index";
     }
 
     public Boolean userNameAvailable(String userName) {

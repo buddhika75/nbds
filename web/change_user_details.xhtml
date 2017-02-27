@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./resources/template/template_1.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+    <ui:define name="content">
+        <h:form>
+
+            <p:panel style="border: #ffffff">
+                <f:facet name="header" >
+                    <h:outputLabel value="Change Password" ></h:outputLabel>
+                </f:facet>
+                <p:growl autoUpdate="true"/>
+                <p:panel style="width: 400px">
+                    <p:panelGrid columns="2" >
+                        <h:outputLabel value="Name" />
+                        <p:inputText value="#{sessionController.loggedUser.webUserPerson.name}" />
+                        <h:outputLabel value="Telephone" />
+                        <p:inputText value="#{sessionController.loggedUser.telNo}" />
+                        <h:outputLabel value="Email" />
+                        <p:inputText value="#{sessionController.loggedUser.email}" />
+                        <p:commandButton ajax="false" id="btnReg"  type="submit" value="Update Details" action="#{sessionController.updateUserDate()}" />
+                    </p:panelGrid>
+                    <p:messages globalOnly="true"  ></p:messages>
+                </p:panel>
+
+            </p:panel>
+
+
+        </h:form>
+
+    </ui:define>
+
+
+</ui:composition>
