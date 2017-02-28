@@ -11,6 +11,7 @@ import gov.health.facade.AreaFacade;
 import gov.health.facade.InstitutionFacade;
 import gov.health.facade.WebUserFacade;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import javax.ejb.EJB;
@@ -180,6 +181,21 @@ public class UserApproveController implements Serializable {
         this.userFacade = userFacade;
     }
 
+    public void removeUser() {
+        if (selectedUser == null) {
+            JsfUtil.addErrorMessage("Please select a user");
+            return;
+        }
+        try {
+            userFacade.remove(selectedUser);
+            JsfUtil.addSuccessMessage("Successfully Removed");
+        }
+        catch(Exception e){
+        JsfUtil.addSuccessMessage("Error. " + Arrays.toString(e.getStackTrace()) );
+        }
+        
+    }
+
     public void saveUser() {
         if (selectedUser == null) {
             JsfUtil.addErrorMessage("Please select a user");
@@ -187,7 +203,6 @@ public class UserApproveController implements Serializable {
         }
         selectedUser.setRole(role);
         selectedUser.setRestrictedInstitution(institution);
-
         if (selectedUser.getRole() != null && "sysAdmin".equals(selectedUser.getRole().getName())) {
             selectedUser.setRestrictedInstitution(null);
         } else if (selectedUser.getRole() != null && "superUser".equals(selectedUser.getRole().getName())) {
@@ -195,29 +210,22 @@ public class UserApproveController implements Serializable {
         } else {
             selectedUser.setRestrictedInstitution(institution);
         }
-//        selectedUser.setRestrictedInstitution(institution);
-
         userFacade.edit(selectedUser);
-        //selectedUser = null;
-
         JsfUtil.addSuccessMessage("Successfully activated");
     }
 
-    
-    
-    
-     public void updateUser() {
+    public void updateUser() {
         if (selectedUser == null) {
             JsfUtil.addErrorMessage("Please select a user");
             return;
         }
-        
+
         userFacade.edit(selectedUser);
         //selectedUser = null;
 
         JsfUtil.addSuccessMessage("Successfully Updated");
     }
-    
+
     public void approveUser() {
         if (selectedUser == null) {
             JsfUtil.addErrorMessage("Please select a user to approve");

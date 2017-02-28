@@ -31,6 +31,7 @@
                                     <f:selectItems value="#{userApproveController.users}" var="user" itemValue="#{user}" itemLabel="#{user.webUserPerson.name}" />
                                     <f:ajax event="change" render="gpDetail" execute="gpSelect"/>
                                 </p:selectOneListbox>
+                                <p:commandButton ajax="false" value="Delete" action="#{userApproveController.removeUser()}"></p:commandButton>
                             </h:panelGrid>
                         </p:panel>
 
