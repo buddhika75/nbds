@@ -9,11 +9,15 @@ import gov.health.entity.WebUser;
 import gov.health.entity.WebUserRole;
 import gov.health.facade.AreaFacade;
 import gov.health.facade.InstitutionFacade;
+import gov.health.facade.PersonFacade;
 import gov.health.facade.WebUserFacade;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -37,6 +41,9 @@ public class UserApproveController implements Serializable {
     AreaFacade areaFacade;
     @EJB
     InstitutionFacade institutionFacade;
+    @EJB
+    PersonFacade personFacade;
+    
     //
     String activateComments;
     @Inject
@@ -102,6 +109,22 @@ public class UserApproveController implements Serializable {
             temSql = "SELECT a FROM WebUser a WHERE a.retired=false ORDER BY a.name ";
         }
         return getUserFacade().findBySQL(temSql);
+    }
+    
+    public List<WebUser> completeUsers(String qry) {
+        List<WebUser> sus = new ArrayList<WebUser>();
+        List<WebUser> allUsers = getUsers();
+        System.out.println("allUsers.size() = " + allUsers.size());
+        for(WebUser u:allUsers){
+            if(u.getDisplayName().toLowerCase().contains(qry.trim().toLowerCase())){
+                
+                sus.add(u);
+                String t= u.getDisplayName();
+                System.out.println("t = " + t);
+            }
+            
+        }
+        return sus;
     }
 
     public void setUsers(List<WebUser> users) {
@@ -211,9 +234,16 @@ public class UserApproveController implements Serializable {
             selectedUser.setRestrictedInstitution(institution);
         }
         userFacade.edit(selectedUser);
+        getPersonFacade().edit(selectedUser.getWebUserPerson());
         JsfUtil.addSuccessMessage("Successfully activated");
     }
 
+    public PersonFacade getPersonFacade() {
+        return personFacade;
+    }
+
+    
+    
     public void updateUser() {
         if (selectedUser == null) {
             JsfUtil.addErrorMessage("Please select a user");

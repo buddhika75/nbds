@@ -7,6 +7,7 @@
  */
 package gov.health.entity;
 
+import gov.health.bean.HOSecurity;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
@@ -62,6 +63,15 @@ public class WebUser implements Serializable {
     Boolean needPwReset;
     @ManyToOne
     Institution restrictedInstitution;
+    @Transient
+    String displayName;
+
+    public String getDisplayName() {
+        return HOSecurity.decrypt(name);
+    }
+    
+    
+    
 
     public Boolean getNeedPwReset() {
         return needPwReset;

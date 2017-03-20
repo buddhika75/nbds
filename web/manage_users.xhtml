@@ -13,7 +13,7 @@
 
     <ui:define name="content">
         <p:growl autoUpdate="true" />
-        <h:outputStylesheet library="css" name="pdhscss1.css"   />
+        <h:outputStylesheet library="css" name="nbds.css"   />
         <p:panel rendered="#{sessionController.sysAdmin or sessionController.insAdmin}" style="border: #ffffff">
             <f:facet name="header" >
                 <h:outputLabel value="Manage Users" ></h:outputLabel>
@@ -27,10 +27,22 @@
                         <p:panel style="height: 250px">
                             <h:panelGrid id="gpSelect" columns="1" >
                                 <h:outputLabel value="Users"  />
-                                <p:selectOneListbox   value="#{userApproveController.selectedUser}">
-                                    <f:selectItems value="#{userApproveController.users}" var="user" itemValue="#{user}" itemLabel="#{user.webUserPerson.name}" />
-                                    <f:ajax event="change" render="gpDetail" execute="gpSelect"/>
-                                </p:selectOneListbox>
+                                <p:autoComplete id="acUsers" completeMethod="#{userApproveController.completeUsers}" var="u"
+                                                itemLabel="#{u.displayName}"
+                                                itemValue="#{u}"
+                                                value="#{userApproveController.selectedUser}"> 
+                                    <f:ajax event="itemSelect" render="gpDetail" execute="acUsers"/>
+                                    <p:column headerText="User Name">
+                                        <p:outputLabel value="#{u.displayName}" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column headerText="Role">
+                                        <p:outputLabel value="#{u.role}" ></p:outputLabel>
+                                    </p:column>
+                                    <p:column headerText="Institutions">
+                                        <p:outputLabel value="#{u.restrictedInstitution.name}" ></p:outputLabel>
+                                    </p:column>
+
+                                </p:autoComplete>
                                 <p:commandButton ajax="false" value="Delete" action="#{userApproveController.removeUser()}"></p:commandButton>
                             </h:panelGrid>
                         </p:panel>
@@ -38,6 +50,13 @@
                         <p:panel style="height: 250px">
                             <h:panelGroup id="gpDetail" >
                                 <h:panelGrid columns="2" >
+                                    <h:outputLabel value="Name" />
+                                    <p:inputText value="#{userApproveController.selectedUser.webUserPerson.name}" />
+
+                                    <h:outputLabel value="User Name" />
+                                    <p:inputText value="#{userApproveController.selectedUser.displayName}" readonly="true" />
+
+
                                     <h:outputLabel value="Role" />
                                     <p:selectOneListbox id="cmnSysAdminList" rendered="#{sessionController.sysAdmin}"  value="#{userApproveController.role}" >
                                         <f:selectItems value="#{webUserRoleController.items}" var="adminRole" itemLabel="#{adminRole.name}" itemValue="#{adminRole}"  />
@@ -55,6 +74,29 @@
                                                        var="ri" itemValue="#{ri}" itemLabel="#{ri.name}" 
                                                        >
 
+                                    </p:autoComplete>
+
+                                    <h:outputLabel value="Email" />
+                                    <p:inputText value="#{userApproveController.selectedUser.email}" />
+
+                                    <h:outputLabel value="Phone No" />
+                                    <p:inputText value="#{userApproveController.selectedUser.telNo}" />
+
+                                    <h:outputLabel value="Area" />
+                                    <p:autoComplete id="acArea" completeMethod="#{areaController.completeArea}" var="a"
+                                                    itemLabel="#{a.name}" itemValue="#{a}"
+                                                    value="#{userApproveController.selectedUser.webUserPerson.area}"> 
+                                        <f:ajax event="itemSelect" render="txtName gpDetail" execute="acArea" >                                
+                                        </f:ajax>
+                                        <p:column headerText="Area" >
+                                            <p:outputLabel value="#{a.name}" ></p:outputLabel>
+                                        </p:column>
+                                        <p:column headerText="Type" >
+                                            <p:outputLabel value="#{a.areaType}" ></p:outputLabel>
+                                        </p:column>
+                                        <p:column headerText="Parent Area" >
+                                            <p:outputLabel value="#{a.superArea.name}" ></p:outputLabel>
+                                        </p:column>
                                     </p:autoComplete>
 
                                     <p:commandButton ajax="false" rendered="#{sessionController.sysAdmin}" value="Remove Institution Restriction" action="#{userApproveController.removeInsRes}" />
