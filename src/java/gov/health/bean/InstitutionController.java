@@ -92,6 +92,8 @@ public class InstitutionController implements Serializable {
     InstitutionType bulkInstitutionType;
     Institution bulkParentInstitution;
     Area bulkDistrict;
+    
+    
 
     public void addBulkInstitutions() {
         if (bulkInstitutionType == null) {

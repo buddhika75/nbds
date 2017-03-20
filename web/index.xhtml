@@ -33,8 +33,8 @@
             <p:commandButton ajax="false" value="Change My Details" action="#{sessionController.toUpdateUserDetails()}"
                              style="position: absolute; top: 220px; left: 325px; width: 250px;" >
             </p:commandButton>
-            <p:commandButton ajax="false" value="View Reports" action="#{notificationFormController.addNewHospitalNotificationForm()}"
-                             style="position: absolute; top: 260px; left: 325px; width: 250px;" >
+            <p:commandButton ajax="false" value="View Reports" action="/reports_index_superuser"
+                             style="position: absolute; top: 260px; left: 325px; width: 250px;" rendered="#{sessionController.sysAdmin or sessionController.superUser}">
             </p:commandButton>
         </h:form>
     </ui:define>

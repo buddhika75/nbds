@@ -1,5 +1,6 @@
 package gov.health.bean;
 
+import gov.health.data.AreaType;
 import gov.health.data.NotificationCategoryType;
 import gov.health.entity.Area;
 import gov.health.entity.Department;
@@ -8,6 +9,7 @@ import gov.health.entity.NotificationForm;
 import gov.health.entity.Institution;
 import gov.health.entity.NotificationCategory;
 import gov.health.entity.Person;
+import gov.health.facade.AreaFacade;
 import gov.health.facade.NotificationCategoryFacade;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -41,6 +43,8 @@ public class NotificationFormController implements Serializable {
     private NotificationFormFacade facade;
     @EJB
     NotificationCategoryFacade notificationCategoryFacade;
+    @EJB
+    AreaFacade areaFacade;
 
     @Inject
     SessionController sessionController;
@@ -68,6 +72,25 @@ public class NotificationFormController implements Serializable {
     NotificationCategory conditions_Contributing_to_Death;
 
     NotificationCategory removingNotificationCategory;
+
+
+    public List<Area> completeMohs(String qry) {
+        Map m = new HashMap();
+        m.put("n", "%" + qry.toLowerCase() + "%");
+        m.put("at", AreaType.Moh);
+        m.put("sa", getCurrent().getResidence_Rdhs());
+        List<Area> des = getAreaFacade().findBySQL("select d from Area d where d.superArea=:sa and d.retired = false and d.areaType=:at and lower(d.name) like :n", m);
+        return des;
+    }
+    
+    public List<Area> completeGnas(String qry) {
+        Map m = new HashMap();
+        m.put("n", "%" + qry.toLowerCase() + "%");
+        m.put("at", AreaType.Gn);
+        m.put("sa", getCurrent().getResidence_Moh());
+        List<Area> des = getAreaFacade().findBySQL("select d from Area d where d.superArea=:sa and d.retired = false and d.areaType=:at and lower(d.name) like :n", m);
+        return des;
+    }
 
     public void removeNotificationCategory() {
         if (removingNotificationCategory == null) {
@@ -215,6 +238,59 @@ public class NotificationFormController implements Serializable {
         m.put("cu", getSessionController().getLoggedUser());
         items = getFacade().findBySQL(jpql, m);
         return "/my_notifications";
+    }
+    
+    public String listAllNationalNotificationForms() {
+        if(sessionController.superUser || sessionController.sysAdmin){
+            JsfUtil.addErrorMessage("You are NOT autherized to view this report");
+            return "/index";
+        }
+        TimeZone.setDefault(TimeZone.getTimeZone("ASIA/COLOMBO"));
+        Map m = new HashMap();
+        m.put("fd", JsfUtil.getDayStart(getFromDate()));
+        m.put("td", JsfUtil.gmtToColombo(JsfUtil.getDayEnd(getToDate())));
+        String jpql = "select n from NotificationForm n where n.retired=false  "
+                + " and n.createdDate between :fd and :td order by n.id desc";
+        items = getFacade().findBySQL(jpql, m);
+        return "/report_national_notification_list";
+    }
+    
+    public String listAllResidantDistrictNotificationForms() {
+        if(sessionController.superUser || sessionController.sysAdmin){
+            JsfUtil.addErrorMessage("You are NOT autherized to view this report");
+            return "/index";
+        }
+        TimeZone.setDefault(TimeZone.getTimeZone("ASIA/COLOMBO"));
+        Map m = new HashMap();
+        m.put("dis", getArea());
+        m.put("fd", JsfUtil.getDayStart(getFromDate()));
+        m.put("td", JsfUtil.gmtToColombo(JsfUtil.getDayEnd(getToDate())));
+        String jpql = "select n from NotificationForm n "
+                + " where n.retired=false  "
+                + " and n.residence_Rdhs=:dis "
+                + " and n.createdDate between :fd and :td "
+                + " order by n.id desc";
+        items = getFacade().findBySQL(jpql, m);
+        return "/report_resident_district_notification_list";
+    }
+    
+    public String listAllInstitutionDistrictNotificationForms() {
+        if(sessionController.superUser || sessionController.sysAdmin){
+            JsfUtil.addErrorMessage("You are NOT autherized to view this report");
+            return "/index";
+        }
+        TimeZone.setDefault(TimeZone.getTimeZone("ASIA/COLOMBO"));
+        Map m = new HashMap();
+        m.put("dis", getArea());
+        m.put("fd", JsfUtil.getDayStart(getFromDate()));
+        m.put("td", JsfUtil.gmtToColombo(JsfUtil.getDayEnd(getToDate())));
+        String jpql = "select n from NotificationForm n "
+                + " where n.retired=false  "
+                + " and n.hospital.district=:dis "
+                + " and n.createdDate between :fd and :td "
+                + " order by n.id desc";
+        items = getFacade().findBySQL(jpql, m);
+        return "/report_institution_district_notification_list";
     }
 
     public String listUserHospitalNotificationForms() {
@@ -607,6 +683,12 @@ public class NotificationFormController implements Serializable {
         this.removingNotificationCategory = removingNotificationCategory;
     }
 
+    public AreaFacade getAreaFacade() {
+        return areaFacade;
+    }
+
+    
+    
     @FacesConverter(forClass = NotificationForm.class)
     public static class NotificationFormControllerConverter implements Converter {
 

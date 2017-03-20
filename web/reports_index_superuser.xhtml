@@ -18,15 +18,15 @@
 
                     <h:form>
 
-                        <h:panelGrid columns="1" >
-                            <p:commandButton value="List All Notifications" ajax="false" action="#" ></p:commandButton>
-                            <p:commandButton value="List Notifications by District of Hospital" ajax="false" action="#" ></p:commandButton>
-                            <p:commandButton value="List Notifications by District of Residance" ajax="false" action="#" ></p:commandButton>
-                            <p:commandButton value="List Institution By Notification" ajax="false" action="#" ></p:commandButton>
-                            <p:commandButton value="List Notifications by ICD10" ajax="false" action="#" ></p:commandButton>
+                        <p:panelGrid columns="1" >
+                            <p:commandButton value="List All Notifications" ajax="false" action="#{notificationFormController.listAllNationalNotificationForms}" styleClass="mediumTextLeft" ></p:commandButton>
+                            <p:commandButton value="List Notifications by District of Residance" ajax="false" action="#{notificationFormController.listAllResidantDistrictNotificationForms}" styleClass="mediumTextLeft"  ></p:commandButton>
+                            <p:commandButton value="List Notifications by District of Hospital" ajax="false" action="#{notificationFormController.listAllInstitutionDistrictNotificationForms}"  styleClass="mediumTextLeft" ></p:commandButton>
+                            <p:commandButton value="List Institution By Notification" ajax="false" styleClass="mediumTextLeft"  ></p:commandButton>
+                            <p:commandButton value="List Notifications by ICD10" ajax="false" styleClass="mediumTextLeft" style="text-align: left;" ></p:commandButton>
                             
                             
-                        </h:panelGrid>
+                        </p:panelGrid>
 
                     </h:form>
                 </f:view>

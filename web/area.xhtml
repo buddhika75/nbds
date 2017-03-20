@@ -26,11 +26,23 @@
                                     <h:outputText id="lblSelect" value="Fields" >
                                     </h:outputText>
 
-                                    <p:selectOneListbox  id="lstSelect"  value="#{areaController.current}" style="min-width: 223px">
-                                        <f:selectItems value="#{areaController.lstItems}" var="myItem" itemValue="#{myItem}" itemLabel="#{myItem.name}" ></f:selectItems>
-                                        <f:ajax event="change" render="txtName gpDetail   " execute="lstSelect" >                                
+
+                                    <p:autoComplete id="acArea" completeMethod="#{areaController.completeArea}" var="a"
+                                                    itemLabel="#{a.name}" itemValue="#{a}"
+                                                    value="#{areaController.current}"> 
+                                        <f:ajax event="itemSelect" render="txtName gpDetail" execute="acArea" >                                
                                         </f:ajax>
-                                    </p:selectOneListbox>
+                                        <p:column headerText="Area" >
+                                            <p:outputLabel value="#{a.name}" ></p:outputLabel>
+                                        </p:column>
+                                        <p:column headerText="Type" >
+                                            <p:outputLabel value="#{a.areaType}" ></p:outputLabel>
+                                        </p:column>
+                                        <p:column headerText="Parent Area" >
+                                            <p:outputLabel value="#{a.superArea.name}" ></p:outputLabel>
+                                        </p:column>
+                                    </p:autoComplete>
+                                   
 
                                 </h:panelGrid>
                                 <h:panelGrid id="gpSelectButtons" columns="3"  >
@@ -39,7 +51,7 @@
                                                                             </f:ajax>-->
                                     </p:commandButton>
                                     <p:commandButton ajax="false" id="btnDelete" onclick="if (!confirm('Are you sure you want to delete this record?'))
-                                            return false"  value="#{labels.delete}" action="#{areaController.delete()}" styleClass="buttons">
+                                                return false"  value="#{labels.delete}" action="#{areaController.delete()}" styleClass="buttons">
                                     </p:commandButton>
                                 </h:panelGrid>
                             </p:panel>

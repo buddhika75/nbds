@@ -25,6 +25,9 @@
                                 <h:outputLabel value="BIRTH DEFECTS NOTIFICATION FORM" style="alignment-adjust: middle"></h:outputLabel>
                                 <p:spacer width="10" ></p:spacer>
                                 <p:commandButton ajax="false" value="Save" action="#{notificationFormController.saveSelected()}" id="cmdSv" disabled="#{sessionController.superUser}"></p:commandButton>
+                                <p:commandButton ajax="false" value="Print" id="cmdPrint" >
+                                    <p:printer target="printBlock" ></p:printer>
+                                </p:commandButton>
                                 <p:tooltip for="cmdSv" value="Save Hospital Notification Form" showEffect="fade" hideEffect="fade" />  
                             </f:facet>
 
@@ -74,18 +77,575 @@
                                                                 itemLabel="#{r.name}"
                                                                 itemValue="#{r}"
                                                                 >
+                                                    <p:ajax event="itemSelect" update="residence_Moh" ></p:ajax>
                                                 </p:autoComplete>
                                                 <p:outputLabel value="MOH" for="residence_Moh" />
                                                 <p:autoComplete id="residence_Moh" value="#{notificationFormController.current.residence_Moh}" 
-                                                                completeMethod="#{areaController.completeMohs}"                                            
+                                                                completeMethod="#{notificationFormController.completeMohs}"                                            
                                                                 var="m" forceSelection="true"
                                                                 itemLabel="#{m.name}"
                                                                 itemValue="#{m}"
                                                                 >
+                                                    <p:ajax event="itemSelect" update="residence_Gn" ></p:ajax>
                                                 </p:autoComplete>
                                                 <p:outputLabel value="GN" for="residence_Gn" />
                                                 <p:autoComplete id="residence_Gn" value="#{notificationFormController.current.residence_Gn}" 
-                                                                completeMethod="#{areaController.completeGns}"                                            
+                                                                completeMethod="#{notificationFormController.completeGnas}"                                            
+                                                                var="g" forceSelection="true"
+                                                                itemLabel="#{g.name}"
+                                                                itemValue="#{g}"
+                                                                >
+                                                </p:autoComplete>
+                                            </p:panelGrid>
+                                        </p:panel>
+
+                                    </h:panelGrid>
+
+
+                                    <h:panelGrid columns="2" styleClass="topLeftCol" >
+
+                                        <p:panel header="Delivery" >
+                                            <p:panelGrid columns="2" columnClasses="topLeftCol, topLeftCol">
+                                                <p:outputLabel value="Date of Birth" for="date_of_Birth_Delivery" />
+                                                <p:calendar id="date_of_Birth_Delivery" value="#{notificationFormController.current.date_of_Birth_Delivery}" title="Date_of_Birth_Delivery" 
+                                                            pattern="MM/dd/yyyy" 
+                                                            timeZone="Asia/Colombo">
+
+                                                </p:calendar>
+                                                <p:outputLabel value="Place of Delivery:" for="place_of_Delivery" />
+                                                <p:autoComplete id="place_of_Delivery" value="#{notificationFormController.current.place_of_Delivery}" 
+                                                                completeMethod="#{institutionController.completeHospitals}"                                            
+                                                                var="h1" forceSelection="true"
+                                                                itemLabel="#{h1.name}"
+                                                                itemValue="#{h1}"
+                                                                >
+
+                                                </p:autoComplete>
+
+                                            </p:panelGrid>
+                                        </p:panel>
+
+                                        <p:panel header="Case Detection" >
+                                            <p:panelGrid columns="2" columnClasses="topLeftCol, topLeftCol">
+
+                                                <p:outputLabel value="Date of case Identification" for="date_of_Case_Identified" />
+                                                <p:calendar id="date_of_Case_Identified" 
+                                                            pattern="MM/dd/yyyy" 
+                                                            value="#{notificationFormController.current.date_of_Case_Identified}" title="Date_of_Case_Identified" 
+                                                            timeZone="Asia/Colombo">
+                                                </p:calendar>
+                                                <p:outputLabel value="Age at Case Detection" />
+                                                <h:panelGrid columns="9" >
+                                                    <p:outputLabel value="Days" />
+                                                    <p:inputText styleClass="shortText" id="age_at_Case_Detection_Days" value="#{notificationFormController.current.age_at_Case_Detection_Days}" title="Days" />
+                                                    <p:outputLabel value="Months" />
+                                                    <p:inputText  styleClass="shortText" id="age_at_Case_Detection_Months" value="#{notificationFormController.current.age_at_Case_Detection_Months}" title="Months" />
+                                                    <p:outputLabel value="Years" />
+                                                    <p:inputText  styleClass="shortText" id="age_at_Case_Detection_Years" value="#{notificationFormController.current.age_at_Case_Detection_Years}" title="Years" />
+                                                </h:panelGrid>
+
+                                            </p:panelGrid>
+                                        </p:panel>
+
+                                    </h:panelGrid>
+
+                                    <p:panel header="Living Status &amp; Necropsy">
+
+                                        <p:panelGrid columns="2" columnClasses="topLeftCol, topLeftCol">
+                                            <p:outputLabel value="Living status" for="living_Status" />
+                                            <p:selectOneMenu id="living_Status" value="#{notificationFormController.current.living_Status}" >
+                                                <f:selectItem itemLabel="Select a Living Status" ></f:selectItem>
+                                                <f:selectItems value="#{enumController.livingStatus}" var="ls" itemValue="#{ls}" itemLabel="#{ls.label}" ></f:selectItems>
+                                            </p:selectOneMenu>
+                                            <p:outputLabel value="Post Mortem Necropsy Done" for="post_Mortem_Necropsy_Done" />
+                                            <p:selectBooleanCheckbox  id="post_Mortem_Necropsy_Done" value="#{notificationFormController.current.post_Mortem_Necropsy_Done}" />
+                                            <p:outputLabel value="Record No" for="pathological_Forensic_Post_Mortem_Record_No" />
+                                            <p:inputText id="pathological_Forensic_Post_Mortem_Record_No" value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Record_No}" title="Pathological_Forensic_Post_Mortem_Record_No" />
+                                            <p:outputLabel value="Date:" for="pathological_Forensic_Post_Mortem_Date" />
+                                            <p:calendar id="pathological_Forensic_Post_Mortem_Date" 
+                                                        pattern="MM/dd/yyyy" 
+                                                        value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Date}" title="Pathological_Forensic_Post_Mortem_Date" 
+                                                        timeZone="Asia/Colombo">
+                                            </p:calendar>
+                                            <p:outputLabel value="Details" for="pathological_Forensic_Post_Mortem_Details" />
+                                            <p:inputTextarea id="pathological_Forensic_Post_Mortem_Details" value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Details}" title="Pathological_Forensic_Post_Mortem_Details" />
+                                            <p:outputLabel value="Done by" for="pathological_Forensic_Post_Mortem_Done_by" />
+                                            <p:inputText id="pathological_Forensic_Post_Mortem_Done_by" value="#{notificationFormController.current.pathological_Forensic_Post_Mortem_Done_by}" title="Pathological_Forensic_Post_Mortem_Done_by" />
+                                        </p:panelGrid>
+                                    </p:panel>
+                                </p:tab>
+
+                                <p:tab title="B. CONGENITAL ABNORMALITIES"  >
+                                    <p:panelGrid columns="2" styleClass="topLeftCol">
+                                        <p:outputLabel value="Presence of Congenital Abnormalities" for="presence_of_Congenital_Abnormalities" />
+                                        <p:selectOneMenu  id="presence_of_Congenital_Abnormalities" value="#{notificationFormController.current.presence_of_Congenital_Abnormalities}" >
+                                            <f:selectItems value="#{enumController.presenceOfCongenitalAbnormalities}" ></f:selectItems>
+                                        </p:selectOneMenu>
+                                    </p:panelGrid>
+                                    <p:panelGrid columns="1" >
+                                        <p:panelGrid columns="6" columnClasses="topLeftCol, topLeftCol, topLeftCol, topLeftCol, topLeftCol, topLeftCol">
+                                            <p:outputLabel value="Type of Birth Defect" for="type_of_Birth_Defect" />
+                                            <p:outputLabel value="Full Description" for="full_Description" />
+                                            <p:outputLabel value="Birth Defect Code ICD 10" for="birth_Defect_Code_ICD_10" />
+                                            <p:outputLabel value="RCPCH Extension" for="rcpch__Extension" />
+                                            <p:outputLabel value="Confirmed" for="confirmed_Possible" />
+                                            <p:outputLabel value=" "  />
+
+                                            <p:inputText id="type_of_Birth_Defect" value="#{notificationFormController.congenital_Abnormality.type_of_Birth_Defect}" title="Type_of_Birth_Defect" />
+                                            <p:inputTextarea rows="4" cols="30" id="full_Description" value="#{notificationFormController.congenital_Abnormality.full_Description}" title="Full_Description" />
+                                            <p:autoComplete forceSelection="true" completeMethod="#{categoryController.completeIcd10s}" var="c" itemLabel="#{c.name}" itemValue="#{c}"
+                                                            id="birth_Defect_Code_ICD_10" value="#{notificationFormController.congenital_Abnormality.birth_Defect_Code_ICD_10}" >
+                                                <p:column >
+                                                    <p:outputLabel value="#{c.code}" ></p:outputLabel>
+                                                </p:column>
+                                                <p:column >
+                                                    <p:outputLabel value="#{c.name}" ></p:outputLabel>
+                                                </p:column>
+                                            </p:autoComplete>
+                                            <p:selectOneMenu id="rcpch__Extension" value="#{notificationFormController.congenital_Abnormality.rcpch__Extension}" >
+                                                <f:selectItem itemLabel="Select RCPCH Extension" ></f:selectItem>
+                                                <f:selectItems value="#{categoryController.rcpchExtensions}"/>
+                                            </p:selectOneMenu>
+                                            <p:selectBooleanCheckbox  id="confirmed_Possible" value="#{notificationFormController.congenital_Abnormality.confirmed_Possible}" />
+                                            <p:commandButton ajax="false" value="Add" action="#{notificationFormController.addCongenitalAbnormality()}" >
+                                            </p:commandButton>
+
+
+                                        </p:panelGrid>
+
+                                        <p:dataTable value="#{notificationFormController.current.con_ab}" var="item">
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Type of Birth Defect"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.type_of_Birth_Defect}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Full Description"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.full_Description}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Birth Defect Code ICD 10"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.birth_Defect_Code_ICD_10.code}"/>
+                                                <p:spacer width="2" height="1" ></p:spacer>
+                                                <h:outputText value="#{item.birth_Defect_Code_ICD_10.name}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="RCPCH Extension"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.rcpch__Extension}"/>
+                                            </p:column>
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Confirmed"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.confirmed_Possible ?'Yes':'No'}"/>
+                                            </p:column>
+                                            <p:column >
+                                                <f:facet name="header">
+                                                    <h:outputText value="Remove"/>
+                                                </f:facet>
+                                                <p:commandButton ajax="false" value="Remove" action="#{notificationFormController.removeNotificationCategory()}" >
+                                                    <f:setPropertyActionListener value="#{item}" target="#{notificationFormController.removingNotificationCategory}" ></f:setPropertyActionListener>
+                                                </p:commandButton>
+                                            </p:column>
+                                        </p:dataTable>
+
+                                        <p:panelGrid columns="2" styleClass="topLeftCol">
+                                            <p:outputLabel value="Additional Information on Congenital Abnormalities" for="additional_Information__On_Congenital_Abnormalities" />
+                                            <p:inputTextarea rows="6" cols="60" id="additional_Information__On_Congenital_Abnormalities" value="#{notificationFormController.current.additional_Information__On_Congenital_Abnormalities}" title="Additional_Information__On_Congenital_Abnormalities" />
+                                        </p:panelGrid>
+
+
+
+
+
+
+                                    </p:panelGrid>
+                                </p:tab>
+
+                                <p:tab title="C. SOCIO-DEMOGRAPHIC DETAILS" >
+                                    <p:panelGrid columns="2">
+                                        <p:outputLabel value="Name of the Mother" for="name_of_the_Mother" />
+                                        <p:inputText id="name_of_the_Mother" value="#{notificationFormController.current.name_of_the_Mother}" title="Name_of_the_Mother" />
+                                        <p:outputLabel value="Residential Address:" for="residential_Address" />
+                                        <p:inputTextarea rows="4" cols="30" id="residential_Address" value="#{notificationFormController.current.residential_Address}" title="Residential_Address" />
+                                        <p:outputLabel value="Mothers Date of Birth:" for="mothers_Date_of_Birth" />
+                                        <p:inputText id="mothers_Date_of_Birth" value="#{notificationFormController.current.mothers_Date_of_Birth}" title="Mothers_Date_of_Birth" >
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </p:inputText>
+                                        <p:outputLabel value="Mothers Age in Years:" for="mothers_Age_in_Years" />
+                                        <p:inputText id="mothers_Age_in_Years" value="#{notificationFormController.current.mothers_Age_in_Years}" title="Mothers_Age_in_Years" />
+                                        <p:outputLabel value="Mariatal Status:" for="mariatal_Status" />
+                                        <p:selectOneMenu id="mariatal_Status" value="#{notificationFormController.current.mariatal_Status}" >
+                                            <f:selectItem itemLabel="Select Mariatal Status" ></f:selectItem>
+                                            <f:selectItems value="#{enumController.mariatalStatus}" ></f:selectItems>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Education Level:" for="education_Level" />
+                                        <p:selectOneMenu id="education_Level" value="#{notificationFormController.current.education_Level}" >
+                                            <f:selectItem itemLabel="Select Educational Status" ></f:selectItem>
+                                            <f:selectItems value="#{enumController.educationLevels}" ></f:selectItems>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="Ethnicity:" for="ethnicity" />
+                                        <p:selectOneMenu id="ethnicity" value="#{notificationFormController.current.ethnicity}" >
+                                            <f:selectItem itemLabel="Select Ethnicity" ></f:selectItem>
+                                            <f:selectItems value="#{enumController.ethnicities}" ></f:selectItems>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Fathers Age (Years)" for="fathers_Age" />
+                                        <p:inputText id="fathers_Age" value="#{notificationFormController.current.fathers_Age}" title="Fathers_Age" />
+                                        <p:outputLabel value="Parental Consanguinity" for="parental_Consanguinity" />
+                                        <p:selectBooleanCheckbox id="parental_Consanguinity" value="#{notificationFormController.current.parental_Consanguinity}" />
+
+
+                                        <p:outputLabel value="Parental Consanguinity Details:" for="parental_Consanguinity_Details" />
+                                        <p:inputTextarea rows="4" cols="30" id="parental_Consanguinity_Details" value="#{notificationFormController.current.parental_Consanguinity_Details}" title="Parental_Consanguinity_Details" />
+                                        <p:outputLabel value="Sector" for="sector" />
+                                        <p:selectOneMenu id="sector" value="#{notificationFormController.current.sector}" >
+                                            <f:selectItem itemLabel="Select Sector" ></f:selectItem>
+                                            <f:selectItems value="#{enumController.sectors}" ></f:selectItems>
+
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Monthly Average Family Income" for="monthly_Average_Family_Income" />
+                                        <p:inputText id="monthly_Average_Family_Income" value="#{notificationFormController.current.monthly_Average_Family_Income}" title="Monthly_Average_Family_Income" />
+                                        <p:outputLabel value="National Identity Card No" for="national_Identity_Card_No" />
+                                        <p:inputText id="national_Identity_Card_No" value="#{notificationFormController.current.national_Identity_Card_No}" title="National_Identity_Card_No" />
+                                        <p:outputLabel value="Contact Phone" for="contact_Phone" />
+                                        <p:inputText id="contact_Phone" value="#{notificationFormController.current.contact_Phone}" title="Contact_Phone" />
+
+                                    </p:panelGrid>
+                                </p:tab>
+
+                                <p:tab title="D. PREGNANCY &amp; DELIVERY" >
+                                    <p:panelGrid columns="5">
+                                        <p:outputLabel value="Total Pregnancies:" for="total_Pregnancies" />
+                                        <p:inputText id="total_Pregnancies" value="#{notificationFormController.current.total_Pregnancies}" title="Total_Pregnancies" />
+                                        <p:spacer height="1" width="20" ></p:spacer>
+                                        <p:outputLabel value="Live Births:" for="live_Births" />
+                                        <p:inputText id="live_Births" value="#{notificationFormController.current.live_Births}" title="Live_Births" />
+                                    </p:panelGrid>
+                                    <p:panelGrid >
+                                        <f:facet name="header" >
+                                            <p:row >
+                                                <p:column >
+                                                    <p:outputLabel value="Condition" ></p:outputLabel>
+                                                </p:column>
+                                                <p:column >
+                                                    <p:outputLabel value="Yes" ></p:outputLabel>
+                                                </p:column>
+                                                <p:column >
+                                                    <p:outputLabel value="Details" ></p:outputLabel>
+                                                </p:column>
+                                            </p:row>
+                                        </f:facet>
+
+                                        <p:row >
+                                            <p:column >
+                                                <p:outputLabel value="Previous Terminations of Pregnancy for"/>
+                                                <br/>
+                                                <p:outputLabel value="Congenital Malformations" />
+                                            </p:column>
+                                            <p:column >
+                                                <p:selectBooleanCheckbox id="previous_Terminations_of_Pregnancy_for_Congenital_Malformations" value="#{notificationFormController.current.previous_Terminations_of_Pregnancy_for_Congenital_Malformations}"  />
+                                            </p:column>
+                                            <p:column >
+                                                <p:inputTextarea rows="4" cols="30" id="previous_Terminations_of_Pregnancy_for_Congenital_Malformations_Details" value="#{notificationFormController.current.previous_Terminations_of_Pregnancy_for_Congenital_Malformations_Details}" title="Previous_Terminations_of_Pregnancy_for_Congenital_Malformations_Details" />
+                                            </p:column>
+                                        </p:row>
+                                        <p:row >
+                                            <p:column >
+                                                <p:outputLabel value="Previous Still Births:" />
+                                            </p:column>
+                                            <p:column >
+                                                <p:selectBooleanCheckbox id="previous_Still_Births" value="#{notificationFormController.current.previous_Still_Births}" />
+                                            </p:column>
+                                            <p:column >
+                                                <p:inputTextarea rows="4" cols="30" id="previous_Still_Births_Details" value="#{notificationFormController.current.previous_Still_Births_Details}" title="Previous_Still_Births_Details" />
+                                            </p:column>
+                                        </p:row>
+
+                                        <p:row >
+                                            <p:column >
+                                                <p:outputLabel value="Previous Spontaneous Abortions:" />
+                                            </p:column>
+                                            <p:column >
+                                                <p:selectBooleanCheckbox id="previous_Spontaneous_Abortions" value="#{notificationFormController.current.previous_Spontaneous_Abortions}" />
+                                            </p:column>
+                                            <p:column >
+                                                <p:inputTextarea rows="4" cols="30" id="previous_Spontaneous_Abortions_details" value="#{notificationFormController.current.previous_Spontaneous_Abortions_details}" title="Previous_Spontaneous_Abortions_details" />                                                
+                                            </p:column>
+                                        </p:row>
+
+                                        <p:row >
+                                            <p:column >
+                                                <p:outputLabel value="Previous Live Births With" />
+                                                <br/>
+                                                <p:outputLabel value="Congenital Malformations:" />
+                                            </p:column>
+                                            <p:column >
+                                                <p:selectBooleanCheckbox id="previous_Live_Births_With_Congenital_Malformations" value="#{notificationFormController.current.previous_Live_Births_With_Congenital_Malformations}"/>
+                                            </p:column>
+                                            <p:column >
+                                                <p:inputTextarea rows="4" cols="30" id="previous_Live_Births_with_Congenital_Malformations_Details" value="#{notificationFormController.current.previous_Live_Births_with_Congenital_Malformations_Details}" title="Previous_Live_Births_with_Congenital_Malformations_Details" />
+                                            </p:column>
+                                        </p:row>
+
+                                    </p:panelGrid>
+                                    <p:panelGrid columns="2">
+                                        <p:outputLabel value="Source_of_POG_Information:" for="source_of_POG_Information" />
+                                        <p:selectOneMenu id="source_of_POG_Information" value="#{notificationFormController.current.source_of_POG_Information}" >
+                                            <f:selectItem itemLabel="Select" ></f:selectItem>
+                                            <f:selectItems value="#{enumController.sourceOfPogs}" ></f:selectItems>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Lmp:" for="lmp" />
+                                        <p:inputText id="lmp" value="#{notificationFormController.current.lmp}" title="Lmp" >
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </p:inputText>
+                                        <p:outputLabel value="Edd:" for="edd" />
+                                        <p:inputText id="edd" value="#{notificationFormController.current.edd}" title="Edd" >
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </p:inputText>
+                                        <p:outputLabel value="DateAndTimeOfDelivary:" for="dateAndTimeOfDelivary" />
+                                        <p:inputText id="dateAndTimeOfDelivary" value="#{notificationFormController.current.dateAndTimeOfDelivary}" title="DateAndTimeOfDelivary" >
+                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                        </p:inputText>
+                                        <p:outputLabel value="ModeOfDelivery:" for="modeOfDelivery" />
+                                        <p:selectOneMenu id="modeOfDelivery" value="#{notificationFormController.current.modeOfDelivery}" >
+                                            <f:selectItem itemLabel="Select" ></f:selectItem>
+                                            <f:selectItems value="#{enumController.modeOfDeliverys}" ></f:selectItems>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="ModeOfDelivery_Other:" for="modeOfDelivery_Other" />
+                                        <p:inputText id="modeOfDelivery_Other" value="#{notificationFormController.current.modeOfDelivery_Other}" title="ModeOfDelivery_Other" />
+                                        <p:outputLabel value="Plurality:" for="plurality" />
+                                        <p:selectOneMenu id="plurality" value="#{notificationFormController.current.plurality}" >
+                                            <f:selectItem itemLabel="Select" ></f:selectItem>
+                                            <f:selectItems value="#{enumController.pluralities}" ></f:selectItems>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="BirthAttendedBy:" for="birthAttendedBy" />
+                                        <p:selectOneMenu id="birthAttendedBy" value="#{notificationFormController.current.birthAttendedBy}" >
+                                            <f:selectItem itemLabel="Select" ></f:selectItem>
+                                            <f:selectItems value="#{enumController.birthAttendedBys}" ></f:selectItems>
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="PregnancyOutcome:" for="pregnancyOutcome" />
+                                        <p:selectOneMenu id="pregnancyOutcome" value="#{notificationFormController.current.pregnancyOutcome}" >
+                                            <f:selectItem itemLabel="Select" ></f:selectItem>
+                                            <f:selectItems value="#{enumController.pregnancyOutcomes}" ></f:selectItems>                                       
+                                        </p:selectOneMenu>
+                                        <p:outputLabel value="Apgar_1st_minute:" for="apgar_1st_minute" />
+                                        <p:inputText id="apgar_1st_minute" value="#{notificationFormController.current.apgar_1st_minute}" title="Apgar_1st_minute" />
+                                        <p:outputLabel value="Apgar_5th_minute:" for="apgar_5th_minute" />
+                                        <p:inputText id="apgar_5th_minute" value="#{notificationFormController.current.apgar_5th_minute}" title="Apgar_5th_minute" />
+                                        <p:outputLabel value="Apgar_10th_minute:" for="apgar_10th_minute" />
+                                        <p:inputText id="apgar_10th_minute" value="#{notificationFormController.current.apgar_10th_minute}" title="Apgar_10th_minute" />
+                                        <p:outputLabel value="Birth_weight_in_grams:" for="birth_weight_in_grams" />
+                                        <p:inputText id="birth_weight_in_grams" value="#{notificationFormController.current.birth_weight_in_grams}" title="Birth_weight_in_grams" />
+                                        <p:outputLabel value="Length_in_cm:" for="length_in_cm" />
+                                        <p:inputText id="length_in_cm" value="#{notificationFormController.current.length_in_cm}" title="Length_in_cm" />
+                                        <p:outputLabel value="Head_circumference_in_cm:" for="head_circumference_in_cm" />
+                                        <p:inputText id="head_circumference_in_cm" value="#{notificationFormController.current.head_circumference_in_cm}" title="Head_circumference_in_cm" />
+                                    </p:panelGrid>
+                                </p:tab>
+
+                                <p:tab title="E. NEONATAL COMPLICATIONS" >
+                                    <p:panelGrid columns="2">
+                                        <p:outputLabel value="Neonatal_Complication_Details:" for="neonatal_Complication_Details" />
+                                        <p:inputTextarea rows="4" cols="30" id="neonatal_Complication_Details" value="#{notificationFormController.current.neonatal_Complication_Details}" title="Neonatal_Complication_Details" />
+
+                                    </p:panelGrid>
+                                </p:tab>
+
+                                <p:tab title="F. MATERNAL HISTORY" >
+                                    <p:panelGrid columns="2">
+                                        <p:outputLabel value="Pre_Pregnancy_Diabetes_Mellitus_IDDM:" for="pre_Pregnancy_Diabetes_Mellitus_IDDM" />
+                                        <p:selectBooleanCheckbox id="pre_Pregnancy_Diabetes_Mellitus_IDDM" value="#{notificationFormController.current.pre_Pregnancy_Diabetes_Mellitus_IDDM}"/>
+                                        <p:outputLabel value="Pre_Pregnancy_Diabetes_Mellitus_NIDM:" for="pre_Pregnancy_Diabetes_Mellitus_NIDM" />
+                                        <p:selectBooleanCheckbox id="pre_Pregnancy_Diabetes_Mellitus_NIDM" value="#{notificationFormController.current.pre_Pregnancy_Diabetes_Mellitus_NIDM}"/>
+                                        <p:outputLabel value="Gdm_During_This_Pregnancy:" for="gdm_During_This_Pregnancy" />
+                                        <p:selectBooleanCheckbox id="gdm_During_This_Pregnancy" value="#{notificationFormController.current.gdm_During_This_Pregnancy}" />
+                                        <p:outputLabel value="Hypertension:" for="hypertension" />
+                                        <p:selectBooleanCheckbox id="hypertension" value="#{notificationFormController.current.hypertension}"/>
+                                        <p:outputLabel value="Epilepsy_Seizures_Before_or_During_This_Pregnancy:" for="epilepsy_Seizures_Before_or_During_This_Pregnancy" />
+                                        <p:selectBooleanCheckbox id="epilepsy_Seizures_Before_or_During_This_Pregnancy" value="#{notificationFormController.current.epilepsy_Seizures_Before_or_During_This_Pregnancy}" />
+                                        <p:outputLabel value="Maternal_Obesity_BMI:" for="maternal_Obesity_BMI" />
+                                        <p:selectBooleanCheckbox id="maternal_Obesity_BMI" value="#{notificationFormController.current.maternal_Obesity_BMI}"/>
+                                        <p:outputLabel value="Rubella:" for="rubella" />
+                                        <p:selectBooleanCheckbox id="rubella" value="#{notificationFormController.current.rubella}"  />
+                                        <p:outputLabel value="Rubella_Vaccinated:" for="rubella_Vaccinated" />
+                                        <p:selectBooleanCheckbox id="rubella_Vaccinated" value="#{notificationFormController.current.rubella_Vaccinated}" />
+
+                                        <p:outputLabel value="Cytomegalovirus_CMV:" for="cytomegalovirus_CMV" />
+                                        <p:selectBooleanCheckbox id="cytomegalovirus_CMV" value="#{notificationFormController.current.cytomegalovirus_CMV}" />
+
+                                        <p:outputLabel value="Pre_Pregnancy_Folic_Acid:" for="pre_Pregnancy_Folic_Acid" />
+                                        <p:selectBooleanCheckbox id="pre_Pregnancy_Folic_Acid" value="#{notificationFormController.current.pre_Pregnancy_Folic_Acid}"  />
+
+                                        <p:outputLabel value="Antenatal_Anaemia:" for="antenatal_Anaemia" />
+                                        <p:selectBooleanCheckbox id="antenatal_Anaemia" value="#{notificationFormController.current.antenatal_Anaemia}"  />
+
+                                        <p:outputLabel value="Antenatal_Anaemia_Hb_g_per_dl:" for="antenatal_Anaemia_Hb_g_per_dl" />
+                                        <p:inputText id="antenatal_Anaemia_Hb_g_per_dl" value="#{notificationFormController.current.antenatal_Anaemia_Hb_g_per_dl}"  />
+
+                                        <p:outputLabel value="Active_Smoking:" for="active_Smoking" />
+                                        <p:selectBooleanCheckbox id="active_Smoking" value="#{notificationFormController.current.active_Smoking}" />
+
+                                        <p:outputLabel value="Passive_Smoking:" for="passive_Smoking" />
+                                        <p:selectBooleanCheckbox id="passive_Smoking" value="#{notificationFormController.current.passive_Smoking}"  />
+
+                                        <p:outputLabel value="Alcohol_Before_Pregnancy:" for="alcohol_Before_Pregnancy" />
+                                        <p:selectBooleanCheckbox id="alcohol_Before_Pregnancy" value="#{notificationFormController.current.alcohol_Before_Pregnancy}"  />
+                                        <p:outputLabel value="Alcohol_During_Pregnancy:" for="alcohol_During_Pregnancy" />
+                                        <p:selectBooleanCheckbox id="alcohol_During_Pregnancy" value="#{notificationFormController.current.alcohol_During_Pregnancy}"/>
+                                        <p:outputLabel value="Other_Substances:" for="other_Substances" />
+                                        <p:selectBooleanCheckbox id="other_Substances" value="#{notificationFormController.current.other_Substances}" />
+                                        <p:outputLabel value="Medications_During_Pregnancy:" for="medications_During_Pregnancy" />
+                                        <p:selectBooleanCheckbox id="medications_During_Pregnancy" value="#{notificationFormController.current.medications_During_Pregnancy}" />
+                                        <p:outputLabel value="Any_Antenatal_Febrile_Illness:" for="any_Antenatal_Febrile_Illness" />
+                                        <p:selectBooleanCheckbox id="any_Antenatal_Febrile_Illness" value="#{notificationFormController.current.any_Antenatal_Febrile_Illness}"/>
+                                        <p:outputLabel value="Additional_Information_Remarks_on_Maternal_Risk_Factors:" for="additional_Information_Remarks_on_Maternal_Risk_Factors" />
+                                        <p:inputTextarea rows="4" cols="30" id="additional_Information_Remarks_on_Maternal_Risk_Factors" value="#{notificationFormController.current.additional_Information_Remarks_on_Maternal_Risk_Factors}" title="Additional_Information_Remarks_on_Maternal_Risk_Factors" />
+
+
+
+                                    </p:panelGrid>
+                                </p:tab>
+
+
+
+
+
+                                <p:tab title="G. FAMILY HISTORY" >
+                                    <p:panelGrid columns="2">
+
+                                    </p:panelGrid>
+                                </p:tab>
+                                <p:tab title="H. INVAESTIGATIONS" >
+                                    <p:panelGrid columns="2">
+
+                                    </p:panelGrid>
+                                </p:tab>
+                                <p:tab title="I. INTERVENTIONS" >
+                                    <p:panelGrid columns="2">
+
+                                    </p:panelGrid>
+                                </p:tab>
+
+
+
+
+
+                                <p:tab title="J. DEATH" >
+                                    <p:panelGrid columns="2">
+                                        <p:outputLabel value="Date_of_Death:" for="date_of_Death" />
+                                        <p:inputText id="date_of_Death" value="#{notificationFormController.current.date_of_Death}" title="Date_of_Death" >
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </p:inputText>
+                                        <p:outputLabel value="Age_at_Death_Year:" for="age_at_Death_Year" />
+                                        <p:inputText id="age_at_Death_Year" value="#{notificationFormController.current.age_at_Death_Year}" title="Age_at_Death_Year" />
+                                        <p:outputLabel value="Age_at_Death_Month:" for="age_at_Death_Month" />
+                                        <p:inputText id="age_at_Death_Month" value="#{notificationFormController.current.age_at_Death_Month}" title="Age_at_Death_Month" />
+                                        <p:outputLabel value="Age_at_Death_Days:" for="age_at_Death_Days" />
+                                        <p:inputText id="age_at_Death_Days" value="#{notificationFormController.current.age_at_Death_Days}" title="Age_at_Death_Days" />
+                                        <p:outputLabel value="Place_of_Death:" for="place_of_Death" />
+                                        <p:autoComplete id="place_of_Death" value="#{notificationFormController.current.place_of_Death}" 
+                                                        completeMethod="#{institutionController.completeHospitals}"                                            
+                                                        var="h2"
+                                                        itemLabel="#{h2.name}"
+                                                        itemValue="#{h2}"
+                                                        >
+                                        </p:autoComplete>
+                                    </p:panelGrid>
+                                </p:tab>
+
+                                <p:tab title="K. SUBMISSION" >
+                                    <p:panelGrid columns="2">
+
+
+
+                                        <p:outputLabel value="Clinician or Medical Officer Name:" for="clinician_or_Medical_Officer_Name" />
+                                        <p:inputText id="clinician_or_Medical_Officer_Name" value="#{notificationFormController.current.clinician_or_Medical_Officer_Name}" title="Clinician_or_Medical_Officer_Name" />
+
+                                        <p:outputLabel value="Form Filled Date:" for="clinician_Form_Filled_Date" />
+                                        <p:calendar id="clinician_Form_Filled_Date" pattern="dd/MMMM/yyyy" value="#{notificationFormController.current.clinician_Form_Filled_Date}" title="Clinician_Form_Filled_Date" >
+                                        </p:calendar>
+                                        <p:outputLabel value="Head of the Institution:" for="head_of_Institution_Name" />
+                                        <p:inputText id="head_of_Institution_Name" value="#{notificationFormController.current.head_of_Institution_Name}" title="Head_of_Institution_Name" />
+                                        <p:outputLabel value="Form Submission by Head of Institution Date" for="head_of_Institution_Date" />
+                                        <p:calendar id="head_of_Institution_Date" pattern="dd/MMMM/yyyy" value="#{notificationFormController.current.head_of_Institution_Date}" title="Head_of_Institution_Date" >
+                                        </p:calendar>
+                                    </p:panelGrid>
+                                    <!--                                        <p:outputLabel value="Designation:" for="clinician_or_Medical_Officer_Designation" />
+                                        <p:selectOneMenu id="clinician_or_Medical_Officer_Designation" value="#{notificationFormController.current.clinician_or_Medical_Officer_Designation}" >
+                                            <f:selectItems value="#{designationController.items}" var="des" itemLabel="#{des.name}" itemValue="#{des}"/>
+                                        </p:selectOneMenu>-->
+                                </p:tab>
+
+                            </p:tabView>
+
+
+
+                            <p:panel id="printBlock"  styleClass="printOnly" style="display:none; text-align: left;" >
+                                <p:tab title="A. BASIC DETAILS" >
+                                    <p:panelGrid columns="2" columnClasses="topLeftCol, topLeftCol">
+                                        <p:outputLabel value="Infants Name:" for="infants_Name" />
+                                        <p:inputText required="true" id="infants_Name" value="#{notificationFormController.current.infants_Name}"
+                                                     title="Infants_Name"  styleClass="mediumText"/>
+                                        <p:outputLabel value="Sex of Infant:" for="sex_of_Infant" />
+                                        <p:selectOneMenu id="sex_of_Infant" value="#{notificationFormController.current.sex_of_Infant}"  >
+                                            <f:selectItem itemLabel="Select Sex" ></f:selectItem>
+                                            <f:selectItem itemValue="MALE" itemLabel=" Male "></f:selectItem>
+                                            <f:selectItem itemValue="FEMALE" itemLabel=" Female "></f:selectItem>
+                                            <f:selectItem itemValue="AMBIGUOUS" itemLabel=" Ambiguous "></f:selectItem>
+                                        </p:selectOneMenu>
+                                    </p:panelGrid>
+
+                                    <h:panelGrid columns="2" >
+
+                                        <p:panel header="Location where case identified" >
+                                            <p:panelGrid columns="2" columnClasses="topLeftCol, topLeftCol">
+                                                <p:outputLabel value="Hospital" for="location_Where_Case_Identified_Hospital" />
+                                                <p:autoComplete id="location_Where_Case_Identified_Hospital" value="#{notificationFormController.current.location_Where_Case_Identified_Hospital}" 
+                                                                completeMethod="#{institutionController.completeHospitals}"                                            
+                                                                var="h0" forceSelection="true" 
+                                                                itemLabel="#{h0.name}"
+                                                                itemValue="#{h0}"
+                                                                >
+                                                </p:autoComplete>
+                                                <p:outputLabel value="Ward / Unit" for="location_Where_Case_Identified_Ward_Unit" />
+                                                <p:inputText id="location_Where_Case_Identified_Ward_Unit" value="#{notificationFormController.current.location_Where_Case_Identified_Ward_Unit}" title="Location_Where_Case_Identified_Ward_Unit" />
+                                                <p:outputLabel value="BHT No." for="location_Where_Case_Identified_Bht_No" />
+                                                <p:inputText id="location_Where_Case_Identified_Bht_No" value="#{notificationFormController.current.location_Where_Case_Identified_Bht_No}" title="Location_Where_Case_Identified_Bht_No" />
+                                            </p:panelGrid>
+                                        </p:panel>
+
+                                        <p:panel header="Residence" >
+                                            <p:panelGrid columns="2" columnClasses="topLeftCol, topLeftCol">
+
+                                                <p:outputLabel value="RDHS" for="residence_Rdhs" />
+                                                <p:autoComplete id="residence_Rdhs" value="#{notificationFormController.current.residence_Rdhs}" 
+                                                                completeMethod="#{areaController.completeDistricts}"                                            
+                                                                var="r" forceSelection="true"
+                                                                itemLabel="#{r.name}"
+                                                                itemValue="#{r}"
+                                                                >
+                                                    <p:ajax event="itemSelect" update="residence_Moh" ></p:ajax>
+                                                </p:autoComplete>
+                                                <p:outputLabel value="MOH" for="residence_Moh" />
+                                                <p:autoComplete id="residence_Moh" value="#{notificationFormController.current.residence_Moh}" 
+                                                                completeMethod="#{notificationFormController.completeMohs}"                                            
+                                                                var="m" forceSelection="true"
+                                                                itemLabel="#{m.name}"
+                                                                itemValue="#{m}"
+                                                                >
+                                                    <p:ajax event="itemSelect" update="residence_Gn" ></p:ajax>
+                                                </p:autoComplete>
+                                                <p:outputLabel value="GN" for="residence_Gn" />
+                                                <p:autoComplete id="residence_Gn" value="#{notificationFormController.current.residence_Gn}" 
+                                                                completeMethod="#{notificationFormController.completeGnas}"                                            
                                                                 var="g" forceSelection="true"
                                                                 itemLabel="#{g.name}"
                                                                 itemValue="#{g}"
@@ -579,11 +1139,7 @@
 
                                 </h:panelGroup>
 
-                            </p:tabView>
-
-
-
-
+                            </p:panel>>
 
                         </p:panel>
                     </h:form>

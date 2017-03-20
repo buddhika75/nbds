@@ -60,14 +60,9 @@
                                 <p:menuitem ajax="false" action="#{notificationFormController.listUserHospitalNotificationForms()}" value="Institution Notifications"></p:menuitem>
                             </p:submenu>
                             <p:submenu label="Reports" rendered="#{sessionController.sysAdmin or sessionController.superUser}">
-                                <p:menuitem ajax="false" action="registry_institution" value="Institutional Birth Defects Registry" ></p:menuitem>
-                                <p:menuitem ajax="false" action="registry_all" value="All Notifications" ></p:menuitem>
-                                <p:menuitem ajax="false" action="registry_district" value="District Birth Defects Registry" ></p:menuitem>
-                                <p:menuitem ajax="false" action="registry_province"  value="Provincial Birth Defects Registry"  ></p:menuitem>
-                                <p:menuitem ajax="false" action="registry_province_by_patients"  value="Provincial Birth Defects Registry By Patients"  ></p:menuitem>
-                                <p:menuitem ajax="false" action="#{abstractionFormController.listInstitutional()}" value="Institutional Case Ascertainment Forms" ></p:menuitem>
-                                <p:menuitem ajax="false" action="#{abstractionFormController.listDistrict()}" value="District Case Ascertainment Forms" ></p:menuitem>
-
+                                <p:menuitem ajax="false" action="reports_index_superuser" value="Lists" ></p:menuitem>
+                                <p:menuitem ajax="false" action="#" value="Graphs" ></p:menuitem>
+                                <p:menuitem ajax="false" action="#" value="Search" ></p:menuitem>
                             </p:submenu>
                             <p:submenu label="Administration"  rendered="#{sessionController.sysAdmin or sessionController.superUser}">
                                 <p:submenu label="Institutions" >
@@ -77,9 +72,6 @@
                                 </p:submenu>
                                 <p:submenu label="Areas" >
                                     <p:menuitem  ajax="false"  action="area" value="Manage All Areas"  ></p:menuitem>
-                                    <p:menuitem  ajax="false"  action="area" value="Manage MOH Areas"  ></p:menuitem>
-                                    <p:menuitem  ajax="false"  action="area" value="Manage Districts"  ></p:menuitem>
-                                    <p:menuitem  ajax="false"  action="area" value="Manage GN Areas"  ></p:menuitem>
                                     <p:menuitem  ajax="false"  action="area_bulk" value="Add All Areas"  ></p:menuitem>
                                 </p:submenu>
                                 

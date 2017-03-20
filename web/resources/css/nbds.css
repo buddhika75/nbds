@@ -14,6 +14,10 @@
     width: 350px;
 }
 
+.mediumTextLeft{
+    width: 350px;
+    text-align: left;
+}
 
 .topLeftCol{
     vertical-align: top;
@@ -26,8 +30,8 @@
 }
 
 .topRightCol{
-/*    color: yellow;
-    background-color: red;*/
+    /*    color: yellow;
+        background-color: red;*/
     vertical-align: top;
     text-align: right;
 }
@@ -70,4 +74,20 @@
 .bottomCentreCol{
     vertical-align: bottom;
     text-align: center;
+}
+
+#printOnly {
+    display : none;
+}
+
+
+
+@media print {
+    #printOnly {
+        display : block;
+    }
+    #displayOnly {
+        display : none;
+    }
+
 }
