@@ -36,12 +36,11 @@
                                         <p:outputLabel value="#{u.displayName}" ></p:outputLabel>
                                     </p:column>
                                     <p:column headerText="Role">
-                                        <p:outputLabel value="#{u.role}" ></p:outputLabel>
+                                        <p:outputLabel value="#{u.role.name}" ></p:outputLabel>
                                     </p:column>
-                                    <p:column headerText="Institutions">
+                                    <p:column headerText="Institution">
                                         <p:outputLabel value="#{u.restrictedInstitution.name}" ></p:outputLabel>
                                     </p:column>
-
                                 </p:autoComplete>
                                 <p:commandButton ajax="false" value="Delete" action="#{userApproveController.removeUser()}"></p:commandButton>
                             </h:panelGrid>

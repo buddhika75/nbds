@@ -19,6 +19,7 @@ import gov.health.facade.PersonFacade;
 import gov.health.facade.WebUserFacade;
 import gov.health.facade.WebUserRoleFacade;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import javax.ejb.EJB;
@@ -476,6 +477,7 @@ public class SessionController implements Serializable {
         user.setWebUserPerson(person);
         user.setTelNo(telNo);
         user.setEmail(email);
+        user.setCreatedAt(new Date());
         user.setActivated(Boolean.TRUE);
         if (user.getRole() != null && "sysAdmin".equals(user.getRole().getName())) {
             user.setRestrictedInstitution(null);
