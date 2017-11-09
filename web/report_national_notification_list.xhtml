@@ -160,6 +160,11 @@
                                     <f:setPropertyActionListener value="#{item}" target="#{notificationFormController.current}" ></f:setPropertyActionListener>
                                 </p:commandButton>
                             </p:column>
+                            <p:column>
+                                <p:commandButton value="Delete" ajax="false" action="#{notificationFormController.delete}" >
+                                    <f:setPropertyActionListener value="#{item}" target="#{notificationFormController.current}" ></f:setPropertyActionListener>
+                                </p:commandButton>
+                            </p:column>
                         </p:dataTable>
 
 

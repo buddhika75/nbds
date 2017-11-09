@@ -73,6 +73,14 @@ public class NotificationFormController implements Serializable {
 
     NotificationCategory removingNotificationCategory;
 
+    public void delete(){
+        if(current==null){
+            return;
+        }
+        getFacade().remove(current);
+        listAllNationalNotificationForms();
+        JsfUtil.addSuccessMessage("Deleted");
+    }
 
     public List<Area> completeMohs(String qry) {
         Map m = new HashMap();
