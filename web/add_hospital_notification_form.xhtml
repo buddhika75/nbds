@@ -276,9 +276,8 @@
                                         <p:outputLabel value="Residential Address:" for="residential_Address" />
                                         <p:inputTextarea rows="4" cols="30" id="residential_Address" value="#{notificationFormController.current.residential_Address}" title="Residential_Address" />
                                         <p:outputLabel value="Mothers Date of Birth:" for="mothers_Date_of_Birth" />
-                                        <p:inputText id="mothers_Date_of_Birth" value="#{notificationFormController.current.mothers_Date_of_Birth}" title="Mothers_Date_of_Birth" >
-                                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                                        </p:inputText>
+                                        <p:calendar id="mothers_Date_of_Birth" navigator="true" placeholder="dd MM yyyy" yearRange="c-50:c-15" pattern="dd MM yyyy" value="#{notificationFormController.current.mothers_Date_of_Birth}" title="Mothers_Date_of_Birth" >
+                                        </p:calendar>
                                         <p:outputLabel value="Mothers Age in Years:" for="mothers_Age_in_Years" />
                                         <p:inputText id="mothers_Age_in_Years" value="#{notificationFormController.current.mothers_Age_in_Years}" title="Mothers_Age_in_Years" />
                                         <p:outputLabel value="Mariatal Status:" for="mariatal_Status" />
@@ -403,17 +402,20 @@
                                             <f:selectItems value="#{enumController.sourceOfPogs}" ></f:selectItems>
                                         </p:selectOneMenu>
                                         <p:outputLabel value="Lmp:" for="lmp" />
-                                        <p:inputText id="lmp" value="#{notificationFormController.current.lmp}" title="Lmp" >
-                                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                                        </p:inputText>
+                                        <p:calendar id="lmp" value="#{notificationFormController.current.lmp}" title="Lmp"
+                                                    pattern="dd MM yyyy" placeholder="dd MM yyyy" navigator="true"
+                                                    yearRange="c-10:c">
+                                        </p:calendar>
                                         <p:outputLabel value="Edd:" for="edd" />
-                                        <p:inputText id="edd" value="#{notificationFormController.current.edd}" title="Edd" >
-                                            <f:convertDateTime pattern="MM/dd/yyyy" />
-                                        </p:inputText>
+                                        <p:calendar id="edd" value="#{notificationFormController.current.edd}" title="Edd"
+                                                    pattern="dd MM yyyy" placeholder="dd MM yyyy" navigator="true"
+                                                    yearRange="c-10:c">
+                                        </p:calendar>
                                         <p:outputLabel value="DateAndTimeOfDelivary:" for="dateAndTimeOfDelivary" />
-                                        <p:inputText id="dateAndTimeOfDelivary" value="#{notificationFormController.current.dateAndTimeOfDelivary}" title="DateAndTimeOfDelivary" >
-                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                                        </p:inputText>
+                                        <p:calendar id="dateAndTimeOfDelivary" 
+                                                    value="#{notificationFormController.current.dateAndTimeOfDelivary}" 
+                                                    title="DateAndTimeOfDelivary" placeholder="dd MM yyyy HH:mm" pattern="dd MM yyyy HH:mm" >
+                                        </p:calendar>
                                         <p:outputLabel value="ModeOfDelivery:" for="modeOfDelivery" />
                                         <p:selectOneMenu id="modeOfDelivery" value="#{notificationFormController.current.modeOfDelivery}" >
                                             <f:selectItem itemLabel="Select" ></f:selectItem>
