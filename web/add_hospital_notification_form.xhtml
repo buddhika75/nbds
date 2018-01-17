@@ -396,59 +396,80 @@
 
                                     </p:panelGrid>
                                     <p:panelGrid columns="2">
-                                        <p:outputLabel value="Source_of_POG_Information:" for="source_of_POG_Information" />
+                                        <p:outputLabel value="Source of POG Information:" for="source_of_POG_Information" />
                                         <p:selectOneMenu id="source_of_POG_Information" value="#{notificationFormController.current.source_of_POG_Information}" >
                                             <f:selectItem itemLabel="Select" ></f:selectItem>
                                             <f:selectItems value="#{enumController.sourceOfPogs}" ></f:selectItems>
                                         </p:selectOneMenu>
-                                        <p:outputLabel value="Lmp:" for="lmp" />
+                                        <p:outputLabel value="LMP:" for="lmp" />
                                         <p:calendar id="lmp" value="#{notificationFormController.current.lmp}" title="Lmp"
                                                     pattern="dd MM yyyy" placeholder="dd MM yyyy" navigator="true"
                                                     yearRange="c-10:c">
                                         </p:calendar>
-                                        <p:outputLabel value="Edd:" for="edd" />
+                                        <p:outputLabel value="EDD:" for="edd" />
                                         <p:calendar id="edd" value="#{notificationFormController.current.edd}" title="Edd"
                                                     pattern="dd MM yyyy" placeholder="dd MM yyyy" navigator="true"
                                                     yearRange="c-10:c">
                                         </p:calendar>
-                                        <p:outputLabel value="DateAndTimeOfDelivary:" for="dateAndTimeOfDelivary" />
+                                        <p:outputLabel value="Date and Time of Delivary:" for="dateAndTimeOfDelivary" />
                                         <p:calendar id="dateAndTimeOfDelivary" 
                                                     value="#{notificationFormController.current.dateAndTimeOfDelivary}" 
                                                     title="DateAndTimeOfDelivary" placeholder="dd MM yyyy HH:mm" pattern="dd MM yyyy HH:mm" >
                                         </p:calendar>
-                                        <p:outputLabel value="ModeOfDelivery:" for="modeOfDelivery" />
+                                        <p:outputLabel value="Best Guess POA:" for="bestGuessPoaWeeks" />
+                                        <h:panelGrid columns="5" >
+                                            <p:inputText id="bestGuessPoaWeeks" 
+                                                         value="#{notificationFormController.current.poaWeeks}" 
+                                                         title="Best Guess POA:" placeholder="weeks"  >
+                                            </p:inputText>
+                                            Weeks and 
+                                            <p:inputText id="bestGuessPoaDays" 
+                                                         value="#{notificationFormController.current.poaDays}" 
+                                                         title="Best Guess POA:" placeholder="days"  >
+                                            </p:inputText>
+                                            days.
+                                        </h:panelGrid>
+
+
+                                        <p:outputLabel value="Mode of Delivery:" for="modeOfDelivery" />
                                         <p:selectOneMenu id="modeOfDelivery" value="#{notificationFormController.current.modeOfDelivery}" >
                                             <f:selectItem itemLabel="Select" ></f:selectItem>
                                             <f:selectItems value="#{enumController.modeOfDeliverys}" ></f:selectItems>
                                         </p:selectOneMenu>
-                                        <p:outputLabel value="ModeOfDelivery_Other:" for="modeOfDelivery_Other" />
+                                        <p:outputLabel value="Mode of Delivery Other:" for="modeOfDelivery_Other" />
                                         <p:inputText id="modeOfDelivery_Other" value="#{notificationFormController.current.modeOfDelivery_Other}" title="ModeOfDelivery_Other" />
                                         <p:outputLabel value="Plurality:" for="plurality" />
                                         <p:selectOneMenu id="plurality" value="#{notificationFormController.current.plurality}" >
                                             <f:selectItem itemLabel="Select" ></f:selectItem>
                                             <f:selectItems value="#{enumController.pluralities}" ></f:selectItems>
                                         </p:selectOneMenu>
-                                        <p:outputLabel value="BirthAttendedBy:" for="birthAttendedBy" />
+                                        <p:outputLabel value="Birth Attended By:" for="birthAttendedBy" />
                                         <p:selectOneMenu id="birthAttendedBy" value="#{notificationFormController.current.birthAttendedBy}" >
                                             <f:selectItem itemLabel="Select" ></f:selectItem>
                                             <f:selectItems value="#{enumController.birthAttendedBys}" ></f:selectItems>
                                         </p:selectOneMenu>
-                                        <p:outputLabel value="PregnancyOutcome:" for="pregnancyOutcome" />
+                                        <p:outputLabel value="Pregnancy Outcome:" for="pregnancyOutcome" />
                                         <p:selectOneMenu id="pregnancyOutcome" value="#{notificationFormController.current.pregnancyOutcome}" >
                                             <f:selectItem itemLabel="Select" ></f:selectItem>
                                             <f:selectItems value="#{enumController.pregnancyOutcomes}" ></f:selectItems>                                       
                                         </p:selectOneMenu>
-                                        <p:outputLabel value="Apgar_1st_minute:" for="apgar_1st_minute" />
+                                        <p:outputLabel for="apgar_1st_minute" escape="true">
+                                            Apgar 1<sup>st</sup> minute:
+                                        </p:outputLabel>
                                         <p:inputText id="apgar_1st_minute" value="#{notificationFormController.current.apgar_1st_minute}" title="Apgar_1st_minute" />
-                                        <p:outputLabel value="Apgar_5th_minute:" for="apgar_5th_minute" />
+                                        <p:outputLabel  for="apgar_5th_minute" >
+                                            Apgar 5<sup>th</sup> minute:
+                                        </p:outputLabel>
                                         <p:inputText id="apgar_5th_minute" value="#{notificationFormController.current.apgar_5th_minute}" title="Apgar_5th_minute" />
-                                        <p:outputLabel value="Apgar_10th_minute:" for="apgar_10th_minute" />
+                                        <p:outputLabel  for="apgar_10th_minute" >
+                                            Apgar 10<sup>th</sup> minute:
+                                        </p:outputLabel>
                                         <p:inputText id="apgar_10th_minute" value="#{notificationFormController.current.apgar_10th_minute}" title="Apgar_10th_minute" />
-                                        <p:outputLabel value="Birth_weight_in_grams:" for="birth_weight_in_grams" />
+                                        <p:outputLabel value="Birth weight in grams:" for="birth_weight_in_grams" />
                                         <p:inputText id="birth_weight_in_grams" value="#{notificationFormController.current.birth_weight_in_grams}" title="Birth_weight_in_grams" />
-                                        <p:outputLabel value="Length_in_cm:" for="length_in_cm" />
+                                        <p:outputLabel value="Length in cm:" for="length_in_cm" />
                                         <p:inputText id="length_in_cm" value="#{notificationFormController.current.length_in_cm}" title="Length_in_cm" />
-                                        <p:outputLabel value="Head_circumference_in_cm:" for="head_circumference_in_cm" />
+                                        <p:outputLabel value="Head circumference in cm:" for="head_circumference_in_cm" />
                                         <p:inputText id="head_circumference_in_cm" value="#{notificationFormController.current.head_circumference_in_cm}" title="Head_circumference_in_cm" />
                                     </p:panelGrid>
                                 </p:tab>
@@ -591,7 +612,7 @@
 
 
                             <p:panel id="printBlock"  styleClass="printOnly" style="display:none; text-align: left;" >
-                            
+
 
                             </p:panel>>
 

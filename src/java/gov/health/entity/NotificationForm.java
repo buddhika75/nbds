@@ -157,6 +157,8 @@ public class NotificationForm implements Serializable {
     double length_in_cm;
     double head_circumference_in_cm;
     
+    int poaDays;
+    int poaWeeks;
 
     /**
      *
@@ -1198,6 +1200,22 @@ public class NotificationForm implements Serializable {
 
     public void setHead_circumference_in_cm(double head_circumference_in_cm) {
         this.head_circumference_in_cm = head_circumference_in_cm;
+    }
+
+    public int getPoaDays() {
+        return poaDays;
+    }
+
+    public void setPoaDays(int poaDays) {
+        this.poaDays = poaDays;
+    }
+
+    public int getPoaWeeks() {
+        return poaWeeks;
+    }
+
+    public void setPoaWeeks(int poaWeeks) {
+        this.poaWeeks = poaWeeks;
     }
 
     
