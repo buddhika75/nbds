@@ -169,12 +169,678 @@
 
 
                         <div style="display: none;" >
-                            <f:view>
-
-
-
-                                <h1><h:outputText value="List"/></h1>
-                                <p:dataTable id="tblAllData" value="#{notificationFormController.items}" var="item">
+                            
+                            
+                            <p:dataTable id="tblAllData" value="#{notificationFormController.items}" var="item">
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Id"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.id}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="CreatedDate"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.createdDate}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Infants_Name"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.infants_Name}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Sex_of_Infant"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.sex_of_Infant}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Location_Where_Case_Identified_Hospital"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.location_Where_Case_Identified_Hospital}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Location_Where_Case_Identified_Ward_Unit"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.location_Where_Case_Identified_Ward_Unit}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Location_Where_Case_Identified_Bht_No"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.location_Where_Case_Identified_Bht_No}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Residence_Rdhs"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.residence_Rdhs}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Residence_Moh"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.residence_Moh}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Residence_Gn"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.residence_Gn}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Date_of_Birth_Delivery"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.date_of_Birth_Delivery}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Place_of_Delivery"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.place_of_Delivery}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Date_of_Case_Identified"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.date_of_Case_Identified}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Age_at_Case_Detection_Days"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.age_at_Case_Detection_Days}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Age_at_Case_Detection_Months"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.age_at_Case_Detection_Months}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Age_at_Case_Detection_Years"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.age_at_Case_Detection_Years}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Living_Status"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.living_Status}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Post_Mortem_Necropsy_Done"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.post_Mortem_Necropsy_Done}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Pathological_Forensic_Post_Mortem_Record_No"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.pathological_Forensic_Post_Mortem_Record_No}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Pathological_Forensic_Post_Mortem_Details"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.pathological_Forensic_Post_Mortem_Details}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Pathological_Forensic_Post_Mortem_Done_by"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.pathological_Forensic_Post_Mortem_Done_by}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Pathological_Forensic_Post_Mortem_Date"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.pathological_Forensic_Post_Mortem_Date}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Presence_of_Congenital_Abnormalities"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.presence_of_Congenital_Abnormalities}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Additional_Information__On_Congenital_Abnormalities"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.additional_Information__On_Congenital_Abnormalities}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Name_of_the_Mother"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.name_of_the_Mother}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Residential_Address"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.residential_Address}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Mothers_Date_of_Birth"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.mothers_Date_of_Birth}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Mothers_Age_in_Years"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.mothers_Age_in_Years}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Mariatal_Status"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.mariatal_Status}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Education_Level"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.education_Level}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Ethnicity"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.ethnicity}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Fathers_Age"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.fathers_Age}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Parental_Consanguinity"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.parental_Consanguinity}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Parental_Consanguinity_Details"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.parental_Consanguinity_Details}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Sector"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.sector}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Monthly_Average_Family_Income"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.monthly_Average_Family_Income}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="National_Identity_Card_No"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.national_Identity_Card_No}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Contact_Phone"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.contact_Phone}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Total_Pregnancies"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.total_Pregnancies}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Live_Births"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.live_Births}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Previous_Terminations_of_Pregnancy_for_Congenital_Malformations"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.previous_Terminations_of_Pregnancy_for_Congenital_Malformations}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Previous_Terminations_of_Pregnancy_for_Congenital_Malformations_Details"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.previous_Terminations_of_Pregnancy_for_Congenital_Malformations_Details}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Previous_Still_Births"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.previous_Still_Births}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Previous_Still_Births_Details"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.previous_Still_Births_Details}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Previous_Spontaneous_Abortions"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.previous_Spontaneous_Abortions}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Previous_Spontaneous_Abortions_details"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.previous_Spontaneous_Abortions_details}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Previous_Live_Births_With_Congenital_Malformations"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.previous_Live_Births_With_Congenital_Malformations}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Previous_Live_Births_with_Congenital_Malformations_Details"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.previous_Live_Births_with_Congenital_Malformations_Details}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Neonatal_Complication_Details"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.neonatal_Complication_Details}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Pre_Pregnancy_Diabetes_Mellitus_IDDM"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.pre_Pregnancy_Diabetes_Mellitus_IDDM}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Pre_Pregnancy_Diabetes_Mellitus_NIDM"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.pre_Pregnancy_Diabetes_Mellitus_NIDM}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Gdm_During_This_Pregnancy"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.gdm_During_This_Pregnancy}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Hypertension"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.hypertension}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Epilepsy_Seizures_Before_or_During_This_Pregnancy"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.epilepsy_Seizures_Before_or_During_This_Pregnancy}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Maternal_Obesity_BMI"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.maternal_Obesity_BMI}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Rubella"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.rubella}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Rubella_Vaccinated"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.rubella_Vaccinated}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Cytomegalovirus_CMV"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.cytomegalovirus_CMV}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Pre_Pregnancy_Folic_Acid"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.pre_Pregnancy_Folic_Acid}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Antenatal_Anaemia"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.antenatal_Anaemia}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Antenatal_Anaemia_Hb_g_per_dl"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.antenatal_Anaemia_Hb_g_per_dl}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Active_Smoking"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.active_Smoking}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Passive_Smoking"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.passive_Smoking}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Alcohol_Before_Pregnancy"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.alcohol_Before_Pregnancy}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Alcohol_During_Pregnancy"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.alcohol_During_Pregnancy}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Other_Substances"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.other_Substances}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Medications_During_Pregnancy"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.medications_During_Pregnancy}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Any_Antenatal_Febrile_Illness"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.any_Antenatal_Febrile_Illness}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Additional_Information_Remarks_on_Maternal_Risk_Factors"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.additional_Information_Remarks_on_Maternal_Risk_Factors}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Date_of_Death"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.date_of_Death}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Age_at_Death_Year"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.age_at_Death_Year}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Age_at_Death_Month"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.age_at_Death_Month}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Age_at_Death_Days"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.age_at_Death_Days}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Place_of_Death"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.place_of_Death}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Clinician_or_Medical_Officer_Name"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.clinician_or_Medical_Officer_Name}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Clinician_or_Medical_Officer_Designation"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.clinician_or_Medical_Officer_Designation}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Clinician_Form_Filled_Date"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.clinician_Form_Filled_Date}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Head_of_Institution_Name"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.head_of_Institution_Name}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Head_of_Institution_Date"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.head_of_Institution_Date}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="RegisteredUser"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.registeredUser}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="RegisteredAt"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.registeredAt}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="RegisteredNumber"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.registeredNumber}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Hospital"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.hospital}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="District"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.district}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="MohArea"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.mohArea}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="CreatedAt"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.createdAt}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="CreatedUser"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.createdUser}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="RetiredAt"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.retiredAt}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="RetiredUser"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.retiredUser}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Source_of_POG_Information"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.source_of_POG_Information}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Lmp"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.lmp}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Edd"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.edd}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="DateAndTimeOfDelivary"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.dateAndTimeOfDelivary}">
+                                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="ModeOfDelivery"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.modeOfDelivery}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="ModeOfDelivery_Other"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.modeOfDelivery_Other}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Plurality"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.plurality}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="BirthAttendedBy"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.birthAttendedBy}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="PregnancyOutcome"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.pregnancyOutcome}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Apgar_1st_minute"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.apgar_1st_minute}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Apgar_5th_minute"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.apgar_5th_minute}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Apgar_10th_minute"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.apgar_10th_minute}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Birth_weight_in_grams"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.birth_weight_in_grams}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Length_in_cm"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.length_in_cm}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Head_circumference_in_cm"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.head_circumference_in_cm}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="PoaDays"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.poaDays}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="PoaWeeks"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.poaWeeks}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                               
+                            
+                           
+                                <p:dataTable id="tblAllData1" value="#{notificationFormController.items}" var="item">
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="Infants_Name"/>
@@ -747,6 +1413,20 @@
                                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                                         </h:outputText>
                                     </p:column>
+                                     <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Best Guess POA Weeks"/>
+                                        </f:facet>
+                                         <h:outputText value="#{item.poaWeeks}">
+                                        </h:outputText>
+                                    </p:column>
+                                     <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Best Guess POA Days"/>
+                                        </f:facet>
+                                         <h:outputText value="#{item.poaDays}">
+                                        </h:outputText>
+                                    </p:column>
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="ModeOfDelivery"/>
@@ -815,7 +1495,7 @@
                                     </p:column>
                                 </p:dataTable>
 
-                            </f:view>
+                         
 
                         </div>
 

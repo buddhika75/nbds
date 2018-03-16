@@ -58,7 +58,7 @@ public class NotificationCategory implements Serializable {
     @ManyToOne
     Category congenital_abnormality;
 
-     //Created Properties
+    //Created Properties
     @ManyToOne
     WebUser creater;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
@@ -118,9 +118,7 @@ public class NotificationCategory implements Serializable {
     public void setRetireComments(String retireComments) {
         this.retireComments = retireComments;
     }
-    
-    
-    
+
     public NotificationCategoryType getType() {
         return type;
     }
@@ -232,10 +230,7 @@ public class NotificationCategory implements Serializable {
     public void setCongenital_abnormality(Category congenital_abnormality) {
         this.congenital_abnormality = congenital_abnormality;
     }
-    
-    
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -266,7 +261,17 @@ public class NotificationCategory implements Serializable {
 
     @Override
     public String toString() {
-        return "gov.health.entity.NotificationCategory[ id=" + id + " ]";
+
+        String temStr = "";
+        try {
+            temStr
+                    = type + "\t" + category + "\t" + type_of_Birth_Defect + "\t" + full_Description +
+                    "\t" + birth_Defect_Code_ICD_10 + "\t" + rcpch__Extension
+                    + "\t" + congenital_abnormality;
+        } catch (Exception e) {
+            System.out.println("e = " + e);
+        }
+        return temStr;
     }
 
 }
