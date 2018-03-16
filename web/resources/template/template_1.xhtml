@@ -51,6 +51,8 @@
                             <p:menuitem  ajax="false"  action="index" value="Home" ></p:menuitem>
                             <p:submenu label="Cases"  rendered="#{sessionController.sysAdmin or sessionController.superUser}">
                                 <p:menuitem ajax="false" action="#{notificationFormController.addNewHospitalNotificationForm()}" value="Notify" ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{notificationFormController.addNewHospitalNotificationFormLrh()}" value="Notify (Cardiology for LRH)" ></p:menuitem>
+
                                 <p:menuitem ajax="false" action="#{notificationFormController.listUserNotificationForms()}" value="User Notifications" ></p:menuitem>
                                 <p:menuitem ajax="false" action="#{notificationFormController.listUserHospitalNotificationForms()}" value="Institution Notifications" ></p:menuitem>
                             </p:submenu>
@@ -74,7 +76,7 @@
                                     <p:menuitem  ajax="false"  action="area" value="Manage All Areas"  ></p:menuitem>
                                     <p:menuitem  ajax="false"  action="area_bulk" value="Add All Areas"  ></p:menuitem>
                                 </p:submenu>
-                                
+
                                 <p:menuitem  ajax="false"  action="/category/List" value="Categories"  ></p:menuitem>
                                 <p:menuitem  ajax="false"  action="#{webUserController.newUserAdd}" value="Add Users"  ></p:menuitem>
                                 <p:menuitem  ajax="false"  action="/manage_users" value="Manage Users"  ></p:menuitem>
