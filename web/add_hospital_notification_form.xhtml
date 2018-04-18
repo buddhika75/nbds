@@ -202,10 +202,15 @@
                                                     <p:outputLabel value="#{c.name}" ></p:outputLabel>
                                                 </p:column>
                                             </p:autoComplete>
-                                            <p:selectOneMenu id="rcpch__Extension" value="#{notificationFormController.congenital_Abnormality.rcpch__Extension}" >
-                                                <f:selectItem itemLabel="Select RCPCH Extension" ></f:selectItem>
-                                                <f:selectItems value="#{categoryController.rcpchExtensions}"/>
-                                            </p:selectOneMenu>
+                                             <p:autoComplete forceSelection="true" completeMethod="#{categoryController.completeRcpch}" var="c" itemLabel="#{c.name}" itemValue="#{c}"
+                                                            id="rcpch__Extension" value="#{notificationFormController.congenital_Abnormality.rcpch__Extension}" >
+                                                <p:column >
+                                                    <p:outputLabel value="#{c.code}" ></p:outputLabel>
+                                                </p:column>
+                                                <p:column >
+                                                    <p:outputLabel value="#{c.name}" ></p:outputLabel>
+                                                </p:column>
+                                            </p:autoComplete>
                                             <p:selectBooleanCheckbox  id="confirmed_Possible" value="#{notificationFormController.congenital_Abnormality.confirmed_Possible}" />
                                             <p:commandButton ajax="false" value="Add" action="#{notificationFormController.addCongenitalAbnormality()}" >
                                             </p:commandButton>
@@ -418,12 +423,12 @@
                                         </p:calendar>
                                         <p:outputLabel value="Best Guess POA:" for="bestGuessPoaWeeks" />
                                         <h:panelGrid columns="5" >
-                                            <p:inputText id="bestGuessPoaWeeks" 
+                                            <p:inputText id="bestGuessPoaWeeks" style="width: 50px;"
                                                          value="#{notificationFormController.current.poaWeeks}" 
                                                          title="Best Guess POA:" placeholder="weeks"  >
                                             </p:inputText>
                                             Weeks and 
-                                            <p:inputText id="bestGuessPoaDays" 
+                                            <p:inputText id="bestGuessPoaDays"  style="width: 50px;"
                                                          value="#{notificationFormController.current.poaDays}" 
                                                          title="Best Guess POA:" placeholder="days"  >
                                             </p:inputText>

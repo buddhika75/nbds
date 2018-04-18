@@ -4,6 +4,7 @@ import gov.health.entity.Category;
 import gov.health.bean.util.JsfUtil;
 import gov.health.bean.util.JsfUtil.PersistAction;
 import gov.health.data.CategoryType;
+import gov.health.entity.Area;
 import gov.health.facade.CategoryFacade;
 
 import java.io.Serializable;
@@ -37,6 +38,7 @@ public class CategoryController implements Serializable {
     private List<Category> surgicalProcedures = null;
 
     private Category selected;
+    String bulkText;
 
     public List<Category> getIcd10s() {
         if (icd10s == null) {
@@ -45,7 +47,42 @@ public class CategoryController implements Serializable {
         return icd10s;
     }
 
-    
+    public void addRcpchExtensions() {
+        if (bulkText.trim().equals("")) {
+            gov.health.bean.JsfUtil.addErrorMessage("Empty?");
+            return;
+        }
+        String lines[] = bulkText.split("\\r?\\n");
+
+        int i = 0;
+
+        for (String line : lines) {
+            if (!line.trim().equals("")) {
+                i++;
+                String code;
+                String name;
+                String[] splits = line.split("\\s{2,6}");
+                if (splits.length == 2) {
+                    code = splits[0];
+                    name = splits[1];
+                    System.out.println("splits = " + splits);
+                    System.out.println("name = " + name);
+                    System.out.println("code = " + code);
+                    Category ba = new Category();
+                    ba.setName(name);
+                    ba.setDescription(name);
+                    ba.setCode(code);
+                    ba.setType(CategoryType.RCPCH_Extension);
+                    getFacade().create(ba);
+                }
+            }
+        }
+
+        bulkText = "";
+
+        gov.health.bean.JsfUtil.addSuccessMessage(i + " Categories added.");
+    }
+
     public List<Category> completeIcd10s(String qry) {
         List<Category> icds = new ArrayList<Category>();
         String j = "Select c from Category c "
@@ -53,12 +90,25 @@ public class CategoryController implements Serializable {
                 + " and c.type=:t "
                 + " order by c.code, c.name";
         Map m = new HashMap();
-        m.put("n", "%"+ qry.trim().toLowerCase() + "%");
+        m.put("n", "%" + qry.trim().toLowerCase() + "%");
         m.put("t", CategoryType.ICD10);
         icds = getFacade().findBySQL(j, m);
         return icds;
     }
-    
+
+    public List<Category> completeRcpch(String qry) {
+        List<Category> icds = new ArrayList<Category>();
+        String j = "Select c from Category c "
+                + " where (lower(c.name) like :n or lower(c.code) like :n) "
+                + " and c.type=:t "
+                + " order by c.code, c.name";
+        Map m = new HashMap();
+        m.put("n", "%" + qry.trim().toLowerCase() + "%");
+        m.put("t", CategoryType.RCPCH_Extension);
+        icds = getFacade().findBySQL(j, m);
+        return icds;
+    }
+
     public void setIcd10s(List<Category> icd10s) {
         this.icd10s = icd10s;
     }
@@ -220,6 +270,14 @@ public class CategoryController implements Serializable {
 
     public List<Category> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    public String getBulkText() {
+        return bulkText;
+    }
+
+    public void setBulkText(String bulkText) {
+        this.bulkText = bulkText;
     }
 
     @FacesConverter(forClass = Category.class)
