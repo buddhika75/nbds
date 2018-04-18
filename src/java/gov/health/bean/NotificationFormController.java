@@ -501,6 +501,27 @@ public class NotificationFormController implements Serializable {
         return "/add_hospital_notification_form";
     }
 
+    public String addNewHospitalNotificationFormLrh() {
+        current = new NotificationForm();
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("Asia/Colombo"));
+        current.setCreatedAt(c.getTime());
+        current.setCreatedDate(c.getTime());
+        System.out.println("current.getCreatedAt() = " + current.getCreatedAt());
+        current.setCreatedUser(getSessionController().getLoggedUser());
+        congenital_Abnormality = new NotificationCategory();
+        family_History_Of_Congenital_Abnormality = new NotificationCategory();
+        prenatal_Antenatal_Postnatal_Investigation = new NotificationCategory();
+        therapeutic_Surgical_Interventions_Referrals_Carried_Out_on_Anomaly = new NotificationCategory();
+        underlyning_Cause_of_Death = new NotificationCategory();
+        immediate_Cause_of_Death = new NotificationCategory();
+        conditions_Contributing_to_Death = new NotificationCategory();
+        if (getSessionController().getLoggedUser().getRestrictedInstitution() != null) {
+            current.setHospital(getSessionController().getLoggedUser().getRestrictedInstitution());
+        }
+        return "/add_hospital_notification_form_lrh";
+    }
+
+    
     public String viewNotificationForm() {
         if (current == null) {
             JsfUtil.addErrorMessage("Please select a notification form");

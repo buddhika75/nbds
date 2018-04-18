@@ -102,6 +102,8 @@ public class NotificationForm implements Serializable {
     @Enumerated(EnumType.STRING)
     EducationLevel education_Level;
     @Enumerated(EnumType.STRING)
+    EducationLevel education_Level_Father;
+    @Enumerated(EnumType.STRING)
     Ethnicity ethnicity;
     int fathers_Age;
     Boolean parental_Consanguinity;
@@ -157,8 +159,6 @@ public class NotificationForm implements Serializable {
     double length_in_cm;
     double head_circumference_in_cm;
     
-    int poaDays;
-    int poaWeeks;
 
     /**
      *
@@ -273,6 +273,21 @@ public class NotificationForm implements Serializable {
     Date retiredAt;
     @ManyToOne
     WebUser retiredUser;
+
+
+    @Lob
+    String notes;
+    
+    @Lob
+    String ourNotes;
+    
+    @Lob
+    String keyLetters;
+    
+    @Lob
+    String keyNotes;
+    
+    
 
     //Gettors & Settors
     public Long getId() {
@@ -1202,22 +1217,47 @@ public class NotificationForm implements Serializable {
         this.head_circumference_in_cm = head_circumference_in_cm;
     }
 
-    public int getPoaDays() {
-        return poaDays;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setPoaDays(int poaDays) {
-        this.poaDays = poaDays;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
-    public int getPoaWeeks() {
-        return poaWeeks;
+    public String getOurNotes() {
+        return ourNotes;
     }
 
-    public void setPoaWeeks(int poaWeeks) {
-        this.poaWeeks = poaWeeks;
+    public void setOurNotes(String ourNotes) {
+        this.ourNotes = ourNotes;
     }
 
+    public String getKeyLetters() {
+        return keyLetters;
+    }
+
+    public void setKeyLetters(String keyLetters) {
+        this.keyLetters = keyLetters;
+    }
+
+    public String getKeyNotes() {
+        return keyNotes;
+    }
+
+    public void setKeyNotes(String keyNotes) {
+        this.keyNotes = keyNotes;
+    }
+
+    public EducationLevel getEducation_Level_Father() {
+        return education_Level_Father;
+    }
+
+    public void setEducation_Level_Father(EducationLevel education_Level_Father) {
+        this.education_Level_Father = education_Level_Father;
+    }
+
+    
     
     
 }
