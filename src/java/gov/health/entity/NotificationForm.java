@@ -33,6 +33,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 
 /**
  *
@@ -85,7 +86,8 @@ public class NotificationForm implements Serializable {
     List<NotificationCategory> con_ab;
     @Lob
     String additional_Information__On_Congenital_Abnormalities;
-
+    @Transient
+    String congenitalDetails;
     /**
      *
      * C. PAENTAL SOCIO-DEMOGRAPHIC DETAILS
@@ -122,6 +124,8 @@ public class NotificationForm implements Serializable {
      */
     int total_Pregnancies;
     int live_Births;
+    Long poaWeeks;
+    Long poaDays;
     Boolean previous_Terminations_of_Pregnancy_for_Congenital_Malformations;
     @Lob
     @Column(name = "PREVIOUS_TERMINATIONS_OF_PREGNANCY_FOR_CM_DETAILS")
@@ -158,7 +162,6 @@ public class NotificationForm implements Serializable {
     double birth_weight_in_grams;
     double length_in_cm;
     double head_circumference_in_cm;
-    
 
     /**
      *
@@ -274,20 +277,17 @@ public class NotificationForm implements Serializable {
     @ManyToOne
     WebUser retiredUser;
 
-
     @Lob
     String notes;
-    
+
     @Lob
     String ourNotes;
-    
+
     @Lob
     String keyLetters;
-    
+
     @Lob
     String keyNotes;
-    
-    
 
     //Gettors & Settors
     public Long getId() {
@@ -306,8 +306,6 @@ public class NotificationForm implements Serializable {
         this.createdDate = createdDate;
     }
 
-    
-    
     public String getInfants_Name() {
         return infants_Name;
     }
@@ -1257,7 +1255,51 @@ public class NotificationForm implements Serializable {
         this.education_Level_Father = education_Level_Father;
     }
 
-    
-    
-    
+    public Long getPoaWeeks() {
+        return poaWeeks;
+    }
+
+    public void setPoaWeeks(Long poaWeeks) {
+        this.poaWeeks = poaWeeks;
+    }
+
+    public Long getPoaDays() {
+        return poaDays;
+    }
+
+    public void setPoaDays(Long poaDays) {
+        this.poaDays = poaDays;
+    }
+
+    public String getCongenitalDetails() {
+        congenitalDetails = "";
+        if (getCon_ab() != null) {
+            for (NotificationCategory c : con_ab) {
+                String r = c.type_of_Birth_Defect;
+                r += "/t";
+                r += c.full_Description;
+                r += "/t";
+                if (c.birth_Defect_Code_ICD_10 != null) {
+                    r += c.birth_Defect_Code_ICD_10.code;
+                    r += "/t";
+                    r += c.birth_Defect_Code_ICD_10.name;
+                    r += "/t";
+                }
+                r += c.rcpch__Extension;
+                r += "/t";
+                if (c.confirmed_Possible) {
+                    r += "Confirmed";
+                } else {
+                    r += "Not Confirmed";
+                }
+                if (congenitalDetails.equals("")) {
+                    congenitalDetails = r;
+                } else {
+                    congenitalDetails += "/n" + r;
+                }
+            }
+        }
+        return congenitalDetails;
+    }
+
 }
